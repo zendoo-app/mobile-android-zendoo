@@ -40,6 +40,15 @@ jobs:
 
 workflows:
   version: 2
-  check_and_release:
+  pull_request:
+    branches:
+      ignore:
+        - master
+    jobs:
+    - dependencies
+  release:
+    branches:
+      only:
+        - master
     jobs:
     - dependencies

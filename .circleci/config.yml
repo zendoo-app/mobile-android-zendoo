@@ -23,7 +23,7 @@ jobs:
     # dependencyUpdates
     - run:
         name:         Checking dependency updates
-        command:      ./gradlew androidDependencies dependencyUpdates
+        command:      ./gradlew androidDependencies dependencyUpdates --profile
     - store_artifacts:
         path:         build/reports/profile/
         destination:  profile

@@ -20,7 +20,6 @@ out/
 # Gradle files
 .gradle/
 build/
-*/build/*
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -82,6 +81,7 @@ gen-external-apklibs
 
 # Android Studio
 /*/build/
+*/build/
 /*/local.properties
 /*/out
 /*/*/build

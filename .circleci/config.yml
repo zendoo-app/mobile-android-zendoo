@@ -19,15 +19,14 @@ jobs:
         - v1-dependencies-{{ checksum "build.gradle" }}
         - v1-dependencies-
 
-    - run:
-        name:         Downloading dependencies
-        command:      ./gradlew androidDependencies
-
 
     # dependencyUpdates
     - run:
         name:         Checking dependency updates
-        command:      ./gradlew dependencyUpdates
+        command:      ./gradlew androidDependencies dependencyUpdates --profile
+    - store_artifacts:
+        path:         build/reports/profile/
+        destination:  profile
     - store_artifacts:
         path:         build/dependencyUpdates
         destination:  dependencies
@@ -55,15 +54,11 @@ jobs:
         - v1-dependencies-{{ checksum "build.gradle" }}
         - v1-dependencies-
 
-    - run:
-        name:         Downloading dependencies
-        command:      ./gradlew androidDependencies
-
 
     # assembleDebug
     - run:
         name:         Running assembleDebug
-        command:      ./gradlew assembleDebug -x lint --profile
+        command:      ./gradlew androidDependencies assembleDebug -x lint --profile
     - store_artifacts:
         path:         build/reports/profile/
         destination:  profile
@@ -92,15 +87,11 @@ jobs:
         - v1-dependencies-{{ checksum "build.gradle" }}
         - v1-dependencies-
 
-    - run:
-        name:         Downloading dependencies
-        command:      ./gradlew androidDependencies
-
 
     # assembleRelease
     - run:
         name:         Running assembleRelease
-        command:      ./gradlew assembleRelease -x lint -x lintVitalRelease --profile
+        command:      ./gradlew androidDependencies assembleRelease -x lint -x lintVitalRelease --profile
     - store_artifacts:
         path:         build/reports/profile/
         destination:  profile
@@ -110,6 +101,67 @@ jobs:
         paths:
         - ~/.gradle
         key:          v1-dependencies-{{ checksum "build.gradle" }}
+
+
+  lint:
+
+    docker:
+    - image:          circleci/android:api-28-node8-alpha
+
+    environment:
+      JVM_OPTS:       -Xmx2048m
+      GRADLE_OPTS:    -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
+
+    steps:
+    - checkout
+
+    - restore_cache:
+        keys:
+        - v1-dependencies-{{ checksum "build.gradle" }}
+        - v1-dependencies-
+
+
+    # :app:lint
+    - run:
+        name:         Running lint
+        command:      ./gradlew androidDependencies lint --profile
+    - store_artifacts:
+        path:         build/reports/profile/
+        destination:  profile
+    - store_artifacts:
+        path:         app/build/reports/
+        destination:  app/
+
+
+  ktlint:
+
+    docker:
+    - image:          circleci/android:api-28-node8-alpha
+
+    environment:
+      JVM_OPTS:       -Xmx2048m
+      GRADLE_OPTS:    -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
+
+    steps:
+    - checkout
+
+    - restore_cache:
+        keys:
+        - v1-dependencies-{{ checksum "build.gradle" }}
+        - v1-dependencies-
+
+
+    # ktlint
+
+    - run:
+        name:         Running ktlint
+        command:      ./gradlew androidDependencies ktlintCheck --profile
+    - store_artifacts:
+        path:         build/reports/profile/
+        destination:  profile
+    - store_artifacts:
+        path:         app/build/reports/ktlint
+        destination:  app
 
 
 workflows:
@@ -127,6 +179,14 @@ workflows:
     - assembleRelease:
         requires:
           - dependencyUpdates
+    - lint:
+        requires:
+          - assembleDebug
+          - assembleRelease
+    - ktlint:
+        requires:
+          - assembleDebug
+          - assembleRelease
 
   release:
     jobs:

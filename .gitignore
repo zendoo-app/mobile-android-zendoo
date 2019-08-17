@@ -81,6 +81,7 @@ gen-external-apklibs
 
 # Android Studio
 /*/build/
+*/build/
 /*/local.properties
 /*/out
 /*/*/build

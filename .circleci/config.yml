@@ -42,14 +42,15 @@ workflows:
   version:           2
   pull_request:
     jobs:
-    - dependencies
+    - dependencies:
         filters:
           branches:
             ignore:
               - master
   release:
     jobs:
-    - dependencies
-        branches:
-          only:
-            - master
+    - dependencies:
+        filters:
+          branches:
+            only:
+              - master

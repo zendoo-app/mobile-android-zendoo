@@ -202,7 +202,7 @@ workflows:
           - dependencyUpdates
     - assembleRelease:
         requires:
-          - dependencies
+          - dependencyUpdates
     - lint_app:
         requires:
           - assembleDebug

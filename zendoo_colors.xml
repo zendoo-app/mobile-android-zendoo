@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="primary">#4440D9</color>
+  <color name="accent">#0F8BAA</color>
+  <color name="error">##f56262</color>
+  <color name="confirmation">#448AFF</color>
+  <color name="very_navy">#001636</color>
+  <color name="much_granite">#627082</color>
+  <color name="dusty">#627082</color>
+  <color name="border">#E6E8EC</color>
+  <color name="almost_white">#FAFAFC</color>
+  <color name="pure_white">#FFFFFF</color>
+  <color name="zen_blue">#6170E0</color>
+  <color name="zen_salmon">#F9B990</color>
+  <color name="zen_glacier">#D7EBF  0</color>
+  <color name="zen_blush">#FBE6D9</color>
+</resources>

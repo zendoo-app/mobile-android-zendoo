@@ -19,15 +19,14 @@ jobs:
         - v1-dependencies-{{ checksum "build.gradle" }}
         - v1-dependencies-
 
-    - run:
-        name:         Downloading dependencies
-        command:      ./gradlew androidDependencies
-
 
     # dependencyUpdates
     - run:
         name:         Checking dependency updates
-        command:      ./gradlew dependencyUpdates
+        command:      ./gradlew androidDependencies dependencyUpdates
+    - store_artifacts:
+        path:         build/reports/profile/
+        destination:  profile
     - store_artifacts:
         path:         build/dependencyUpdates
         destination:  dependencies
@@ -55,15 +54,11 @@ jobs:
         - v1-dependencies-{{ checksum "build.gradle" }}
         - v1-dependencies-
 
-    - run:
-        name:         Downloading dependencies
-        command:      ./gradlew androidDependencies
-
 
     # assembleDebug
     - run:
         name:         Running assembleDebug
-        command:      ./gradlew assembleDebug -x lint --profile
+        command:      ./gradlew androidDependencies assembleDebug -x lint --profile
     - store_artifacts:
         path:         build/reports/profile/
         destination:  profile
@@ -92,15 +87,11 @@ jobs:
         - v1-dependencies-{{ checksum "build.gradle" }}
         - v1-dependencies-
 
-    - run:
-        name:         Downloading dependencies
-        command:      ./gradlew androidDependencies
-
 
     # assembleRelease
     - run:
         name:         Running assembleRelease
-        command:      ./gradlew assembleRelease -x lint -x lintVitalRelease --profile
+        command:      ./gradlew androidDependencies assembleRelease -x lint -x lintVitalRelease --profile
     - store_artifacts:
         path:         build/reports/profile/
         destination:  profile
@@ -126,18 +117,17 @@ jobs:
 
     - restore_cache:
         keys:
-        - v1-dependencies-{{ checksum ".dependencies/dependencies.gradle" }}
+        - v1-dependencies-{{ checksum "build.gradle" }}
         - v1-dependencies-
-
-    - run:
-        name:         Downloading dependencies
-        command:      ./gradlew androidDependencies
 
 
     # :app:lint
     - run:
         name:         Running lint
-        command:      ./gradlew lint
+        command:      ./gradlew androidDependencies lint --profile
+    - store_artifacts:
+        path:         build/reports/profile/
+        destination:  profile
     - store_artifacts:
         path:         app/build/reports/
         destination:  app/
@@ -160,16 +150,15 @@ jobs:
         - v1-dependencies-{{ checksum "build.gradle" }}
         - v1-dependencies-
 
-    - run:
-        name:         Downloading dependencies
-        command:      ./gradlew androidDependencies
-
 
     # ktlint
 
     - run:
         name:         Running ktlint
-        command:      ./gradlew ktlintCheck
+        command:      ./gradlew androidDependencies ktlintCheck --profile
+    - store_artifacts:
+        path:         build/reports/profile/
+        destination:  profile
     - store_artifacts:
         path:         app/build/reports/ktlint
         destination:  app

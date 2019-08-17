@@ -217,7 +217,7 @@ jobs:
 
     - run:
         name:         Running unit
-        command:      ./gradlew jacocoTestReportDebug jacocoTestReportMerged --profile
+        command:      ./gradlew testDebugUnitTest jacocoTestReportDebug jacocoTestReportMerged --profile
     - store_artifacts:
         path:         build/reports/profile/
         destination:  profile

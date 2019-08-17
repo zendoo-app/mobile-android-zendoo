@@ -154,8 +154,8 @@ jobs:
     # ktlint
 
     - run:
-        name:         Running ktlint
-        command:      ./gradlew ktlint --profile
+        name:         Running ktlintCheck
+        command:      ./gradlew ktlintCheck --profile
     - store_artifacts:
         path:         build/reports/profile/
         destination:  profile

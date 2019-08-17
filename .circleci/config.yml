@@ -195,6 +195,39 @@ jobs:
         destination:  app
 
 
+  unit:
+
+    docker:
+    - image:          circleci/android:api-28-node8-alpha
+
+    environment:
+      JVM_OPTS:       -Xmx2048m
+      GRADLE_OPTS:    -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
+
+    steps:
+    - checkout
+
+    - restore_cache:
+        keys:
+        - v1-dependencies-{{ checksum "build.gradle" }}
+        - v1-dependencies-
+
+
+    # unit
+
+    - run:
+        name:         Running unit
+        command:      ./gradlew jacocoTestReportDebug mergeJacocoReports jacocoTestReportMerged --profile
+    - store_artifacts:
+        path:         build/reports/profile/
+        destination:  profile
+    - store_artifacts:
+        path:         build/reports/jacoco
+        destination:  jacoco
+    - store_test_results:
+        path:         build/reports/jacoco
+
+
 workflows:
   version:            2
   pull_request:
@@ -222,6 +255,8 @@ workflows:
         requires:
           - assembleDebug
           - assembleRelease
+    - unit
+
 
   release:
     jobs:

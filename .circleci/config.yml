@@ -112,7 +112,7 @@ jobs:
         key:          v1-dependencies-{{ checksum "build.gradle" }}
 
 
-  lint_app:
+  lint:
 
     docker:
     - image:          circleci/android:api-28-node8-alpha
@@ -142,15 +142,8 @@ jobs:
         path:         build/reports/
         destination:  lint
 
-    - run:
-        name:         Running ktlint
-        command:      ./gradlew :app:ktlintCheck
-    - store_artifacts:
-        path:         build/reports/ktlint
-        destination:  ktlint
 
-
-  lint:
+  ktlint:
 
     docker:
     - image:          circleci/android:api-28-node8-alpha
@@ -164,7 +157,7 @@ jobs:
 
     - restore_cache:
         keys:
-        - v1-dependencies-{{ checksum ".dependencies/dependencies.gradle" }}
+        - v1-dependencies-{{ checksum "build.gradle" }}
         - v1-dependencies-
 
     - run:
@@ -172,19 +165,13 @@ jobs:
         command:      ./gradlew androidDependencies
 
 
-    # lint
-    - run:
-        name:         Running lint
-        command:      ./gradlew lint
-    - store_artifacts:
-        path:         build/reports/
-        destination:  lint
+    # ktlint
 
     - run:
         name:         Running ktlint
         command:      ./gradlew ktlintCheck
     - store_artifacts:
-        path:         build/reports/ktlint
+        path:         app/build/reports/ktlint
         destination:  ktlint
 
 
@@ -203,13 +190,14 @@ workflows:
     - assembleRelease:
         requires:
           - dependencyUpdates
-    - lint_app:
+    - lint:
         requires:
           - assembleDebug
           - assembleRelease
-    - lint:
+    - ktlint:
         requires:
-          - lint_app
+          - assembleDebug
+          - assembleRelease
 
   release:
     jobs:

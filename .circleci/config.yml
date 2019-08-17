@@ -186,6 +186,82 @@ jobs:
         key: v1-dependencies-{{ checksum "build.gradle" }}
 
 
+  lint_app:
+
+    docker:
+    - image: circleci/android:api-28-node8-alpha
+
+    environment:
+      JVM_OPTS: -Xmx2048m
+      GRADLE_OPTS: -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
+
+    steps:
+    - checkout
+
+    - restore_cache:
+        keys:
+        - v1-dependencies-{{ checksum ".dependencies/dependencies.gradle" }}
+        - v1-dependencies-
+
+    - run:
+        name: Downloading dependencies
+        command: ./gradlew androidDependencies
+
+
+    # :app:lint
+    - run:
+        name: Running lint
+        command: ./gradlew :app:lint
+    - store_artifacts:
+        path: build/reports/
+        destination: lint
+
+    - run:
+        name: Running ktlint
+        command: ./gradlew :app:ktlintCheck
+    - store_artifacts:
+        path: build/reports/ktlint
+        destination: ktlint
+
+
+  lint:
+
+    docker:
+    - image: circleci/android:api-28-node8-alpha
+
+    environment:
+      JVM_OPTS: -Xmx2048m
+      GRADLE_OPTS: -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
+
+    steps:
+    - checkout
+
+    - restore_cache:
+        keys:
+        - v1-dependencies-{{ checksum ".dependencies/dependencies.gradle" }}
+        - v1-dependencies-
+
+    - run:
+        name: Downloading dependencies
+        command: ./gradlew androidDependencies
+
+
+    # lint
+    - run:
+        name: Running lint
+        command: ./gradlew lint
+    - store_artifacts:
+        path: build/reports/
+        destination: lint
+
+    - run:
+        name: Running ktlint
+        command: ./gradlew ktlintCheck
+    - store_artifacts:
+        path: build/reports/ktlint
+        destination: ktlint
+
+
 workflows:
   version:            2
   pull_request:
@@ -200,7 +276,14 @@ workflows:
           - dependencyUpdates
     - assembleRelease:
         requires:
-          - dependencyUpdates
+          - dependencies
+    - lint_app:
+        requires:
+          - assembleDebug
+          - assembleRelease
+    - lint:
+        requires:
+          - lint_app
 
   release:
     jobs:

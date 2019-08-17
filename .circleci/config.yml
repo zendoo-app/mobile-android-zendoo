@@ -112,6 +112,80 @@ jobs:
         key:          v1-dependencies-{{ checksum "build.gradle" }}
 
 
+  assembleDebug:
+
+    docker:
+    - image: circleci/android:api-28-node8-alpha
+
+    environment:
+      JVM_OPTS: -Xmx2048m
+      GRADLE_OPTS: -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
+
+    steps:
+    - checkout
+
+    - restore_cache:
+        keys:
+        - v1-dependencies-{{ checksum "build.gradle" }}
+        - v1-dependencies-
+
+    - run:
+        name: Downloading dependencies
+        command: ./gradlew androidDependencies
+
+
+    # assembleDebug
+    - run:
+        name: Running assembleDebug
+        command: ./gradlew assembleDebug -x lint --profile
+    - store_artifacts:
+        path: build/reports/profile/
+        destination: profile
+
+
+    - save_cache:
+        paths:
+        - ~/.gradle
+        key: v1-dependencies-{{ checksum "build.gradle" }}
+
+
+  assembleRelease:
+
+    docker:
+    - image: circleci/android:api-28-node8-alpha
+
+    environment:
+      JVM_OPTS: -Xmx2048m
+      GRADLE_OPTS: -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
+
+    steps:
+    - checkout
+
+    - restore_cache:
+        keys:
+        - v1-dependencies-{{ checksum "build.gradle" }}
+        - v1-dependencies-
+
+    - run:
+        name: Downloading dependencies
+        command: ./gradlew androidDependencies
+
+
+    # assembleRelease
+    - run:
+        name: Running assembleRelease
+        command: ./gradlew assembleRelease -x lint -x lintVitalRelease --profile
+    - store_artifacts:
+        path: build/reports/profile/
+        destination: profile
+
+
+    - save_cache:
+        paths:
+        - ~/.gradle
+        key: v1-dependencies-{{ checksum "build.gradle" }}
+
+
 workflows:
   version:            2
   pull_request:

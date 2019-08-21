@@ -214,7 +214,11 @@ jobs:
 
 
     # unit
-
+    - run:
+        name: Build debug APK and release APK
+        command: |
+          ./gradlew :app:assembleDebug
+          ./gradlew :app:assembleDebugAndroidTest
     - run:
         name:         Running unit
         command:      ./gradlew :app:jacocoTestReportDebug jacocoTestReportMerged --profile
@@ -226,15 +230,15 @@ jobs:
         destination:  jacoco
 
     - run:
-        name:         Save test results
-        command:      |
+        name: Save test results
+        command: |
           mkdir -p ~/junit/
-          find . -type f -regex "app/build/test-results/testDebugUnitTest/.*xml" -exec cp {} ~/junit/ \;
+          find . -type f -regex "app/build/test-results/.*xml" -exec cp {} ~/junit/ \;
     - store_test_results:
-        path:         ~/junit
+        path: ~/junit
     - store_artifacts:
-        path:         ~/junit
-        destination:  app
+        path: ~/junit
+        destination: app
 
 
 workflows:

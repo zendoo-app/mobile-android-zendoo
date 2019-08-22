@@ -1,280 +1,309 @@
-version:              2
+version:                       2
 
 jobs:
 
   dependencyUpdates:
 
     docker:
-    - image:          circleci/android:api-28-node8-alpha
+      - image:                 circleci/android:api-28-node8-alpha
 
     environment:
-      JVM_OPTS:       -Xmx2048m
-      GRADLE_OPTS:    -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
+      JVM_OPTS:                -Xmx2048m
+      GRADLE_OPTS:             -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
 
     steps:
-    - checkout
+      - checkout
 
-    - restore_cache:
-        keys:
-        - v1-dependencies-{{ checksum "build.gradle" }}
-        - v1-dependencies-
-
-
-    # dependencyUpdates
-    - run:
-        name:         Checking dependency updates
-        command:      ./gradlew androidDependencies dependencyUpdates --profile
-    - store_artifacts:
-        path:         build/reports/profile/
-        destination:  profile
-    - store_artifacts:
-        path:         build/dependencyUpdates
-        destination:  dependencies
-
-    - save_cache:
-        paths:
-        - ~/.gradle
-        key:          v1-dependencies-{{ checksum "build.gradle" }}
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            - v1-dependencies-
 
 
-  assembleDebug:
+      # dependencyUpdates
+      - run:
+          name:                Checking dependency updates
+          command:             ./gradlew androidDependencies dependencyUpdates --profile
+      - store_artifacts:
+          path:                build/reports/profile/
+          destination:         profile
+      - store_artifacts:
+          path:                build/dependencyUpdates
+          destination:         dependencies
+
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key:                 v1-dependencies-{{ checksum "build.gradle" }}
+
+
+  unit_app:
 
     docker:
-    - image:          circleci/android:api-28-node8-alpha
+      - image:                 circleci/android:api-28-node8-alpha
 
     environment:
-      JVM_OPTS:       -Xmx2048m
-      GRADLE_OPTS:    -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
+      JVM_OPTS:                -Xmx2048m
+      GRADLE_OPTS:             -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
 
     steps:
-    - checkout
+      - checkout
 
-    - restore_cache:
-        keys:
-        - v1-dependencies-{{ checksum "build.gradle" }}
-        - v1-dependencies-
-
-
-    # assembleDebug
-    - run:
-        name:         Running assembleDebug
-        command:      ./gradlew assembleDebug -x lint --profile
-    - store_artifacts:
-        path:         build/reports/profile/
-        destination:  profile
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            - v1-dependencies-
 
 
-    - save_cache:
-        paths:
-        - ~/.gradle
-        key:          v1-dependencies-{{ checksum "build.gradle" }}
+      # unit_app
+      - run:
+          name: Running :app:test
+          command: ./gradlew :app:test
+      - store_artifacts:
+          path: app/build/reports/tests/
+          destination: unit
 
-
-  assembleRelease:
-
-    docker:
-    - image:          circleci/android:api-28-node8-alpha
-
-    environment:
-      JVM_OPTS:       -Xmx2048m
-      GRADLE_OPTS:    -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
-
-    steps:
-    - checkout
-
-    - restore_cache:
-        keys:
-        - v1-dependencies-{{ checksum "build.gradle" }}
-        - v1-dependencies-
-
-
-    # assembleRelease
-    - run:
-        name:         Running assembleRelease
-        command:      ./gradlew assembleRelease -x lint -x lintVitalRelease --profile
-    - store_artifacts:
-        path:         build/reports/profile/
-        destination:  profile
-
-
-    - save_cache:
-        paths:
-        - ~/.gradle
-        key:          v1-dependencies-{{ checksum "build.gradle" }}
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/unit/xml/
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/unit/xml/ \;
+      - store_test_results:
+          path: ~/unit/xml
+      - store_artifacts:
+          path: ~/unit/xml
+          destination: junit
 
 
   lint:
 
     docker:
-    - image:          circleci/android:api-28-node8-alpha
+      - image:                 circleci/android:api-28-node8-alpha
 
     environment:
-      JVM_OPTS:       -Xmx2048m
-      GRADLE_OPTS:    -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
+      JVM_OPTS:                -Xmx2048m
+      GRADLE_OPTS:             -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
 
     steps:
-    - checkout
+      - checkout
 
-    - restore_cache:
-        keys:
-        - v1-dependencies-{{ checksum "build.gradle" }}
-        - v1-dependencies-
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            - v1-dependencies-
 
 
-    # lint
-    - run:
-        name:         Running lint
-        command:      ./gradlew lint --profile
-    - store_artifacts:
-        path:         build/reports/profile/
-        destination:  profile
-    - store_artifacts:
-        path:         app/build/reports/
-        destination:  app/
+      # lint
+      - run:
+          name:                Running lint
+          command:             ./gradlew lint --profile
+      - store_artifacts:
+          path:                build/reports/profile/
+          destination:         profile
+      - store_artifacts:
+          path:                app/build/reports/
+          destination:         app/
 
 
   ktlint:
 
     docker:
-    - image:          circleci/android:api-28-node8-alpha
+      - image:                 circleci/android:api-28-node8-alpha
 
     environment:
-      JVM_OPTS:       -Xmx2048m
-      GRADLE_OPTS:    -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
+      JVM_OPTS:                -Xmx2048m
+      GRADLE_OPTS:             -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
 
     steps:
-    - checkout
+      - checkout
 
-    - restore_cache:
-        keys:
-        - v1-dependencies-{{ checksum "build.gradle" }}
-        - v1-dependencies-
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            - v1-dependencies-
 
 
-    # ktlint
-
-    - run:
-        name:         Running ktlintCheck
-        command:      ./gradlew ktlintCheck --profile
-    - store_artifacts:
-        path:         build/reports/profile/
-        destination:  profile
-    - store_artifacts:
-        path:         app/build/reports/ktlint
-        destination:  app
+      # ktlint
+      - run:
+          name:                Running ktlintCheck
+          command:             ./gradlew --continue ktlintCheck --profile
+      - store_artifacts:
+          path:                build/reports/profile/
+          destination:         profile
+      - store_artifacts:
+          path:                app/build/reports/ktlint
+          destination:         app
 
 
   detekt:
 
     docker:
-    - image:          circleci/android:api-28-node8-alpha
+      - image:                 circleci/android:api-28-node8-alpha
 
     environment:
-      JVM_OPTS:       -Xmx2048m
-      GRADLE_OPTS:    -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
+      JVM_OPTS:                -Xmx2048m
+      GRADLE_OPTS:             -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
 
     steps:
-    - checkout
+      - checkout
 
-    - restore_cache:
-        keys:
-        - v1-dependencies-{{ checksum "build.gradle" }}
-        - v1-dependencies-
-
-
-    # detekt
-
-    - run:
-        name:         Running detekt
-        command:      ./gradlew detekt --profile
-    - store_artifacts:
-        path:         build/reports/profile/
-        destination:  profile
-    - store_artifacts:
-        path:         app/build/reports/detekt
-        destination:  app
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            - v1-dependencies-
 
 
-  unit:
+      # detekt
+      - run:
+          name:                Running detekt
+          command:             ./gradlew detekt --profile
+      - store_artifacts:
+          path:                build/reports/profile/
+          destination:         profile
+      - store_artifacts:
+          path:                app/build/reports/detekt
+          destination:         app
+
+
+  coverage:
 
     docker:
-    - image:          circleci/android:api-28-node8-alpha
+      - image:                 circleci/android:api-28-node8-alpha
 
     environment:
-      JVM_OPTS:       -Xmx2048m
-      GRADLE_OPTS:    -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
+      JVM_OPTS:                -Xmx2048m
+      GRADLE_OPTS:             -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
 
     steps:
-    - checkout
+      - checkout
 
-    - restore_cache:
-        keys:
-        - v1-dependencies-{{ checksum "build.gradle" }}
-        - v1-dependencies-
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            - v1-dependencies-
 
 
-    # unit
-    - run:
-        name: Build debug APK and release APK
-        command: |
-          ./gradlew :app:assembleDebug
-          ./gradlew :app:assembleDebugAndroidTest
-    - run:
-        name:         Running unit
-        command:      ./gradlew :app:jacocoTestReportDebug jacocoTestReportMerged --profile
-    - store_artifacts:
-        path:         build/reports/profile/
-        destination:  profile
-    - store_artifacts:
-        path:         build/reports/jacoco
-        destination:  jacoco
+      # coverage
+      - run:
+          name:                Running jacocoTestReportDebug jacocoTestReportMerged
+          command:             |
+            ./gradlew jacocoTestReportProductionRelease
+            ./gradlew jacocoTestReportMerged
+      - store_artifacts:
+          path:                build/reports/profile/
+          destination:         profile
+      - store_artifacts:
+          path:                build/reports/jacoco
+          destination:         jacoco
 
-    - run:
-        name: Save test results
-        command: |
-          mkdir -p ~/junit/
-          find . -type f -regex "app/build/test-results/.*xml" -exec cp {} ~/junit/ \;
-    - store_test_results:
-        path: ~/junit
-    - store_artifacts:
-        path: ~/junit
-        destination: app
+
+  robo:
+    docker:
+      - image:                 circleci/android:api-28-node8-alpha
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum ".dependencies/dependencies.gradle" }}
+            - v1-dependencies-
+
+      - run:
+          name:                Downloading dependencies
+          command:             ./gradlew androidDependencies
+
+
+      # robo
+      - run:
+          name:                Authorize gcloud and set config defaults
+          command:             |
+            sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+            sudo gcloud auth activate-service-account ${FIREBASE_SERVICE_ACCOUNT} --key-file=${HOME}/gcloud-service-key.json
+            sudo gcloud config set account ${FIREBASE_SERVICE_ACCOUNT}
+      - run:
+          name:                Build debug APK and release APK
+          command:             |
+            ./gradlew :application-test:assembleDebug
+            ./gradlew :application-test:assembleDebugAndroidTest
+      - run:
+          name:                Test with Firebase Test Lab
+          command:             sudo gcloud firebase test android run
+            --type robo
+            --app application-test/build/outputs/apk/debug/application-test-debug.apk
+            --device model=star2qlteue,version=26,locale=de,orientation=portrait
+            --timeout 90s
+          # --results-bucket cloud-test-${GOOGLE_PROJECT_ID}
+          # --timeout 90s
+
+
+  assemble:
+
+    docker:
+      - image:                 circleci/android:api-28-node8-alpha
+
+    environment:
+      JVM_OPTS:                -Xmx2048m
+      GRADLE_OPTS:             -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            - v1-dependencies-
+
+
+      # assemble
+      - run:                   |
+            ./gradlew assembleDebug
+            ./gradlew assembleDebug
+
+      - store_artifacts:
+          path:                app/build/outputs/apk/debug/
+          destination:         debug
+
+      - store_artifacts:
+          path:                app/build/outputs/apk/release/
+          destination:         release
 
 
 workflows:
-  version:            2
+  version:                     2
   pull_request:
     jobs:
-    - dependencyUpdates:
-        filters:
-          branches:
-            ignore:
-              - master
-    - assembleDebug:
-        requires:
-          - dependencyUpdates
-    - assembleRelease:
-        requires:
-          - dependencyUpdates
-    - lint:
-        requires:
-          - assembleDebug
-          - assembleRelease
-    - ktlint:
-        requires:
-          - assembleDebug
-          - assembleRelease
-    - detekt:
-        requires:
-          - assembleDebug
-          - assembleRelease
-    - unit
-
+      - dependencyUpdates:
+          filters:
+            branches:
+              ignore:
+                - master
+      - unit_app:
+          requires:
+            - dependencyUpdates
+      - lint:
+          requires:
+            - unit_app
+      - ktlint:
+          requires:
+            - unit_app
+      - detekt:
+          requires:
+            - unit_app
+      - coverage:
+          requires:
+            - unit_app
+      - assemble:
+          requires:
+            - coverage
+            - detekt
+            - ktlint
+            - lint
 
   release:
     jobs:
-    - dependencyUpdates:
-        filters:
-          branches:
-            only:
-              - master
+      - assemble:
+          filters:
+            branches:
+              only:
+                - master

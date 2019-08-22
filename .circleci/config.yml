@@ -187,7 +187,7 @@ jobs:
       - run:
           name:                Running jacocoTestReportDebug jacocoTestReportMerged
           command:             |
-            ./gradlew jacocoTestReportProductionRelease
+            ./gradlew jacocoTestReportRelease
             ./gradlew jacocoTestReportMerged
       - store_artifacts:
           path:                build/reports/profile/

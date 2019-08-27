@@ -328,3 +328,4 @@ gradle-app.setting
 
 # build profile
 reports/profile
+app/google-services.json

@@ -1,15 +1,15 @@
-version:                       2
+version:               2
 
 jobs:
 
   dependencyUpdates:
 
     docker:
-      - image:                 circleci/android:api-28-node8-alpha
+      - image:         circleci/android:api-28-node8-alpha
 
     environment:
-      JVM_OPTS:                -Xmx2048m
-      GRADLE_OPTS:             -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
+      JVM_OPTS:        -Xmx2048m
+      GRADLE_OPTS:     -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
 
     steps:
       - checkout
@@ -22,67 +22,29 @@ jobs:
 
       # dependencyUpdates
       - run:
-          name:                Checking dependency updates
-          command:             ./gradlew androidDependencies dependencyUpdates --profile
+          name:        Checking dependency updates
+          command:     ./gradlew androidDependencies dependencyUpdates --profile
       - store_artifacts:
-          path:                build/reports/profile/
-          destination:         profile
+          path:        build/reports/profile/
+          destination: profile
       - store_artifacts:
-          path:                build/dependencyUpdates
-          destination:         dependencies
+          path:        build/dependencyUpdates
+          destination: dependencies
 
       - save_cache:
           paths:
             - ~/.gradle
-          key:                 v1-dependencies-{{ checksum "build.gradle" }}
-
-
-  unit_zendoo:
-
-    docker:
-      - image:                 circleci/android:api-28-node8-alpha
-
-    environment:
-      JVM_OPTS:                -Xmx2048m
-      GRADLE_OPTS:             -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
-
-    steps:
-      - checkout
-
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "build.gradle" }}
-            - v1-dependencies-
-
-
-      # unit_zendoo
-      - run:
-          name: Running :zendoo:test
-          command: ./gradlew :zendoo:test
-      - store_artifacts:
-          path: zendoo/build/reports/tests/
-          destination: unit
-
-      - run:
-          name: Save test results
-          command: |
-            mkdir -p ~/unit/xml/
-            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/unit/xml/ \;
-      - store_test_results:
-          path: ~/unit/xml
-      - store_artifacts:
-          path: ~/unit/xml
-          destination: junit
+          key:         v1-dependencies-{{ checksum "build.gradle" }}
 
 
   lint:
 
     docker:
-      - image:                 circleci/android:api-28-node8-alpha
+      - image:         circleci/android:api-28-node8-alpha
 
     environment:
-      JVM_OPTS:                -Xmx2048m
-      GRADLE_OPTS:             -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
+      JVM_OPTS:        -Xmx2048m
+      GRADLE_OPTS:     -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
 
     steps:
       - checkout
@@ -95,24 +57,26 @@ jobs:
 
       # lint
       - run:
-          name:                Running lint
-          command:             ./gradlew lint --profile
+          name:        Running lint
+          command:     ./gradlew lint --profile
       - store_artifacts:
-          path:                build/reports/profile/
-          destination:         profile
+          path:        build/reports/profile/
+          destination: profile
       - store_artifacts:
-          path:                zendoo/build/reports/
-          destination:         zendoo/
-
+          path:        zendoo/build/reports/
+          destination: zendoo
+      - store_artifacts:
+          path:        feature/dashboard/build/reports/
+          destination: dashboard
 
   ktlint:
 
     docker:
-      - image:                 circleci/android:api-28-node8-alpha
+      - image:         circleci/android:api-28-node8-alpha
 
     environment:
-      JVM_OPTS:                -Xmx2048m
-      GRADLE_OPTS:             -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
+      JVM_OPTS:        -Xmx2048m
+      GRADLE_OPTS:     -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
 
     steps:
       - checkout
@@ -125,24 +89,26 @@ jobs:
 
       # ktlint
       - run:
-          name:                Running ktlintCheck
-          command:             ./gradlew --continue ktlintCheck --profile
+          name:        Running ktlintCheck
+          command:     ./gradlew --continue ktlintCheck --profile
       - store_artifacts:
-          path:                build/reports/profile/
-          destination:         profile
+          path:        build/reports/profile/
+          destination: profile
       - store_artifacts:
-          path:                zendoo/build/reports/ktlint
-          destination:         app
-
+          path:        zendoo/build/reports/ktlint
+          destination: app
+      - store_artifacts:
+          path:        feature/dashboard/build/reports/ktlint
+          destination: dashboard
 
   detekt:
 
     docker:
-      - image:                 circleci/android:api-28-node8-alpha
+      - image:         circleci/android:api-28-node8-alpha
 
     environment:
-      JVM_OPTS:                -Xmx2048m
-      GRADLE_OPTS:             -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
+      JVM_OPTS:        -Xmx2048m
+      GRADLE_OPTS:     -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
 
     steps:
       - checkout
@@ -155,24 +121,26 @@ jobs:
 
       # detekt
       - run:
-          name:                Running detekt
-          command:             ./gradlew detekt --profile
+          name:        Running detekt
+          command:     ./gradlew detekt --profile
       - store_artifacts:
-          path:                build/reports/profile/
-          destination:         profile
+          path:        build/reports/profile/
+          destination: profile
       - store_artifacts:
-          path:                zendoo/build/reports/detekt
-          destination:         app
-
+          path:        zendoo/build/reports/detekt
+          destination: zendoo
+      - store_artifacts:
+          path:        feature/dashboard/build/reports/detekt
+          destination: dashboard
 
   coverage:
 
     docker:
-      - image:                 circleci/android:api-28-node8-alpha
+      - image:         circleci/android:api-28-node8-alpha
 
     environment:
-      JVM_OPTS:                -Xmx2048m
-      GRADLE_OPTS:             -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
+      JVM_OPTS:        -Xmx2048m
+      GRADLE_OPTS:     -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
 
     steps:
       - checkout
@@ -185,21 +153,37 @@ jobs:
 
       # coverage
       - run:
-          name:                Running jacocoTestReportDebug jacocoTestReportMerged
-          command:             |
+          name:        Running jacocoTestReportDebug jacocoTestReportMerged
+          command:     |
             ./gradlew jacocoTestReportRelease
             ./gradlew jacocoTestReportMerged
       - store_artifacts:
-          path:                build/reports/profile/
-          destination:         profile
+          path:        build/reports/profile/
+          destination: profile
       - store_artifacts:
-          path:                build/reports/jacoco
-          destination:         jacoco
+          path:        build/reports/jacoco
+          destination: jacoco
+      - store_artifacts:
+          path:        zendoo/build/reports/tests/
+          destination: unit/zendoo
+      - store_artifacts:
+          path:        feature/dashboard/build/reports/tests/
+          destination: unit/dashboard
 
+      - run:
+          name:        Save test results
+          command:     |
+            mkdir -p ~/reports/xml/
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/reports/xml/ \;
+      - store_test_results:
+          path:        ~/reports/xml
+      - store_artifacts:
+          path:        ~/reports/xml
+          destination: junit
 
   robo:
     docker:
-      - image:                 circleci/android:api-28-node8-alpha
+      - image:         circleci/android:api-28-node8-alpha
 
     steps:
       - checkout
@@ -210,25 +194,25 @@ jobs:
             - v1-dependencies-
 
       - run:
-          name:                Downloading dependencies
-          command:             ./gradlew androidDependencies
+          name:        Downloading dependencies
+          command:     ./gradlew androidDependencies
 
 
       # robo
       - run:
-          name:                Authorize gcloud and set config defaults
-          command:             |
+          name:        Authorize gcloud and set config defaults
+          command:     |
             sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
             sudo gcloud auth activate-service-account ${FIREBASE_SERVICE_ACCOUNT} --key-file=${HOME}/gcloud-service-key.json
             sudo gcloud config set account ${FIREBASE_SERVICE_ACCOUNT}
       - run:
-          name:                Build debug APK and release APK
-          command:             |
+          name:        Build debug APK and release APK
+          command:     |
             ./gradlew :application-test:assembleDebug
             ./gradlew :application-test:assembleDebugAndroidTest
       - run:
-          name:                Test with Firebase Test Lab
-          command:             sudo gcloud firebase test android run
+          name:        Test with Firebase Test Lab
+          command:     sudo gcloud firebase test android run
             --type robo
             --app application-test/build/outputs/apk/debug/application-test-debug.apk
             --device model=star2qlteue,version=26,locale=de,orientation=portrait
@@ -240,11 +224,11 @@ jobs:
   assemble:
 
     docker:
-      - image:                 circleci/android:api-28-node8-alpha
+      - image:         circleci/android:api-28-node8-alpha
 
     environment:
-      JVM_OPTS:                -Xmx2048m
-      GRADLE_OPTS:             -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
+      JVM_OPTS:        -Xmx2048m
+      GRADLE_OPTS:     -Xmx1536m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
 
     steps:
       - checkout
@@ -256,21 +240,21 @@ jobs:
 
 
       # assemble
-      - run:                   |
-            ./gradlew assembleDebug
-            ./gradlew assembleDebug
+      - run:           |
+          ./gradlew assembleDebug
+          ./gradlew assembleDebug
 
       - store_artifacts:
-          path:                zendoo/build/outputs/apk/debug/
-          destination:         debug
+          path:        zendoo/build/outputs/apk/debug/
+          destination: debug
 
       - store_artifacts:
-          path:                zendoo/build/outputs/apk/release/
-          destination:         release
+          path:        zendoo/build/outputs/apk/release/
+          destination: release
 
 
 workflows:
-  version:                     2
+  version:             2
   pull_request:
     jobs:
       - dependencyUpdates:
@@ -278,21 +262,18 @@ workflows:
             branches:
               ignore:
                 - master
-      - unit_zendoo:
-          requires:
-            - dependencyUpdates
       - lint:
           requires:
-            - unit_zendoo
+            - dependencyUpdates
       - ktlint:
           requires:
-            - unit_zendoo
+            - dependencyUpdates
       - detekt:
           requires:
-            - unit_zendoo
+            - dependencyUpdates
       - coverage:
           requires:
-            - unit_zendoo
+            - dependencyUpdates
       - assemble:
           requires:
             - coverage

@@ -3,11 +3,15 @@ package app.zendoo.namaste
 import android.content.Context
 import org.junit.Assert
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations.initMocks
+import org.mockito.junit.MockitoJUnit
+import org.mockito.junit.MockitoRule
 
 class AsdTest {
+
     lateinit var asd: Asd
 
     @Mock
@@ -21,7 +25,6 @@ class AsdTest {
     @Test(expected = NullPointerException::class)
     fun testAsd() {
         asd = Asd(context)
-
         val result = asd.asd(0, 0)
         Assert.assertEquals(0, result.toLong())
     }

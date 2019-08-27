@@ -69,6 +69,9 @@ jobs:
           path:        feature/dashboard/build/reports/
           destination: dashboard
       - store_artifacts:
+          path:        feature/home/build/reports/
+          destination: home
+      - store_artifacts:
           path:        feature/user/build/reports/
           destination: user
 
@@ -104,8 +107,12 @@ jobs:
           path:        feature/dashboard/build/reports/ktlint
           destination: dashboard
       - store_artifacts:
+          path:        feature/home/build/reports/ktlint
+          destination: home
+      - store_artifacts:
           path:        feature/user/build/reports/ktlint
           destination: user
+
   detekt:
 
     docker:
@@ -137,6 +144,9 @@ jobs:
       - store_artifacts:
           path:        feature/dashboard/build/reports/detekt
           destination: dashboard
+      - store_artifacts:
+          path:        feature/home/build/reports/detekt
+          destination: home
       - store_artifacts:
           path:        feature/user/build/reports/detekt
           destination: user
@@ -177,6 +187,9 @@ jobs:
       - store_artifacts:
           path:        feature/dashboard/build/reports/tests/
           destination: unit/dashboard
+      - store_artifacts:
+          path:        feature/home/build/reports/tests/
+          destination: unit/home
       - store_artifacts:
           path:        feature/user/build/reports/tests/
           destination: unit/user

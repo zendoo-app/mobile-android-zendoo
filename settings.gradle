@@ -1,3 +1,4 @@
 include ':zendoo'
 include ':feature:dashboard'
 include ':feature:user'
+include ':feature:home'

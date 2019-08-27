@@ -1,1 +1,2 @@
 include ':zendoo'
+include ':feature:dashboard'

@@ -1,4 +1,4 @@
-package app.zendoo.zendoo
+package app.zendoo.namaste
 
 import android.content.Context
 import com.google.firebase.analytics.FirebaseAnalytics

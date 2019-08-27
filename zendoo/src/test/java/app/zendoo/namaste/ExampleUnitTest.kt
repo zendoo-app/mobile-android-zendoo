@@ -1,4 +1,4 @@
-package app.zendoo.zendoo
+package app.zendoo.namaste
 
 import org.junit.Test
 

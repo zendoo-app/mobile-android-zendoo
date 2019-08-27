@@ -25,5 +25,7 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        val asd = Asd().asd(1, 2)
     }
 }

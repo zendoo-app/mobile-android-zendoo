@@ -26,5 +26,3 @@ class AsdTest {
         Assert.assertEquals(0, result.toLong())
     }
 }
-
-//Generated with love by TestMe :) Please report issues and submit feature requests at: http://weirddev.com/forum#!/testme

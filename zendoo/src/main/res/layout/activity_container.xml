@@ -5,7 +5,6 @@
     android:id="@+id/constraint_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorError"
     tools:context="app.zendoo.namaste.ui.ContainerActivity">
 
     <fragment

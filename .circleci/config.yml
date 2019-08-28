@@ -55,28 +55,71 @@ jobs:
             - v1-dependencies-
 
 
-      # lint
+      # :features:dashboard
       - run:
-          name:        Running lint
-          command:     ./gradlew lint --profile
+          name:        Running :features:dashboard:lint
+          command:     ./gradlew :features:dashboard:lint --profile
       - store_artifacts:
           path:        build/reports/profile/
-          destination: profile
-      - store_artifacts:
-          path:        zendoo/build/reports/
-          destination: zendoo
+          destination: features/dashboard
       - store_artifacts:
           path:        features/dashboard/build/reports/
-          destination: dashboard
+          destination: features/dashboard
+
+      # :features:home
+      - run:
+          name:        Running :features:home:lint
+          command:     ./gradlew :features:home:lint --profile
+      - store_artifacts:
+          path:        build/reports/profile/
+          destination: features/home
       - store_artifacts:
           path:        features/home/build/reports/
-          destination: home
+          destination: features/home
+
+      # :features:user
+      - run:
+          name:        Running :features:user:lint
+          command:     ./gradlew :features:user:lint --profile
+      - store_artifacts:
+          path:        build/reports/profile/
+          destination: features/user
       - store_artifacts:
           path:        features/user/build/reports/
-          destination: user
+          destination: features/user
+
+      # :libraries:di-components
+      - run:
+          name:        Running :libraries:di-components:lint
+          command:     ./gradlew :libraries:di-components:lint --profile
+      - store_artifacts:
+          path:        build/reports/profile/
+          destination: di-components
+      - store_artifacts:
+          path:        libraries/di-components/build/reports/
+          destination: di-components
+
+      # :libraries:ui-components
+      - run:
+          name:        Running :libraries:ui-components:lint
+          command:     ./gradlew :libraries:ui-components:lint --profile
+      - store_artifacts:
+          path:        build/reports/profile/
+          destination: ui-components
       - store_artifacts:
           path:        libraries/ui-components/build/reports/
           destination: ui-components
+
+      # :zendoo
+      - run:
+          name:        Running lint
+          command:     ./gradlew :zendoo:lint --profile
+      - store_artifacts:
+          path:        build/reports/profile/
+          destination: zendoo
+      - store_artifacts:
+          path:        zendoo/build/reports/
+          destination: zendoo
           
   ktlint:
 
@@ -106,6 +149,8 @@ jobs:
       - store_artifacts:
           path:        zendoo/build/reports/ktlint
           destination: app
+
+          
       - store_artifacts:
           path:        features/dashboard/build/reports/ktlint
           destination: dashboard

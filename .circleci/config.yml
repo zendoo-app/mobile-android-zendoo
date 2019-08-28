@@ -84,11 +84,11 @@ jobs:
 
       # :libraries:ui-components
       - run:
-          name:        Running :libraries:di-components
-          command:     ./gradlew :libraries:di-components:lint --profile
+          name:        Running :libraries:ui-components
+          command:     ./gradlew :libraries:ui-components:lint --profile
       - store_artifacts:
-          path:        libraries/di-components/build/reports/
-          destination: di-components
+          path:        libraries/ui-components/build/reports/
+          destination: libraries/ui-components
 
       # :zendoo
       - run:
@@ -121,26 +121,26 @@ jobs:
             - v1-dependencies-
 
 
-      # :feature:dashboard
+      # :features:dashboard
       - run:
-          name:        Running :feature:dashboard
-          command:     ./gradlew --continue :feature:dashboard:ktlintCheck --profile
+          name:        Running :features:dashboard
+          command:     ./gradlew --continue :features:dashboard:ktlintCheck --profile
       - store_artifacts:
           path:        features/dashboard/build/reports/ktlint
           destination: features/dashboard
 
-      # :feature:home
+      # :features:home
       - run:
-          name:        Running :feature:home
-          command:     ./gradlew --continue :feature:home:ktlintCheck --profile
+          name:        Running :features:home
+          command:     ./gradlew --continue :features:home:ktlintCheck --profile
       - store_artifacts:
           path:        features/home/build/reports/ktlint
           destination: features/home
 
-      # :feature:user
+      # :features:user
       - run:
-          name:        Running :feature:user
-          command:     ./gradlew --continue :feature:user:ktlintCheck --profile
+          name:        Running :features:user
+          command:     ./gradlew --continue :features:user:ktlintCheck --profile
       - store_artifacts:
           path:        features/user/build/reports/ktlint
           destination: features/user
@@ -193,26 +193,26 @@ jobs:
             - v1-dependencies-
 
 
-      # :feature:dashboard
+      # :features:dashboard
       - run:
-          name:        Running :feature:dashboard
-          command:     ./gradlew :feature:dashboard:detekt --profile
+          name:        Running :features:dashboard
+          command:     ./gradlew :features:dashboard:detekt --profile
       - store_artifacts:
           path:        features/dashboard/build/reports/detekt
           destination: features/dashboard
 
-      # :feature:home
+      # :features:home
       - run:
-          name:        Running :feature:home
-          command:     ./gradlew :feature:home:detekt --profile
+          name:        Running :features:home
+          command:     ./gradlew :features:home:detekt --profile
       - store_artifacts:
           path:        features/home/build/reports/detekt
           destination: features/home
 
-      # :feature:user
+      # :features:user
       - run:
-          name:        Running :feature:user
-          command:     ./gradlew :feature:user:detekt --profile
+          name:        Running :features:user
+          command:     ./gradlew :features:user:detekt --profile
       - store_artifacts:
           path:        features/user/build/reports/detekt
           destination: features/user
@@ -275,18 +275,18 @@ jobs:
           path:        build/reports/jacoco
           destination: _jacoco
 
-      # :feature:dashboard
+      # :features:dashboard
       - store_artifacts:
           path:        features/dashboard/build/reports/tests
-          destination: feature/dashboard
-      # :feature:home
+          destination: features/dashboard
+      # :features:home
       - store_artifacts:
           path:        features/home/build/reports/tests
-          destination: feature/home
-      # :feature:user
+          destination: features/home
+      # :features:user
       - store_artifacts:
           path:        features/user/build/reports/tests
-          destination: feature/user
+          destination: features/user
       # :libraries:di-components
       - store_artifacts:
           path:        libraries/di-components/build/reports/tests

@@ -1,7 +1,6 @@
 package app.zendoo.libraries.ui
 
 import android.content.Context
-import app.zendoo.libraries.ui.R
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test

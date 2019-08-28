@@ -2,7 +2,6 @@ package app.zendoo.libraries.ui
 
 import android.content.res.Resources
 import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
-import app.zendoo.libraries.ui.R
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test

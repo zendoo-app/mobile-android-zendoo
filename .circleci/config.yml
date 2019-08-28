@@ -60,9 +60,6 @@ jobs:
           name:        Running :features:dashboard:lint
           command:     ./gradlew :features:dashboard:lint --profile
       - store_artifacts:
-          path:        build/reports/profile/
-          destination: features/dashboard
-      - store_artifacts:
           path:        features/dashboard/build/reports/
           destination: features/dashboard
 
@@ -70,9 +67,6 @@ jobs:
       - run:
           name:        Running :features:home:lint
           command:     ./gradlew :features:home:lint --profile
-      - store_artifacts:
-          path:        build/reports/profile/
-          destination: features/home
       - store_artifacts:
           path:        features/home/build/reports/
           destination: features/home
@@ -82,9 +76,6 @@ jobs:
           name:        Running :features:user:lint
           command:     ./gradlew :features:user:lint --profile
       - store_artifacts:
-          path:        build/reports/profile/
-          destination: features/user
-      - store_artifacts:
           path:        features/user/build/reports/
           destination: features/user
 
@@ -93,34 +84,25 @@ jobs:
           name:        Running :libraries:di-components:lint
           command:     ./gradlew :libraries:di-components:lint --profile
       - store_artifacts:
-          path:        build/reports/profile/
-          destination: di-components
-      - store_artifacts:
           path:        libraries/di-components/build/reports/
           destination: di-components
 
       # :libraries:ui-components
-      - run:
-          name:        Running :libraries:ui-components:lint
-          command:     ./gradlew :libraries:ui-components:lint --profile
-      - store_artifacts:
-          path:        build/reports/profile/
-          destination: ui-components
-      - store_artifacts:
-          path:        libraries/ui-components/build/reports/
-          destination: ui-components
+      # kotlin library
 
       # :zendoo
       - run:
           name:        Running lint
           command:     ./gradlew :zendoo:lint --profile
       - store_artifacts:
-          path:        build/reports/profile/
-          destination: zendoo
-      - store_artifacts:
           path:        zendoo/build/reports/
           destination: zendoo
-          
+
+      # profile
+      - store_artifacts:
+          path:        build/reports/profile/
+          destination: _profile
+
   ktlint:
 
     docker:
@@ -139,30 +121,59 @@ jobs:
             - v1-dependencies-
 
 
-      # ktlint
+      # :feature:dashboard
       - run:
-          name:        Running ktlintCheck
-          command:     ./gradlew --continue ktlintCheck --profile
-      - store_artifacts:
-          path:        build/reports/profile/
-          destination: profile
-      - store_artifacts:
-          path:        zendoo/build/reports/ktlint
-          destination: app
-
-          
+          name:        Running :feature:dashboard:ktlintCheck
+          command:     ./gradlew --continue :feature:dashboard:ktlintCheck --profile
       - store_artifacts:
           path:        features/dashboard/build/reports/ktlint
-          destination: dashboard
+          destination: features/dashboard
+
+      # :feature:home
+      - run:
+          name:        Running :feature:home:ktlintCheck
+          command:     ./gradlew --continue :feature:home:ktlintCheck --profile
       - store_artifacts:
           path:        features/home/build/reports/ktlint
-          destination: home
+          destination: features/home
+
+      # :feature:user
+      - run:
+          name:        Running :feature:user:ktlintCheck
+          command:     ./gradlew --continue :feature:user:ktlintCheck --profile
       - store_artifacts:
           path:        features/user/build/reports/ktlint
-          destination: user
+          destination: features/user
+
+      # :libraries:ui-components
+      - run:
+          name:        Running :libraries:ui-components:ktlintCheck
+          command:     ./gradlew --continue :libraries:ui-components:ktlintCheck --profile
       - store_artifacts:
           path:        libraries/ui-components/build/reports/ktlint
-          destination: ui-components
+          destination: libraries/ui-components
+
+      # :libraries:di-components
+      - run:
+          name:        Running :libraries:di-components:ktlintCheck
+          command:     ./gradlew --continue :libraries:di-components:ktlintCheck --profile
+      - store_artifacts:
+          path:        libraries/di-components/bdild/reports/ktlint
+          destination: libraries/di-components
+          
+      # :zendoo
+      - run:
+          name:        Running :zendoo:ktlintCheck
+          command:     ./gradlew --continue :zendoo:ktlintCheck --profile
+      - store_artifacts:
+          path:        zendoo/build/reports/ktlint
+          destination: zendoo
+
+      # profile
+      - store_artifacts:
+          path:        build/reports/profile/
+          destination: _profile
+
 
   detekt:
 

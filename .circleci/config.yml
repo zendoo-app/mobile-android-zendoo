@@ -22,7 +22,7 @@ jobs:
 
       # dependencyUpdates
       - run:
-          name:        Checking dependency updates
+          name:        Checking dependencyUpdates
           command:     ./gradlew androidDependencies dependencyUpdates --profile
       - store_artifacts:
           path:        build/reports/profile/
@@ -57,7 +57,7 @@ jobs:
 
       # :features:dashboard
       - run:
-          name:        Running :features:dashboard:lint
+          name:        Running :features:dashboard
           command:     ./gradlew :features:dashboard:lint --profile
       - store_artifacts:
           path:        features/dashboard/build/reports/
@@ -65,7 +65,7 @@ jobs:
 
       # :features:home
       - run:
-          name:        Running :features:home:lint
+          name:        Running :features:home
           command:     ./gradlew :features:home:lint --profile
       - store_artifacts:
           path:        features/home/build/reports/
@@ -73,7 +73,7 @@ jobs:
 
       # :features:user
       - run:
-          name:        Running :features:user:lint
+          name:        Running :features:user
           command:     ./gradlew :features:user:lint --profile
       - store_artifacts:
           path:        features/user/build/reports/
@@ -84,7 +84,7 @@ jobs:
 
       # :libraries:ui-components
       - run:
-          name:        Running :libraries:di-components:lint
+          name:        Running :libraries:di-components
           command:     ./gradlew :libraries:di-components:lint --profile
       - store_artifacts:
           path:        libraries/di-components/build/reports/
@@ -92,7 +92,7 @@ jobs:
 
       # :zendoo
       - run:
-          name:        Running lint
+          name:        Running :zendoo
           command:     ./gradlew :zendoo:lint --profile
       - store_artifacts:
           path:        zendoo/build/reports/
@@ -123,7 +123,7 @@ jobs:
 
       # :feature:dashboard
       - run:
-          name:        Running :feature:dashboard:ktlintCheck
+          name:        Running :feature:dashboard
           command:     ./gradlew --continue :feature:dashboard:ktlintCheck --profile
       - store_artifacts:
           path:        features/dashboard/build/reports/ktlint
@@ -131,7 +131,7 @@ jobs:
 
       # :feature:home
       - run:
-          name:        Running :feature:home:ktlintCheck
+          name:        Running :feature:home
           command:     ./gradlew --continue :feature:home:ktlintCheck --profile
       - store_artifacts:
           path:        features/home/build/reports/ktlint
@@ -139,7 +139,7 @@ jobs:
 
       # :feature:user
       - run:
-          name:        Running :feature:user:ktlintCheck
+          name:        Running :feature:user
           command:     ./gradlew --continue :feature:user:ktlintCheck --profile
       - store_artifacts:
           path:        features/user/build/reports/ktlint
@@ -147,7 +147,7 @@ jobs:
 
       # :libraries:ui-components
       - run:
-          name:        Running :libraries:ui-components:ktlintCheck
+          name:        Running :libraries:ui-components
           command:     ./gradlew --continue :libraries:ui-components:ktlintCheck --profile
       - store_artifacts:
           path:        libraries/ui-components/build/reports/ktlint
@@ -155,7 +155,7 @@ jobs:
 
       # :libraries:di-components
       - run:
-          name:        Running :libraries:di-components:ktlintCheck
+          name:        Running :libraries:di-components
           command:     ./gradlew --continue :libraries:di-components:ktlintCheck --profile
       - store_artifacts:
           path:        libraries/di-components/bdild/reports/ktlint
@@ -163,7 +163,7 @@ jobs:
 
       # :zendoo
       - run:
-          name:        Running :zendoo:ktlintCheck
+          name:        Running :zendoo
           command:     ./gradlew --continue :zendoo:ktlintCheck --profile
       - store_artifacts:
           path:        zendoo/build/reports/ktlint
@@ -195,7 +195,7 @@ jobs:
 
       # :feature:dashboard
       - run:
-          name:        Running :feature:dashboard:detekt
+          name:        Running :feature:dashboard
           command:     ./gradlew :feature:dashboard:detekt --profile
       - store_artifacts:
           path:        features/dashboard/build/reports/detekt
@@ -203,7 +203,7 @@ jobs:
 
       # :feature:home
       - run:
-          name:        Running :feature:home:detekt
+          name:        Running :feature:home
           command:     ./gradlew :feature:home:detekt --profile
       - store_artifacts:
           path:        features/home/build/reports/detekt
@@ -211,7 +211,7 @@ jobs:
 
       # :feature:user
       - run:
-          name:        Running :feature:user:detekt
+          name:        Running :feature:user
           command:     ./gradlew :feature:user:detekt --profile
       - store_artifacts:
           path:        features/user/build/reports/detekt
@@ -219,7 +219,7 @@ jobs:
 
       # :libraries:ui-components
       - run:
-          name:        Running :libraries:ui-components:detekt
+          name:        Running :libraries:ui-components
           command:     ./gradlew :libraries:ui-components:detekt --profile
       - store_artifacts:
           path:        libraries/ui-components/build/reports/detekt
@@ -227,7 +227,7 @@ jobs:
 
       # :libraries:di-components
       - run:
-          name:        Running :libraries:di-components:detekt
+          name:        Running :libraries:di-components
           command:     ./gradlew :libraries:di-components:detekt --profile
       - store_artifacts:
           path:        libraries/di-components/bdild/reports/detekt
@@ -235,7 +235,7 @@ jobs:
 
       # :zendoo
       - run:
-          name:        Running :zendoo:detekt
+          name:        Running :zendoo
           command:     ./gradlew :zendoo:detekt --profile
       - store_artifacts:
           path:        zendoo/build/reports/detekt

@@ -6,7 +6,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
-class ColorsInstrumentedTest {
+class ColorsXMLInstrumentedTest {
 
     private lateinit var res: Resources
 

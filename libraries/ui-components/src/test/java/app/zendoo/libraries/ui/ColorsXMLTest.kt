@@ -9,7 +9,7 @@ import org.mockito.Mockito.`when`
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations.initMocks
 
-class ColorsTest {
+class ColorsXMLTest {
 
     @Mock
     lateinit var context: Context

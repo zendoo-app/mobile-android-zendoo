@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#4440D9</color>
+    <color name="colorPrimaryDark">#3935B6</color>
+    <color name="colorAccent">#0F8BAA</color>
+    <color name="colorError">#f56262</color>
+    <color name="colorConfirmation">#448AFF</color>
+    <color name="colorVeryNavy">#001636</color>
+    <color name="colorMuchGranite">#627082</color>
+    <color name="colorDusty">#627082</color>
+    <color name="colorBorder">#E6E8EC</color>
+    <color name="colorAlmostWhite">#FAFAFC</color>
+    <color name="colorPureWhite">#FFFFFF</color>
+    <color name="colorZenBlue">#6170E0</color>
+    <color name="colorZenSalmon">#F9B990</color>
+    <color name="colorZenGlacier">#D7EBF0</color>
+    <color name="colorZenBlush">#FBE6D9</color>
+</resources>

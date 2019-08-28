@@ -8,6 +8,7 @@ import org.mockito.Mock
 import org.mockito.MockitoAnnotations.initMocks
 
 class AsdTest {
+
     lateinit var asd: Asd
 
     @Mock
@@ -21,7 +22,6 @@ class AsdTest {
     @Test(expected = NullPointerException::class)
     fun testAsd() {
         asd = Asd(context)
-
         val result = asd.asd(0, 0)
         Assert.assertEquals(0, result.toLong())
     }

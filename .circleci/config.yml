@@ -66,15 +66,18 @@ jobs:
           path:        zendoo/build/reports/
           destination: zendoo
       - store_artifacts:
-          path:        feature/dashboard/build/reports/
+          path:        features/dashboard/build/reports/
           destination: dashboard
       - store_artifacts:
-          path:        feature/home/build/reports/
+          path:        features/home/build/reports/
           destination: home
       - store_artifacts:
-          path:        feature/user/build/reports/
+          path:        features/user/build/reports/
           destination: user
-
+      - store_artifacts:
+          path:        libraries/ui-components/build/reports/
+          destination: ui-components
+          
   ktlint:
 
     docker:
@@ -104,14 +107,17 @@ jobs:
           path:        zendoo/build/reports/ktlint
           destination: app
       - store_artifacts:
-          path:        feature/dashboard/build/reports/ktlint
+          path:        features/dashboard/build/reports/ktlint
           destination: dashboard
       - store_artifacts:
-          path:        feature/home/build/reports/ktlint
+          path:        features/home/build/reports/ktlint
           destination: home
       - store_artifacts:
-          path:        feature/user/build/reports/ktlint
+          path:        features/user/build/reports/ktlint
           destination: user
+      - store_artifacts:
+          path:        libraries/ui-components/build/reports/ktlint
+          destination: ui-components
 
   detekt:
 
@@ -142,14 +148,17 @@ jobs:
           path:        zendoo/build/reports/detekt
           destination: zendoo
       - store_artifacts:
-          path:        feature/dashboard/build/reports/detekt
+          path:        features/dashboard/build/reports/detekt
           destination: dashboard
       - store_artifacts:
-          path:        feature/home/build/reports/detekt
+          path:        features/home/build/reports/detekt
           destination: home
       - store_artifacts:
-          path:        feature/user/build/reports/detekt
+          path:        features/user/build/reports/detekt
           destination: user
+      - store_artifacts:
+          path:        libraries/ui-components/build/reports/detekt
+          destination: ui-components
 
   coverage:
 
@@ -182,17 +191,20 @@ jobs:
           path:        build/reports/jacoco
           destination: jacoco
       - store_artifacts:
-          path:        zendoo/build/reports/tests/
+          path:        zendoo/build/reports/tests
           destination: unit/zendoo
       - store_artifacts:
-          path:        feature/dashboard/build/reports/tests/
+          path:        features/dashboard/build/reports/tests
           destination: unit/dashboard
       - store_artifacts:
-          path:        feature/home/build/reports/tests/
+          path:        features/home/build/reports/tests
           destination: unit/home
       - store_artifacts:
-          path:        feature/user/build/reports/tests/
+          path:        features/user/build/reports/tests
           destination: unit/user
+      - store_artifacts:
+          path:        libraries/ui-components/build/reports/tests
+          destination: ui-components
 
       - run:
           name:        Save test results

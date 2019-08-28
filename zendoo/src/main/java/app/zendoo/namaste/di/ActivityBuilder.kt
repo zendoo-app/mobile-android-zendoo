@@ -1,6 +1,7 @@
 package app.zendoo.namaste.di
 
 import app.zendoo.di.ActivityScope
+import app.zendoo.namaste.ui.ContainerActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -11,7 +12,7 @@ abstract class ActivityBuilder {
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [(ContainerActivityModule::class)])
-    abstract fun containerActivityModule(): ContainerActivityModule
+    abstract fun containerActivity(): ContainerActivity
 
     //endregion
 }

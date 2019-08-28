@@ -1,3 +1,5 @@
 <resources>
     <string name="all_app_name">Zendoo</string>
+    <string name="all_home">Home</string>
+    <string name="all_user">User</string>
 </resources>

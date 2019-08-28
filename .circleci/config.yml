@@ -230,7 +230,7 @@ jobs:
           name:        Running :libraries:di-components
           command:     ./gradlew :libraries:di-components:detekt --profile
       - store_artifacts:
-          path:        libraries/di-components/bdild/reports/detekt
+          path:        libraries/di-components/build/reports/detekt
           destination: libraries/di-components
 
       # :zendoo

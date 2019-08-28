@@ -22,7 +22,7 @@ jobs:
 
       # dependencyUpdates
       - run:
-          name:        Checking dependency updates
+          name:        Checking dependencyUpdates
           command:     ./gradlew androidDependencies dependencyUpdates --profile
       - store_artifacts:
           path:        build/reports/profile/
@@ -55,29 +55,54 @@ jobs:
             - v1-dependencies-
 
 
-      # lint
+      # :features:dashboard
       - run:
-          name:        Running lint
-          command:     ./gradlew lint --profile
+          name:        Running :features:dashboard
+          command:     ./gradlew :features:dashboard:lint --profile
       - store_artifacts:
-          path:        build/reports/profile/
-          destination: profile
+          path:        features/dashboard/build/reports/
+          destination: features/dashboard
+
+      # :features:home
+      - run:
+          name:        Running :features:home
+          command:     ./gradlew :features:home:lint --profile
+      - store_artifacts:
+          path:        features/home/build/reports/
+          destination: features/home
+
+      # :features:user
+      - run:
+          name:        Running :features:user
+          command:     ./gradlew :features:user:lint --profile
+      - store_artifacts:
+          path:        features/user/build/reports/
+          destination: features/user
+
+      # :libraries:di-components
+      # kotlin library
+
+      # :libraries:ui-components
+      - run:
+          name:        Running :libraries:ui-components
+          command:     ./gradlew :libraries:ui-components:lint --profile
+      - store_artifacts:
+          path:        libraries/ui-components/build/reports/
+          destination: libraries/ui-components
+
+      # :zendoo
+      - run:
+          name:        Running :zendoo
+          command:     ./gradlew :zendoo:lint --profile
       - store_artifacts:
           path:        zendoo/build/reports/
           destination: zendoo
+
+      # profile
       - store_artifacts:
-          path:        features/dashboard/build/reports/
-          destination: dashboard
-      - store_artifacts:
-          path:        features/home/build/reports/
-          destination: home
-      - store_artifacts:
-          path:        features/user/build/reports/
-          destination: user
-      - store_artifacts:
-          path:        libraries/ui-components/build/reports/
-          destination: ui-components
-          
+          path:        build/reports/profile/
+          destination: _profile
+
   ktlint:
 
     docker:
@@ -96,28 +121,59 @@ jobs:
             - v1-dependencies-
 
 
-      # ktlint
+      # :features:dashboard
       - run:
-          name:        Running ktlintCheck
-          command:     ./gradlew --continue ktlintCheck --profile
-      - store_artifacts:
-          path:        build/reports/profile/
-          destination: profile
-      - store_artifacts:
-          path:        zendoo/build/reports/ktlint
-          destination: app
+          name:        Running :features:dashboard
+          command:     ./gradlew --continue :features:dashboard:ktlintCheck --profile
       - store_artifacts:
           path:        features/dashboard/build/reports/ktlint
-          destination: dashboard
+          destination: features/dashboard
+
+      # :features:home
+      - run:
+          name:        Running :features:home
+          command:     ./gradlew --continue :features:home:ktlintCheck --profile
       - store_artifacts:
           path:        features/home/build/reports/ktlint
-          destination: home
+          destination: features/home
+
+      # :features:user
+      - run:
+          name:        Running :features:user
+          command:     ./gradlew --continue :features:user:ktlintCheck --profile
       - store_artifacts:
           path:        features/user/build/reports/ktlint
-          destination: user
+          destination: features/user
+
+      # :libraries:ui-components
+      - run:
+          name:        Running :libraries:ui-components
+          command:     ./gradlew --continue :libraries:ui-components:ktlintCheck --profile
       - store_artifacts:
           path:        libraries/ui-components/build/reports/ktlint
-          destination: ui-components
+          destination: libraries/ui-components
+
+      # :libraries:di-components
+      - run:
+          name:        Running :libraries:di-components
+          command:     ./gradlew --continue :libraries:di-components:ktlintCheck --profile
+      - store_artifacts:
+          path:        libraries/di-components/bdild/reports/ktlint
+          destination: libraries/di-components
+
+      # :zendoo
+      - run:
+          name:        Running :zendoo
+          command:     ./gradlew --continue :zendoo:ktlintCheck --profile
+      - store_artifacts:
+          path:        zendoo/build/reports/ktlint
+          destination: zendoo
+
+      # profile
+      - store_artifacts:
+          path:        build/reports/profile/
+          destination: _profile
+
 
   detekt:
 
@@ -137,28 +193,59 @@ jobs:
             - v1-dependencies-
 
 
-      # detekt
+      # :features:dashboard
       - run:
-          name:        Running detekt
-          command:     ./gradlew detekt --profile
+          name:        Running :features:dashboard
+          command:     ./gradlew :features:dashboard:detekt --profile
       - store_artifacts:
-          path:        build/reports/profile/
-          destination: profile
+          path:        features/dashboard/build/reports/detekt
+          destination: features/dashboard
+
+      # :features:home
+      - run:
+          name:        Running :features:home
+          command:     ./gradlew :features:home:detekt --profile
+      - store_artifacts:
+          path:        features/home/build/reports/detekt
+          destination: features/home
+
+      # :features:user
+      - run:
+          name:        Running :features:user
+          command:     ./gradlew :features:user:detekt --profile
+      - store_artifacts:
+          path:        features/user/build/reports/detekt
+          destination: features/user
+
+      # :libraries:ui-components
+      - run:
+          name:        Running :libraries:ui-components
+          command:     ./gradlew :libraries:ui-components:detekt --profile
+      - store_artifacts:
+          path:        libraries/ui-components/build/reports/detekt
+          destination: libraries/ui-components
+
+      # :libraries:di-components
+      - run:
+          name:        Running :libraries:di-components
+          command:     ./gradlew :libraries:di-components:detekt --profile
+      - store_artifacts:
+          path:        libraries/di-components/bdild/reports/detekt
+          destination: libraries/di-components
+
+      # :zendoo
+      - run:
+          name:        Running :zendoo
+          command:     ./gradlew :zendoo:detekt --profile
       - store_artifacts:
           path:        zendoo/build/reports/detekt
           destination: zendoo
+
+      # profile
       - store_artifacts:
-          path:        features/dashboard/build/reports/detekt
-          destination: dashboard
-      - store_artifacts:
-          path:        features/home/build/reports/detekt
-          destination: home
-      - store_artifacts:
-          path:        features/user/build/reports/detekt
-          destination: user
-      - store_artifacts:
-          path:        libraries/ui-components/build/reports/detekt
-          destination: ui-components
+          path:        build/reports/profile/
+          destination: _profile
+
 
   coverage:
 
@@ -185,37 +272,51 @@ jobs:
             ./gradlew jacocoTestReportRelease
             ./gradlew jacocoTestReportMerged
       - store_artifacts:
-          path:        build/reports/profile/
-          destination: profile
-      - store_artifacts:
           path:        build/reports/jacoco
-          destination: jacoco
-      - store_artifacts:
-          path:        zendoo/build/reports/tests
-          destination: unit/zendoo
+          destination: _jacoco
+
+      # :features:dashboard
       - store_artifacts:
           path:        features/dashboard/build/reports/tests
-          destination: unit/dashboard
+          destination: features/dashboard
+      # :features:home
       - store_artifacts:
           path:        features/home/build/reports/tests
-          destination: unit/home
+          destination: features/home
+      # :features:user
       - store_artifacts:
           path:        features/user/build/reports/tests
-          destination: unit/user
+          destination: features/user
+      # :libraries:di-components
+      - store_artifacts:
+          path:        libraries/di-components/build/reports/tests
+          destination: libraries/di-components
+      # :libraries:ui-components
       - store_artifacts:
           path:        libraries/ui-components/build/reports/tests
-          destination: ui-components
+          destination: libraries/ui-components
+      # :zendoo
+      - store_artifacts:
+          path:        zendoo/build/reports/tests
+          destination: zendoo
 
+      # test results
       - run:
           name:        Save test results
           command:     |
-            mkdir -p ~/reports/xml/
-            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/reports/xml/ \;
+            mkdir -p ~/_reports/xml/
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/_reports/xml/ \;
       - store_test_results:
-          path:        ~/reports/xml
+          path:        ~/_reports/xml
       - store_artifacts:
-          path:        ~/reports/xml
+          path:        ~/_reports/xml
           destination: junit
+
+      # profile
+      - store_artifacts:
+          path:        build/reports/profile/
+          destination: _profile
+
 
   robo:
     docker:

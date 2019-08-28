@@ -2,13 +2,13 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_zendoo"
+    android:id="@+id/nav_graph_container"
     app:startDestination="@id/dashboard">
 
     <fragment
         android:id="@+id/dashboard"
-        android:name="app.zendoo.feature.dashboard.Dashboard"
-        android:label="Blank"
+        android:name="app.zendoo.feature.dashboard.DashboardFragment"
+        android:label="Dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
 </navigation>

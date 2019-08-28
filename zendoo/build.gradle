@@ -61,7 +61,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:truth:1.2.0'
     androidTestImplementation 'androidx.test:core:1.2.0'
     androidTestImplementation 'androidx.test:runner:1.2.0'
-    
+
     androidTestUtil 'androidx.test:orchestrator:1.2.0'
 
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0-beta-3'
@@ -80,6 +80,7 @@ dependencies {
     implementation 'com.google.dagger:dagger-android:2.24'
     implementation 'com.google.dagger:dagger:2.24'
     implementation 'com.google.firebase:firebase-core:17.2.0'
+    implementation 'com.jakewharton.timber:timber:4.7.1'
     kapt 'com.google.dagger:dagger-android-processor:2.24'
     kapt 'com.google.dagger:dagger-compiler:2.24'
 

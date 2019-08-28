@@ -1,10 +1,11 @@
-package app.zendoo.namaste
+package app.zendoo.namaste.ui
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import app.zendoo.zendoo.R
+import app.zendoo.namaste.Asd
+import app.zendoo.namaste.R
+import dagger.android.support.DaggerAppCompatActivity
 
-class ContainerActivity : AppCompatActivity() {
+class ContainerActivity : DaggerAppCompatActivity() {
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

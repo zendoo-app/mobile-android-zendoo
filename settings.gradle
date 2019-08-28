@@ -1,5 +1,6 @@
 include ':features:dashboard'
 include ':features:home'
 include ':features:user'
+include ':libraries:di-components'
 include ':libraries:ui-components'
 include ':zendoo'

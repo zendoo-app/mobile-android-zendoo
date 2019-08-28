@@ -27,6 +27,10 @@ android {
         }
     }
 
+    dexOptions {
+        preDexLibraries true
+    }
+
     testOptions {
         execution 'ANDROIDX_TEST_ORCHESTRATOR'
 

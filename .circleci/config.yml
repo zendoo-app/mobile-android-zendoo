@@ -193,28 +193,59 @@ jobs:
             - v1-dependencies-
 
 
-      # detekt
+      # :feature:dashboard
       - run:
-          name:        Running detekt
-          command:     ./gradlew detekt --profile
+          name:        Running :feature:dashboard:detekt
+          command:     ./gradlew :feature:dashboard:detekt --profile
       - store_artifacts:
-          path:        build/reports/profile/
-          destination: profile
+          path:        features/dashboard/build/reports/detekt
+          destination: features/dashboard
+
+      # :feature:home
+      - run:
+          name:        Running :feature:home:detekt
+          command:     ./gradlew :feature:home:detekt --profile
+      - store_artifacts:
+          path:        features/home/build/reports/detekt
+          destination: features/home
+
+      # :feature:user
+      - run:
+          name:        Running :feature:user:detekt
+          command:     ./gradlew :feature:user:detekt --profile
+      - store_artifacts:
+          path:        features/user/build/reports/detekt
+          destination: features/user
+
+      # :libraries:ui-components
+      - run:
+          name:        Running :libraries:ui-components:detekt
+          command:     ./gradlew :libraries:ui-components:detekt --profile
+      - store_artifacts:
+          path:        libraries/ui-components/build/reports/detekt
+          destination: libraries/ui-components
+
+      # :libraries:di-components
+      - run:
+          name:        Running :libraries:di-components:detekt
+          command:     ./gradlew :libraries:di-components:detekt --profile
+      - store_artifacts:
+          path:        libraries/di-components/bdild/reports/detekt
+          destination: libraries/di-components
+
+      # :zendoo
+      - run:
+          name:        Running :zendoo:detekt
+          command:     ./gradlew :zendoo:detekt --profile
       - store_artifacts:
           path:        zendoo/build/reports/detekt
           destination: zendoo
+
+      # profile
       - store_artifacts:
-          path:        features/dashboard/build/reports/detekt
-          destination: dashboard
-      - store_artifacts:
-          path:        features/home/build/reports/detekt
-          destination: home
-      - store_artifacts:
-          path:        features/user/build/reports/detekt
-          destination: user
-      - store_artifacts:
-          path:        libraries/ui-components/build/reports/detekt
-          destination: ui-components
+          path:        build/reports/profile/
+          destination: _profile
+
 
   coverage:
 

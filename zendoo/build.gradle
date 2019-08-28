@@ -18,10 +18,12 @@ android {
 
     buildTypes {
         debug {
+            buildConfigField "boolean", "LOGS_ENABLED", 'false'
             debuggable true
             testCoverageEnabled true
         }
         release {
+            buildConfigField "boolean", "LOGS_ENABLED", 'true'
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -89,3 +91,5 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:3.0.0'
     testImplementation 'org.mockito:mockito-inline:3.0.0'
 }
+
+apply plugin: 'com.google.gms.google-services'

@@ -19,9 +19,11 @@ android {
     buildTypes {
         debug {
             debuggable true
+            manifestPlaceholders = [enableCrashReporting: "false"]
             testCoverageEnabled true
         }
         release {
+            manifestPlaceholders = [enableCrashReporting: "true"]
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -89,3 +91,5 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:3.0.0'
     testImplementation 'org.mockito:mockito-inline:3.0.0'
 }
+
+apply plugin: 'com.google.gms.google-services'

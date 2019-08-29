@@ -19,6 +19,9 @@ jobs:
             - v1-dependencies-{{ checksum "build.gradle" }}
             - v1-dependencies-
 
+      - run:
+          name: Decrypting settings
+          command: echo ${GOOGLE_SERVICES} > zendoo/google-services.json
 
       # dependencyUpdates
       - run:
@@ -54,6 +57,9 @@ jobs:
             - v1-dependencies-{{ checksum "build.gradle" }}
             - v1-dependencies-
 
+      - run:
+          name: Decrypting settings
+          command: echo ${GOOGLE_SERVICES} > zendoo/google-services.json
 
       # :features:dashboard
       - run:
@@ -120,6 +126,9 @@ jobs:
             - v1-dependencies-{{ checksum "build.gradle" }}
             - v1-dependencies-
 
+      - run:
+          name: Decrypting settings
+          command: echo ${GOOGLE_SERVICES} > zendoo/google-services.json
 
       # :features:dashboard
       - run:
@@ -192,6 +201,9 @@ jobs:
             - v1-dependencies-{{ checksum "build.gradle" }}
             - v1-dependencies-
 
+      - run:
+          name: Decrypting settings
+          command: echo ${GOOGLE_SERVICES} > zendoo/google-services.json
 
       # :features:dashboard
       - run:
@@ -264,6 +276,9 @@ jobs:
             - v1-dependencies-{{ checksum "build.gradle" }}
             - v1-dependencies-
 
+      - run:
+          name: Decrypting settings
+          command: echo ${GOOGLE_SERVICES} > zendoo/google-services.json
 
       # coverage
       - run:
@@ -334,6 +349,9 @@ jobs:
           name:        Downloading dependencies
           command:     ./gradlew androidDependencies
 
+      - run:
+          name: Decrypting settings
+          command: echo ${GOOGLE_SERVICES} > zendoo/google-services.json
 
       # robo
       - run:
@@ -375,6 +393,9 @@ jobs:
             - v1-dependencies-{{ checksum "build.gradle" }}
             - v1-dependencies-
 
+      - run:
+          name: Decrypting settings
+          command: echo ${GOOGLE_SERVICES} > zendoo/google-services.json
 
       # assemble
       - run:           |

@@ -47,6 +47,43 @@ android {
     lintOptions {
         warningsAsErrors true
         abortOnError true
+        enable 'AppLinksAutoVerifyError',
+                'AppLinksAutoVerifyWarning',
+                'BackButton',
+                'ConvertToWebp',
+                'DalvikOverride',
+                'DuplicateStrings',
+                'EasterEgg',
+                'FieldGetter',
+                'GoogleAppIndexingApiWarning',
+                'IconExpectedSize',
+                'ImplicitSamInstance',
+                'KotlinPropertyAccess',
+                'LambdaLast',
+                'LockedOrientationActivity',
+                'LogConditional',
+                'MangledCRLF',
+                'MinSdkTooLow',
+                'MissingRegistered',
+                'NegativeMargin',
+                'NewerVersionAvailable',
+                'NoHardKeywords',
+                'NonResizeableActivity',
+                'PermissionImpliesUnsupportedChromeOsHardware',
+                'Registered',
+                'RequiredSize',
+                'SelectableText',
+                'SourceLockedOrientationActivity',
+                'StopShip',
+                'SyntheticAccessor',
+                'TypographyQuotes',
+                'UnknownNullness',
+                'UnpackedNativeCode',
+                'UnsupportedChromeOsCameraSystemFeature',
+                'UnsupportedChromeOsHardware',
+                'UnusedIds',
+                'ValidActionsXml',
+                'WrongThreadInterprocedural'
     }
 }
 

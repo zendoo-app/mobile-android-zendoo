@@ -8,6 +8,7 @@ import dagger.android.support.DaggerAppCompatActivity
 class ContainerActivity : DaggerAppCompatActivity() {
 
     public override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.ZendooTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_container)
 

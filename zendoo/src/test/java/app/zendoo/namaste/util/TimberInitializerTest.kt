@@ -1,49 +1,75 @@
 package app.zendoo.namaste.util
 
+import io.mockk.MockKAnnotations.init
+import io.mockk.confirmVerified
+import io.mockk.every
+import io.mockk.impl.annotations.InjectMockKs
+import io.mockk.impl.annotations.MockK
+import io.mockk.mockk
+import io.mockk.mockkStatic
+import io.mockk.unmockkAll
+import io.mockk.verify
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Mock
-import org.mockito.Mockito
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.verify
 import timber.log.Timber
 
 class TimberInitializerTest {
 
-    //region TimberInitializer
+    //@MockK
 
+    @MockK
+    private val buildConfig: BuildConfigProvider = mockk()
+
+    @MockK
+    private val seed: Timber.DebugTree = mockk()
+
+    @MockK
+    private val timberDebugTree: TimberDebugTree = mockk()
+
+    @InjectMockKs
     private lateinit var timberInitializer: TimberInitializer
 
     //endregion
 
-    //region mock
+    //region UnitTest
 
-    @Mock
-    lateinit var buildConfig: BuildConfigProvider
-    lateinit var timberDebugTree: TimberDebugTree
-    lateinit var seed: Timber.DebugTree
+    @Before
+    fun setUp() {
+        mockkStatic(Timber::class)
+        init(this)
+    }
+
+    @After
+    fun tearDown() {
+        unmockkAll()
+    }
 
     //endregion
 
     //region TimberInitializerTest
 
-    @Before
-    fun setUp() {
-
-        timberInitializer = TimberInitializer(buildConfig, timberDebugTree)
-    }
-
     @Test
     fun `init !DEBUG`() {
-        `when`(buildConfig.isDebug()).thenReturn(false)
+        every { buildConfig.isDebug() } returns false
 
         timberInitializer.init()
 
-        verify(buildConfig).isDebug()
+        verify { buildConfig.isDebug() }
+
+        confirmVerified(buildConfig)
     }
 
     @Test
     fun `init DEBUG`() {
+        every { buildConfig.isDebug() } returns true
+        every { timberDebugTree.tree } returns seed
+
+        timberInitializer.init()
+
+        verify { buildConfig.isDebug(); Timber.plant(any()) }
+
+        confirmVerified(buildConfig, timberDebugTree.tree)
     }
 
     //endregion

@@ -1,45 +1,53 @@
 package app.zendoo.namaste.util
 
+import io.mockk.MockKAnnotations
+import io.mockk.confirmVerified
+import io.mockk.every
+import io.mockk.impl.annotations.InjectMockKs
+import io.mockk.impl.annotations.MockK
+import io.mockk.unmockkAll
+import io.mockk.verify
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Mock
-import org.mockito.Mockito.doAnswer
-import org.mockito.Mockito.times
-import org.mockito.Mockito.verify
-import org.mockito.MockitoAnnotations.initMocks
 
 class ApplicationInitializerTest {
 
-    //region ApplicationInitializer
+    //@MockK
 
+    @MockK
+    private lateinit var timber: TimberInitializer
+
+    @InjectMockKs
     private lateinit var initializer: ApplicationInitializer
 
     //endregion
 
-    //region mock
+    //region UnitTest
 
-    @Mock
-    lateinit var timber: TimberInitializer
+    @Before
+    fun setUp() {
+        MockKAnnotations.init(this)
+    }
+
+    @After
+    fun tearDown() {
+        unmockkAll()
+    }
 
     //endregion
 
     //region ApplicationInitializerTest
 
-    @Before
-    fun setUp() {
-        initMocks(this)
-        initializer = ApplicationInitializer(
-            timber = timber
-        )
-    }
-
     @Test
     fun init() {
-        doAnswer { }.`when`(timber).init()
+        every { timber.init() } answers {}
 
         initializer.init()
 
-        verify(timber).init()
+        verify { timber.init() }
+
+        confirmVerified(timber)
     }
 
     //endregion

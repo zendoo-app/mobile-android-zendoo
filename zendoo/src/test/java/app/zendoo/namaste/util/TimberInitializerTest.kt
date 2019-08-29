@@ -16,7 +16,7 @@ import timber.log.Timber
 
 class TimberInitializerTest {
 
-    //@MockK
+    // @MockK
 
     @MockK
     private val buildConfig: BuildConfigProvider = mockk()

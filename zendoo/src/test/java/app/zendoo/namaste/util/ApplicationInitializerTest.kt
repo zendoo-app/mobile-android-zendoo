@@ -13,7 +13,7 @@ import org.junit.Test
 
 class ApplicationInitializerTest {
 
-    //@MockK
+    // @MockK
 
     @MockK
     private lateinit var timber: TimberInitializer

@@ -12,7 +12,7 @@ import kotlin.test.assertEquals
 
 class BuildConfigProviderTest {
 
-    //@MockK
+    // @MockK
 
     @InjectMockKs
     private lateinit var buildConfigProvider: BuildConfigProvider

@@ -14,5 +14,4 @@ constructor() {
     fun isDebug() = BuildConfig.DEBUG
 
     //endregion
-
 }

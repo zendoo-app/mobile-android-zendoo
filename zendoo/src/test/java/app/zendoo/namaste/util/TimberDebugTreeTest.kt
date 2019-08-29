@@ -11,7 +11,7 @@ import kotlin.test.assertNotNull
 
 class TimberDebugTreeTest {
 
-    //@MockK
+    // @MockK
 
     @InjectMockKs
     private lateinit var timberDebugTree: TimberDebugTree

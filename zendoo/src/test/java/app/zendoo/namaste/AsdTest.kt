@@ -1,7 +1,7 @@
 package app.zendoo.namaste
 
 import android.content.Context
-import org.junit.Assert
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -23,6 +23,6 @@ class AsdTest {
     fun testAsd() {
         asd = Asd(context)
         val result = asd.asd(0, 0)
-        Assert.assertEquals(0, result.toLong())
+        assertEquals(0, result.toLong())
     }
 }

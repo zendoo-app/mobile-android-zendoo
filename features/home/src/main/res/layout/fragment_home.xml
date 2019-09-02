@@ -37,11 +37,11 @@
     <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/progressbar_home"
         style="?android:attr/progressBarStyleHorizontal"
-        android:progress="80"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:paddingBottom="16dp"
+        android:progress="80"
         app:layout_constraintBottom_toTopOf="@id/imageview_home_cutiepie"
         app:layout_constraintEnd_toEndOf="@+id/imageview_home_cutiepie"
         app:layout_constraintStart_toStartOf="@+id/imageview_home_cutiepie"

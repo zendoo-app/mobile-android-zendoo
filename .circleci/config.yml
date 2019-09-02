@@ -90,6 +90,14 @@ jobs:
 
       # :libraries:ui-components
       - run:
+          name:        Running :libraries:domain
+          command:     ./gradlew :libraries:domain:lint --profile
+      - store_artifacts:
+          path:        libraries/domain/build/reports/
+          destination: libraries/domain
+
+      # :libraries:ui-components
+      - run:
           name:        Running :libraries:ui-components
           command:     ./gradlew :libraries:ui-components:lint --profile
       - store_artifacts:
@@ -154,14 +162,6 @@ jobs:
           path:        features/user/build/reports/ktlint
           destination: features/user
 
-      # :libraries:ui-components
-      - run:
-          name:        Running :libraries:ui-components
-          command:     ./gradlew --continue :libraries:ui-components:ktlintCheck --profile
-      - store_artifacts:
-          path:        libraries/ui-components/build/reports/ktlint
-          destination: libraries/ui-components
-
       # :libraries:di-components
       - run:
           name:        Running :libraries:di-components
@@ -169,6 +169,22 @@ jobs:
       - store_artifacts:
           path:        libraries/di-components/bdild/reports/ktlint
           destination: libraries/di-components
+
+      # :libraries:domain
+      - run:
+          name:        Running :libraries:domain
+          command:     ./gradlew --continue :libraries:domain:ktlintCheck --profile
+      - store_artifacts:
+          path:        libraries/domain/bdild/reports/ktlint
+          destination: libraries/domain
+
+      # :libraries:ui-components
+      - run:
+          name:        Running :libraries:ui-components
+          command:     ./gradlew --continue :libraries:ui-components:ktlintCheck --profile
+      - store_artifacts:
+          path:        libraries/ui-components/build/reports/ktlint
+          destination: libraries/ui-components
 
       # :zendoo
       - run:
@@ -229,14 +245,6 @@ jobs:
           path:        features/user/build/reports/detekt
           destination: features/user
 
-      # :libraries:ui-components
-      - run:
-          name:        Running :libraries:ui-components
-          command:     ./gradlew :libraries:ui-components:detekt --profile
-      - store_artifacts:
-          path:        libraries/ui-components/build/reports/detekt
-          destination: libraries/ui-components
-
       # :libraries:di-components
       - run:
           name:        Running :libraries:di-components
@@ -244,6 +252,23 @@ jobs:
       - store_artifacts:
           path:        libraries/di-components/build/reports/detekt
           destination: libraries/di-components
+
+
+      # :libraries:domain
+      - run:
+          name:        Running :libraries:domain
+          command:     ./gradlew :libraries:domain:detekt --profile
+      - store_artifacts:
+          path:        libraries/domain/build/reports/detekt
+          destination: libraries/domain
+
+      # :libraries:ui-components
+      - run:
+          name:        Running :libraries:ui-components
+          command:     ./gradlew :libraries:ui-components:detekt --profile
+      - store_artifacts:
+          path:        libraries/ui-components/build/reports/detekt
+          destination: libraries/ui-components
 
       # :zendoo
       - run:
@@ -306,6 +331,10 @@ jobs:
       - store_artifacts:
           path:        libraries/di-components/build/reports/tests
           destination: libraries/di-components
+      # :libraries:domain
+      - store_artifacts:
+          path:        libraries/domain/build/reports/tests
+          destination: libraries/domain
       # :libraries:ui-components
       - store_artifacts:
           path:        libraries/ui-components/build/reports/tests

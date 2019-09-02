@@ -14,6 +14,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
     }
+
     buildTypes {
         debug {
             debuggable true
@@ -23,6 +24,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    dexOptions {
+        preDexLibraries true
     }
 
     testOptions {
@@ -39,11 +44,49 @@ android {
     lintOptions {
         warningsAsErrors true
         abortOnError true
+        enable 'AppLinksAutoVerifyError',
+                'AppLinksAutoVerifyWarning',
+                'BackButton',
+                'ConvertToWebp',
+                'DalvikOverride',
+                'DuplicateStrings',
+                'EasterEgg',
+                'FieldGetter',
+                'GoogleAppIndexingApiWarning',
+                'IconExpectedSize',
+                'ImplicitSamInstance',
+                'KotlinPropertyAccess',
+                'LambdaLast',
+                'LockedOrientationActivity',
+                'LogConditional',
+                'MangledCRLF',
+                'MinSdkTooLow',
+                'MissingRegistered',
+                'NegativeMargin',
+                'NewerVersionAvailable',
+                'NoHardKeywords',
+                'NonResizeableActivity',
+                'PermissionImpliesUnsupportedChromeOsHardware',
+                'Registered',
+                'RequiredSize',
+                'SelectableText',
+                'SourceLockedOrientationActivity',
+                'StopShip',
+                'SyntheticAccessor',
+                'TypographyQuotes',
+                'UnknownNullness',
+                'UnpackedNativeCode',
+                'UnsupportedChromeOsCameraSystemFeature',
+                'UnsupportedChromeOsHardware',
+                'UnusedIds',
+                'ValidActionsXml',
+                'WrongThreadInterprocedural'
     }
 }
 
 dependencies {
     implementation project(':libraries:di-components')
+    implementation project(':libraries:domain')
     implementation project(':libraries:ui-components')
 
     androidTestImplementation 'androidx.arch.core:core-testing:2.0.1'

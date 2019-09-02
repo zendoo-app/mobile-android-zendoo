@@ -1,12 +1,11 @@
-package app.zendoo.feature.dashboard
+package app.zendoo.namaste.ui
 
 import androidx.lifecycle.ViewModel
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class DashboardViewModel
+class ContainerViewModel
 @Inject constructor() : ViewModel() {
 
 }
-

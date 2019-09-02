@@ -4,20 +4,30 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
+import app.zendoo.feature.dashboard.home.HomeViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
-class DashboardFragment : Fragment() {
+class DashboardFragment : DaggerFragment() {
+
+    //region @Inject
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    //endregion
 
     //region lateinit
 
-    private lateinit var viewModel: DashboardViewModel
-
-    //endregion
+    private val viewModel: HomeViewModel by viewModels {
+        viewModelFactory
+    }
 
     //region lazy
 
@@ -27,7 +37,7 @@ class DashboardFragment : Fragment() {
 
     //endregion
 
-    //region Fragment
+    //region DaggerFragment
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,16 +45,14 @@ class DashboardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
+
         setupBottomNavigationView(view)
-        val navView: BottomNavigationView = view.findViewById(R.id.bottom_nav_dashboard)
-        setupWithNavController(navView, navDashboardController!!)
 
         return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
     }
 
     //endregion

@@ -1,6 +1,7 @@
 package app.zendoo.namaste.di
 
 import android.app.Application
+import app.zendoo.di.viewmodel.ViewModelModule
 import app.zendoo.namaste.ZendooApplication
 import dagger.BindsInstance
 import dagger.Component
@@ -11,8 +12,9 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
-        (ActivityBuilder::class),
-        (AndroidInjectionModule::class)
+        (AndroidInjectionModule::class),
+        (ZendooActivityBuilder::class),
+        (ViewModelModule::class)
     ]
 )
 interface ZendooApplicationComponent : AndroidInjector<ZendooApplication> {

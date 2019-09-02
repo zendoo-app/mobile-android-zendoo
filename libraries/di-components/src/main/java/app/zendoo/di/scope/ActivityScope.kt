@@ -1,4 +1,4 @@
-package app.zendoo.di
+package app.zendoo.di.scope
 
 import javax.inject.Scope
 

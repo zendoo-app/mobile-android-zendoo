@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Home</string>
     <string name="home">HOME</string>
+    <string name="start_title">take_a_break</string>
 </resources>

@@ -11,7 +11,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
-        (ActivityBuilder::class),
+        (ZendooBuilder::class),
         (AndroidInjectionModule::class)
     ]
 )

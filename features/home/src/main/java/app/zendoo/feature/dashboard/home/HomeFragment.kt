@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 
-class Home : Fragment() {
+class HomeFragment : Fragment() {
 
     private lateinit var viewModel: HomeViewModel
 

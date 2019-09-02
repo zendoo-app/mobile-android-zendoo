@@ -10,8 +10,16 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
 class DashboardFragment : DaggerFragment() {
+
+    //region @Inject
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    //endregion
 
     //region lateinit
 
@@ -27,7 +35,7 @@ class DashboardFragment : DaggerFragment() {
 
     //endregion
 
-    //region Fragment
+    //region DaggerFragment
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,16 +43,15 @@ class DashboardFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
+
         setupBottomNavigationView(view)
-        val navView: BottomNavigationView = view.findViewById(R.id.bottom_nav_dashboard)
-        setupWithNavController(navView, navDashboardController!!)
 
         return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory)[DashboardViewModel::class.java]
     }
 
     //endregion

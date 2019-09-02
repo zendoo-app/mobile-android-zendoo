@@ -11,8 +11,9 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
-        (ZendooBuilder::class),
-        (AndroidInjectionModule::class)
+        (AndroidInjectionModule::class),
+        (ZendooViewModelModule::class),
+        (ZendooActivityBuilder::class)
     ]
 )
 interface ZendooApplicationComponent : AndroidInjector<ZendooApplication> {

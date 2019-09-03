@@ -1,7 +1,7 @@
-package app.zendoo.di.scope
+package app.zendoo.feature.dashboard.di
 
 import javax.inject.Scope
 
 @Scope
 @kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
-public annotation class FragmentScope
+annotation class DashboardScope

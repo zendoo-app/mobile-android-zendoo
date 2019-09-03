@@ -1,23 +1,19 @@
 package app.zendoo.namaste.di
 
-import app.zendoo.di.scope.ActivityScope
 import app.zendoo.feature.dashboard.di.DashboardFeatureBuilder
 import app.zendoo.namaste.ui.ContainerActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
-@Module(
-    includes = [
-
-    ]
-)
-abstract class ZendooActivityBuilder {
+@Module
+abstract class ActivityBuilder {
 
     //region ContainerActivity
 
-    @ActivityScope
+    @ContainerScope
     @ContributesAndroidInjector(
         modules = [
+            (ContainerViewModelModule::class),
             (DashboardFeatureBuilder::class)
         ]
     )

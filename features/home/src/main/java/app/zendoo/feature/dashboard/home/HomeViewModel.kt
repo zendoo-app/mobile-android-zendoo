@@ -1,12 +1,14 @@
 package app.zendoo.feature.dashboard.home
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import android.util.Log
+import androidx.lifecycle.ViewModel
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class HomeViewModel
-@Inject constructor(application: Application) : AndroidViewModel(application) {
-
+@Inject constructor() : ViewModel() {
+    fun asd() {
+        Log.e("asd", this.toString())
+    }
 }

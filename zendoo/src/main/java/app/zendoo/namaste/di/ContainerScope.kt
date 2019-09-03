@@ -1,7 +1,7 @@
-package app.zendoo.di
+package app.zendoo.namaste.di
 
 import javax.inject.Scope
 
 @Scope
 @kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
-public annotation class ActivityScope
+annotation class ContainerScope

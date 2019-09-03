@@ -427,9 +427,11 @@ jobs:
           command: echo ${GOOGLE_SERVICES} > zendoo/google-services.json
 
       # assemble
-      - run:           |
-          ./gradlew assembleDebug
-          ./gradlew assembleDebug
+      - run:
+          name: Running ./gradlew assembleDebug ./gradlew assembleRelease
+          command: |
+            ./gradlew assembleDebug
+            ./gradlew assembleRelease
 
       - store_artifacts:
           path:        zendoo/build/outputs/apk/debug/

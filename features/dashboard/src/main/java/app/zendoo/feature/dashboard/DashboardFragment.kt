@@ -29,7 +29,7 @@ class DashboardFragment : DaggerFragment() {
 
     //region lazy
 
-    private val navDashboardController: NavController? by lazy {
+    private val navController: NavController? by lazy {
         (childFragmentManager.findFragmentById(R.id.nav_host_fragment_dashboard) as NavHostFragment?)?.navController
     }
 
@@ -60,7 +60,7 @@ class DashboardFragment : DaggerFragment() {
 
     private fun setupBottomNavigationView(view: View) {
         val navView: BottomNavigationView = view.findViewById(R.id.bottom_nav_dashboard)
-        setupWithNavController(navView, navDashboardController!!)
+        setupWithNavController(navView, navController!!)
     }
 
     //endregion

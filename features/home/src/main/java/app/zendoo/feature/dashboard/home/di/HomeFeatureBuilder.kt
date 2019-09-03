@@ -10,7 +10,12 @@ abstract class HomeFeatureBuilder {
     //region HomeFragment
 
     @HomeScope
-    @ContributesAndroidInjector(modules = [(HomeFragmentModule::class)])
+    @ContributesAndroidInjector(
+        modules = [
+            (HomeFragmentModule::class),
+            (LoadingFeatureBuilder::class)
+        ]
+    )
     abstract fun homeFragment(): HomeFragment
 
     //endregion

@@ -18,7 +18,7 @@ class AsdTest {
         initMocks(this)
     }
 
-    @Test(expected = NullPointerException::class)
+    @Test
     fun testAsd() {
         asd = Asd(context)
 

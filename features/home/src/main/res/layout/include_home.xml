@@ -67,6 +67,7 @@
             app:layout_constraintBottom_toTopOf="@id/imageview_home_cutiepie"
             app:layout_constraintEnd_toEndOf="@+id/imageview_home_cutiepie"
             app:layout_constraintStart_toStartOf="@+id/imageview_home_cutiepie"
+            android:scaleType="fitXY"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 

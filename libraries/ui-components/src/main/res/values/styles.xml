@@ -1,18 +1,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="ZendooTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style name="ZendooBaseTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
-        <item name="android:windowLightStatusBar">true</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     </style>
 
-    <style name="SplashTheme" parent="ZendooTheme">
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
-        <item name="android:windowLightStatusBar">false</item>
+    <style name="ZendooTheme" parent="ZendooBaseTheme">
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="SplashTheme" parent="ZendooBaseTheme">
         <item name="android:windowBackground">@drawable/background_splash</item>
     </style>
 

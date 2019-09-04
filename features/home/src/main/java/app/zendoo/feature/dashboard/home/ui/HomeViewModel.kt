@@ -1,5 +1,7 @@
 package app.zendoo.feature.dashboard.home.ui
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import app.zendoo.feature.dashboard.home.ui.entity.HomeViewEntity
 import app.zendoo.feature.dashboard.home.ui.entity.HomeViewEntityEnum
@@ -10,7 +12,9 @@ import javax.inject.Singleton
 @Singleton
 class HomeViewModel
 @Inject constructor(private val homeViewEntityFactory: HomeViewEntityFactory) : ViewModel() {
-    fun asd(): HomeViewEntity {
-        return homeViewEntityFactory.get(HomeViewEntityEnum.START)
+    fun asd(): LiveData<HomeViewEntity> {
+        val liveData = MutableLiveData<HomeViewEntity>()
+        liveData.value = homeViewEntityFactory.create(HomeViewEntityEnum.START)
+        return liveData
     }
 }

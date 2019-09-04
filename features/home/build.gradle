@@ -91,6 +91,10 @@ android {
                 'ValidActionsXml',
                 'WrongThreadInterprocedural'
     }
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {

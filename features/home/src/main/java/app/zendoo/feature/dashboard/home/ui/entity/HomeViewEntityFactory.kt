@@ -12,7 +12,7 @@ constructor() {
 
     //region HomeViewEntityFactory
 
-    fun get(enum: HomeViewEntityEnum): HomeViewEntity = when (enum) {
+    fun create(enum: HomeViewEntityEnum): HomeViewEntity = when (enum) {
         HomeViewEntityEnum.START -> createStartHomeViewEntity()
         HomeViewEntityEnum.PROGRESS -> TODO()
         HomeViewEntityEnum.DONE -> TODO()
@@ -22,15 +22,14 @@ constructor() {
 
     //region HomeViewEntity
 
-    private fun createStartHomeViewEntity(): HomeViewEntity =
-        HomeViewEntity(
-            titleRes = R.string.start_title,
-            subtitleRes = R.string.start_subtitle,
-            progressBarVisibility = true,
-            progressBarProgress = 0,
-            buttonRes = R.string.all_start,
-            buttonListener = View.OnClickListener { }
-        )
+    private fun createStartHomeViewEntity() = HomeViewEntity(
+        titleRes = R.string.start_title,
+        subtitleRes = R.string.start_subtitle,
+        progressBarVisibility = true,
+        progressBarProgress = 0,
+        buttonRes = R.string.all_start,
+        buttonListener = View.OnClickListener { }
+    )
 
     //endregion
 }

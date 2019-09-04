@@ -11,7 +11,6 @@ import app.zendoo.feature.dashboard.home.R
 import app.zendoo.feature.dashboard.home.databinding.FragmentLoadingBinding
 import app.zendoo.feature.dashboard.home.ui.HomeViewModel
 import dagger.android.support.DaggerFragment
-import io.supercharge.shimmerlayout.ShimmerLayout
 import javax.inject.Inject
 
 class LoadingFragment : DaggerFragment() {
@@ -54,18 +53,7 @@ class LoadingFragment : DaggerFragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel.entity
 
-        setupShimmerLayout(binding.root)
-
         return binding.root
-    }
-
-    //endregion
-
-    //region ShimmerLayout
-
-    private fun setupShimmerLayout(view: View) {
-        val shimmerLayout = view.findViewById(R.id.shimmerlayout_loading) as ShimmerLayout
-        shimmerLayout.startShimmerAnimation()
     }
 
     //endregion

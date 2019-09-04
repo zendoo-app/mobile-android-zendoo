@@ -16,16 +16,16 @@
 
     </data>
 
-    <io.supercharge.shimmerlayout.ShimmerLayout
-        android:id="@+id/shimmerlayout_loading"
+    <xyz.peridy.shimmerlayout.ShimmerLayout
+        android:id="@+id/shimmer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:shimmer_animation_duration="1200">
+        app:shimmer_color="#EBEBEB">
 
         <include
             layout="@layout/include_home"
             app:viewModel="@{viewModel}" />
 
-    </io.supercharge.shimmerlayout.ShimmerLayout>
+    </xyz.peridy.shimmerlayout.ShimmerLayout>
 
 </layout>

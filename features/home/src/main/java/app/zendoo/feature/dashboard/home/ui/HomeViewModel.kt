@@ -2,11 +2,10 @@ package app.zendoo.feature.dashboard.home.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import app.zendoo.domain.model.Session
 import app.zendoo.domain.repository.SessionRepository
-import app.zendoo.feature.dashboard.home.ui.entity.HomeViewEntity
 import app.zendoo.feature.dashboard.home.ui.entity.HomeViewEntityEnum
 import app.zendoo.feature.dashboard.home.ui.entity.HomeViewEntityFactory
 import javax.inject.Inject
@@ -19,7 +18,9 @@ class HomeViewModel
     private val sessionRepository: SessionRepository
 ) : ViewModel() {
 
-    internal val state = MediatorLiveData<Pair<HomeViewEntityEnum, List<Session>?>>()
+    internal val state: MediatorLiveData<Pair<HomeViewEntityEnum, List<Session>?>> =
+        MediatorLiveData()
+    internal val entity = Transformations.map(state, ::mapHomeViewEntity)
 
     init {
         val currentSession: LiveData<Session?> = sessionRepository.currentSession
@@ -37,7 +38,6 @@ class HomeViewModel
         currentSession: Session?,
         sessionList: List<Session>?
     ): Pair<HomeViewEntityEnum, List<Session>?> {
-
         val enum: HomeViewEntityEnum = when (currentSession) {
             null -> sessionList?.let { HomeViewEntityEnum.START }
                 ?: run { HomeViewEntityEnum.LOADING }
@@ -46,9 +46,6 @@ class HomeViewModel
         return Pair(enum, sessionList)
     }
 
-    fun asd(): LiveData<HomeViewEntity> {
-        val liveData = MutableLiveData<HomeViewEntity>()
-        liveData.value = homeViewEntityFactory.create(HomeViewEntityEnum.START)
-        return liveData
-    }
+    private fun mapHomeViewEntity(asd: Pair<HomeViewEntityEnum, List<Session>?>) =
+        homeViewEntityFactory.create(asd.first)
 }

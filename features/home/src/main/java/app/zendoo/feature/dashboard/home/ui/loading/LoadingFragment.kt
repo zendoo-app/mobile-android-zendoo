@@ -52,7 +52,7 @@ class LoadingFragment : DaggerFragment() {
         )
 
         binding.lifecycleOwner = this
-        binding.viewModel = viewModel.asd()
+        binding.viewModel = viewModel.entity
 
         setupShimmerLayout(binding.root)
 

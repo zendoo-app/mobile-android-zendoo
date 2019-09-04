@@ -12,7 +12,7 @@ constructor() {
     //region HomeViewEntityFactory
 
     fun create(enum: HomeViewEntityEnum): HomeViewEntity = when (enum) {
-        HomeViewEntityEnum.LOADING -> TODO()
+        HomeViewEntityEnum.LOADING -> createLoadingViewEntity()
         HomeViewEntityEnum.PROGRESS -> TODO()
         HomeViewEntityEnum.START -> createStartViewEntity()
     }
@@ -21,8 +21,18 @@ constructor() {
 
     //region HomeViewEntity
 
-    private fun createStartViewEntity() = HomeViewEntity(
+    private fun createLoadingViewEntity() = HomeViewEntity(
         foreground = R.drawable.skeleton,
+        titleRes = R.string.start_title,
+        subtitleRes = R.string.start_subtitle,
+        progressBarProgress = 0,
+        drawableRes = R.drawable.ic_cutiepie,
+        buttonRes = R.string.all_start,
+        buttonListener = null
+    )
+
+    private fun createStartViewEntity() = HomeViewEntity(
+        foreground = null,
         titleRes = R.string.start_title,
         subtitleRes = R.string.start_subtitle,
         progressBarProgress = 0,

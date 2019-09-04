@@ -428,10 +428,11 @@ jobs:
 
       # assemble
       - run:
-          name: Running ./gradlew assembleDebug ./gradlew assembleRelease
-          command: |
-            ./gradlew assembleDebug
-            ./gradlew assembleRelease
+          name: Running ./gradlew assembleDebug
+          command: ./gradlew assembleDebug
+      - run:
+          name: Running ./gradlew assembleRelease
+          command: ./gradlew assembleRelease
 
       - store_artifacts:
           path:        zendoo/build/outputs/apk/debug/

@@ -1,14 +1,20 @@
 package app.zendoo.feature.dashboard.home.ui
 
-import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import app.zendoo.feature.dashboard.home.ui.entity.HomeViewEntity
+import app.zendoo.feature.dashboard.home.ui.entity.HomeViewEntityEnum
+import app.zendoo.feature.dashboard.home.ui.entity.HomeViewEntityFactory
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class HomeViewModel
-@Inject constructor() : ViewModel() {
-    fun asd() {
-        Log.e("asd", this.toString())
+@Inject constructor(private val homeViewEntityFactory: HomeViewEntityFactory) : ViewModel() {
+    fun asd(): LiveData<HomeViewEntity> {
+        val liveData = MutableLiveData<HomeViewEntity>()
+        liveData.value = homeViewEntityFactory.create(HomeViewEntityEnum.START)
+        return liveData
     }
 }

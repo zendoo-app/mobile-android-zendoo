@@ -4,11 +4,38 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import app.zendoo.feature.dashboard.home.R
+import app.zendoo.feature.dashboard.home.databinding.FragmentLoadingBinding
+import app.zendoo.feature.dashboard.home.ui.HomeViewModel
 import dagger.android.support.DaggerFragment
 import io.supercharge.shimmerlayout.ShimmerLayout
+import javax.inject.Inject
 
 class LoadingFragment : DaggerFragment() {
+
+    //region @Inject
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    //endregion
+
+    //region lateinit
+
+    private lateinit var binding: FragmentLoadingBinding
+
+    //endregion
+
+    //region val
+
+    private val viewModel: HomeViewModel by viewModels {
+        viewModelFactory
+    }
+
+    //endregion
 
     //region DaggerFragment
 
@@ -17,15 +44,19 @@ class LoadingFragment : DaggerFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_loading, container, false)
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_loading,
+            container,
+            false
+        )
 
-        setupShimmerLayout(view)
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel.asd()
 
-        return view
-    }
+        setupShimmerLayout(binding.root)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+        return binding.root
     }
 
     //endregion

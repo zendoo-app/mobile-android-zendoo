@@ -1,19 +1,17 @@
-package app.zendoo.feature.dashboard.home.ui
+package app.zendoo.feature.dashboard.home.ui.start
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
 import app.zendoo.feature.dashboard.home.R
+import app.zendoo.feature.dashboard.home.ui.HomeViewModel
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class HomeFragment : DaggerFragment() {
+class StartFragment : DaggerFragment() {
 
     //region @Inject
 
@@ -30,14 +28,6 @@ class HomeFragment : DaggerFragment() {
 
     //endregion
 
-    //region lazy
-
-    private val navDashboardController: NavController? by lazy {
-        (childFragmentManager.findFragmentById(R.id.nav_host_fragment_home) as NavHostFragment?)?.navController
-    }
-
-    //endregion
-
     //region DaggerFragment
 
     override fun onCreateView(
@@ -45,12 +35,11 @@ class HomeFragment : DaggerFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
-    }
+        val view = inflater.inflate(R.layout.fragment_start, container, false)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        Log.e("asd", viewModel.asd().toString())
+        viewModel.asd()
+
+        return view
     }
 
     //endregion

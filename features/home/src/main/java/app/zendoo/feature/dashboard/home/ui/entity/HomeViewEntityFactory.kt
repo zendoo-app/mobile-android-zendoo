@@ -1,6 +1,5 @@
 package app.zendoo.feature.dashboard.home.ui.entity
 
-import android.view.View
 import app.zendoo.feature.dashboard.home.R
 import javax.inject.Inject
 import javax.inject.Singleton

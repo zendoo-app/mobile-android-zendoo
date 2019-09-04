@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/fragment_start"
-        android:name="app.zendoo.feature.dashboard.home.ui.start.StartFragment"
+        android:name="app.zendoo.feature.dashboard.home.ui.starting.StartingFragment"
         android:label="Home"
         tools:layout="@layout/fragment_start" />
 

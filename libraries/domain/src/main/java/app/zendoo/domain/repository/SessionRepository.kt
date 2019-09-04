@@ -31,7 +31,7 @@ class SessionRepository
         Handler().postDelayed(
             {
                 sessionList.value = arrayListOf()
-            }, 1000
+            }, 2000
         )
     }
 }

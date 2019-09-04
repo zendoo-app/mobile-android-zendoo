@@ -57,7 +57,7 @@ class HomeFragment : DaggerFragment() {
 
     private fun navigate(pair: Pair<HomeViewEntityEnum, List<Session>?>?) {
         when (pair?.first) {
-            HomeViewEntityEnum.START -> navController?.navigate(R.id.action_to_start)
+            HomeViewEntityEnum.STARTING -> navController?.navigate(R.id.action_to_start)
             else -> {
                 navController?.navigate(R.id.action_to_loading)
             }

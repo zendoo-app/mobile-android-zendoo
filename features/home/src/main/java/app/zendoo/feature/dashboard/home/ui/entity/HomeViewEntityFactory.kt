@@ -13,8 +13,8 @@ constructor() {
 
     fun create(enum: HomeViewEntityEnum): HomeViewEntity = when (enum) {
         HomeViewEntityEnum.LOADING -> createLoadingViewEntity()
-        HomeViewEntityEnum.PROGRESS -> TODO()
-        HomeViewEntityEnum.START -> createStartViewEntity()
+        HomeViewEntityEnum.WORKING -> TODO()
+        HomeViewEntityEnum.STARTING -> createStartViewEntity()
     }
 
     //endregion

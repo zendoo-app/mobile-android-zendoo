@@ -39,9 +39,9 @@ class HomeViewModel
         sessionList: List<Session>?
     ): Pair<HomeViewEntityEnum, List<Session>?> {
         val enum: HomeViewEntityEnum = when (currentSession) {
-            null -> sessionList?.let { HomeViewEntityEnum.START }
+            null -> sessionList?.let { HomeViewEntityEnum.STARTING }
                 ?: run { HomeViewEntityEnum.LOADING }
-            else -> HomeViewEntityEnum.PROGRESS
+            else -> HomeViewEntityEnum.WORKING
         }
         return Pair(enum, sessionList)
     }

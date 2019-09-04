@@ -3,7 +3,7 @@ package app.zendoo.feature.dashboard.di
 import androidx.lifecycle.ViewModel
 import app.zendoo.di.viewmodel.ViewModelKey
 import app.zendoo.feature.dashboard.DashboardViewModel
-import app.zendoo.feature.dashboard.home.di.HomeViewModelModule
+import app.zendoo.feature.dashboard.home.di.home.HomeViewModelModule
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

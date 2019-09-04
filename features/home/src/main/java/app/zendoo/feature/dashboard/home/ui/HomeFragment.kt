@@ -1,4 +1,4 @@
-package app.zendoo.feature.dashboard.home
+package app.zendoo.feature.dashboard.home.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import app.zendoo.feature.dashboard.home.R
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -22,6 +25,14 @@ class HomeFragment : DaggerFragment() {
 
     private val viewModel: HomeViewModel by viewModels {
         viewModelFactory
+    }
+
+    //endregion
+
+    //region lazy
+
+    private val navDashboardController: NavController? by lazy {
+        (childFragmentManager.findFragmentById(R.id.nav_host_fragment_home) as NavHostFragment?)?.navController
     }
 
     //endregion

@@ -1,8 +1,11 @@
 package app.zendoo.feature.dashboard.home.ui
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import app.zendoo.domain.model.Session
+import app.zendoo.domain.repository.SessionRepository
 import app.zendoo.feature.dashboard.home.ui.entity.HomeViewEntity
 import app.zendoo.feature.dashboard.home.ui.entity.HomeViewEntityEnum
 import app.zendoo.feature.dashboard.home.ui.entity.HomeViewEntityFactory
@@ -16,7 +19,32 @@ class HomeViewModel
     private val sessionRepository: SessionRepository
 ) : ViewModel() {
 
-    val state: LiveData<HomeViewEntityEnum> =
+    internal val state = MediatorLiveData<Pair<HomeViewEntityEnum, List<Session>?>>()
+
+    init {
+        val currentSession: LiveData<Session?> = sessionRepository.currentSession
+        val sessionList: LiveData<List<Session>?> = sessionRepository.sessionList
+        state.addSource(currentSession) {
+            state.value = combineLatestData(currentSession.value, sessionList.value)
+        }
+
+        state.addSource(sessionList) {
+            state.value = combineLatestData(currentSession.value, sessionList.value)
+        }
+    }
+
+    private fun combineLatestData(
+        currentSession: Session?,
+        sessionList: List<Session>?
+    ): Pair<HomeViewEntityEnum, List<Session>?> {
+
+        val enum: HomeViewEntityEnum = when (currentSession) {
+            null -> sessionList?.let { HomeViewEntityEnum.START }
+                ?: run { HomeViewEntityEnum.LOADING }
+            else -> HomeViewEntityEnum.PROGRESS
+        }
+        return Pair(enum, sessionList)
+    }
 
     fun asd(): LiveData<HomeViewEntity> {
         val liveData = MutableLiveData<HomeViewEntity>()

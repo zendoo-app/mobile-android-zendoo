@@ -49,7 +49,6 @@ class HomeFragment : DaggerFragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-
         observe(viewModel.state, ::navigate)
 
         return view

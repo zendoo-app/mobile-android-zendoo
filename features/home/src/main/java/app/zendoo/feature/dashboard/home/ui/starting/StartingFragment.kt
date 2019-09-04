@@ -11,6 +11,7 @@ import app.zendoo.feature.dashboard.home.R
 import app.zendoo.feature.dashboard.home.ui.HomeViewModel
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
+import app.zendoo.feature.dashboard.home.databinding.FragmentStartingBinding
 
 class StartingFragment : DaggerFragment() {
 
@@ -44,7 +45,7 @@ class StartingFragment : DaggerFragment() {
     ): View? {
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_start,
+            R.layout.fragment_starting,
             container,
             false
         )

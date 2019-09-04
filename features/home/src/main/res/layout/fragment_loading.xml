@@ -23,7 +23,7 @@
         app:shimmer_animation_duration="1200">
 
         <include
-            layout="@layout/include_fragment"
+            layout="@layout/include_home"
             app:viewModel="@{viewModel}" />
 
     </io.supercharge.shimmerlayout.ShimmerLayout>

@@ -11,7 +11,13 @@ import javax.inject.Singleton
 
 @Singleton
 class HomeViewModel
-@Inject constructor(private val homeViewEntityFactory: HomeViewEntityFactory) : ViewModel() {
+@Inject constructor(
+    private val homeViewEntityFactory: HomeViewEntityFactory,
+    private val sessionRepository: SessionRepository
+) : ViewModel() {
+
+    val state: LiveData<HomeViewEntityEnum> =
+
     fun asd(): LiveData<HomeViewEntity> {
         val liveData = MutableLiveData<HomeViewEntity>()
         liveData.value = homeViewEntityFactory.create(HomeViewEntityEnum.START)

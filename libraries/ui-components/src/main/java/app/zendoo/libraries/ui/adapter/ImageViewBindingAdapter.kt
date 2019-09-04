@@ -1,4 +1,4 @@
-package app.zendoo.libraries.ui
+package app.zendoo.libraries.ui.adapter
 
 import android.view.View
 import androidx.annotation.DrawableRes

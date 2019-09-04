@@ -1,4 +1,4 @@
-package app.zendoo.feature.dashboard.home.ui.loading
+package app.zendoo.feature.dashboard.home.ui.start
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,10 +9,9 @@ import androidx.lifecycle.ViewModelProvider
 import app.zendoo.feature.dashboard.home.R
 import app.zendoo.feature.dashboard.home.ui.HomeViewModel
 import dagger.android.support.DaggerFragment
-import io.supercharge.shimmerlayout.ShimmerLayout
 import javax.inject.Inject
 
-class LoadingFragment : DaggerFragment() {
+class StartFragment : DaggerFragment() {
 
     //region @Inject
 
@@ -36,20 +35,11 @@ class LoadingFragment : DaggerFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_loading, container, false)
+        val view = inflater.inflate(R.layout.fragment_start, container, false)
 
-        setupShimmerLayout(view)
+        viewModel.asd()
 
         return view
-    }
-
-    //endregion
-
-    //region ShimmerLayout
-
-    private fun setupShimmerLayout(view: View) {
-        val shimmerLayout = view.findViewById(R.id.shimmerlayout_loading) as ShimmerLayout
-        shimmerLayout.startShimmerAnimation()
     }
 
     //endregion

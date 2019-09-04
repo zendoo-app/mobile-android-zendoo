@@ -14,3 +14,4 @@ constructor(
     @StringRes val buttonRes: Int,
     val buttonListener: View.OnClickListener
 )
+

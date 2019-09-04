@@ -16,16 +16,15 @@
 
     </data>
 
-    <io.supercharge.shimmerlayout.ShimmerLayout
-        android:id="@+id/shimmerlayout_loading"
+    <FrameLayout
+        android:id="@+id/frame_loading"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:shimmer_animation_duration="1200">
+        android:layout_height="match_parent">
 
         <include
             layout="@layout/include_home"
             app:viewModel="@{viewModel}" />
 
-    </io.supercharge.shimmerlayout.ShimmerLayout>
+    </FrameLayout>
 
 </layout>

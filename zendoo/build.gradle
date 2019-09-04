@@ -96,6 +96,7 @@ dependencies {
     implementation project(':features:dashboard')
     implementation project(':libraries:di-components')
     implementation project(':libraries:ui-components')
+    implementation project(':libraries:domain')
 
     androidTestImplementation 'io.mockk:mockk-android:1.9.3'
     androidTestImplementation 'androidx.arch.core:core-testing:2.0.1'

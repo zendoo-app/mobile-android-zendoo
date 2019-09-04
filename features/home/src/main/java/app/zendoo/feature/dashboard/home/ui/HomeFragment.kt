@@ -1,6 +1,7 @@
 package app.zendoo.feature.dashboard.home.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,7 +50,7 @@ class HomeFragment : DaggerFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.asd()
+        Log.e("asd", viewModel.asd().toString())
     }
 
     //endregion

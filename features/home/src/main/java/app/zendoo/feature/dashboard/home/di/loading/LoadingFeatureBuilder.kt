@@ -1,6 +1,7 @@
-package app.zendoo.feature.dashboard.home.di
+package app.zendoo.feature.dashboard.home.di.loading
 
-import app.zendoo.feature.dashboard.home.ui.LoadingFragment
+import app.zendoo.feature.dashboard.home.di.StateScope
+import app.zendoo.feature.dashboard.home.ui.loading.LoadingFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

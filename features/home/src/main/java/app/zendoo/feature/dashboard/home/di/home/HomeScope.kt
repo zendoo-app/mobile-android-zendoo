@@ -1,4 +1,4 @@
-package app.zendoo.feature.dashboard.home.di
+package app.zendoo.feature.dashboard.home.di.home
 
 import javax.inject.Scope
 

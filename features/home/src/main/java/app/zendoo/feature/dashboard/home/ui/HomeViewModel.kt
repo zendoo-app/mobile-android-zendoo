@@ -1,4 +1,4 @@
-package app.zendoo.feature.dashboard.home
+package app.zendoo.feature.dashboard.home.ui
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

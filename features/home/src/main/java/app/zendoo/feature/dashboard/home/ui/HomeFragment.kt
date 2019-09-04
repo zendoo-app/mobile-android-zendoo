@@ -1,4 +1,4 @@
-package app.zendoo.feature.dashboard.home
+package app.zendoo.feature.dashboard.home.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import app.zendoo.feature.dashboard.home.R
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 

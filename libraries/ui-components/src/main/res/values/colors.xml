@@ -2,7 +2,8 @@
 <resources>
     <color name="colorPrimary">#4440D9</color>
     <color name="colorPrimaryDark">#3935B6</color>
-    <color name="colorAccent">#0F8BAA</color>
+    <!--color name="colorAccent">#0F8BAA</color-->
+    <color name="colorAccent">#4440D9</color>
     <color name="colorError">#f56262</color>
     <color name="colorConfirmation">#448AFF</color>
     <color name="colorVeryNavy">#001636</color>

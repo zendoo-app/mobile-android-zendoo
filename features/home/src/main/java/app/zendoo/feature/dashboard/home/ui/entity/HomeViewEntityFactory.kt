@@ -26,7 +26,7 @@ constructor() {
         titleRes = R.string.start_title,
         subtitleRes = R.string.start_subtitle,
         progressBarProgress = 0,
-        drawableRes = R.drawable.ic_cutiepie,
+        drawableRes = R.drawable.ic_cutie_pie,
         buttonRes = R.string.all_start,
         buttonListener = null
     )
@@ -36,7 +36,7 @@ constructor() {
         titleRes = R.string.start_title,
         subtitleRes = R.string.start_subtitle,
         progressBarProgress = 0,
-        drawableRes = R.drawable.ic_cutiepie,
+        drawableRes = R.drawable.ic_cutie_pie,
         buttonRes = R.string.all_start,
         buttonListener = null
     )

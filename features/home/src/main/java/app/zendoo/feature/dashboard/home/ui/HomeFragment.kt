@@ -8,7 +8,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import app.zendoo.domain.model.Session
 import app.zendoo.feature.dashboard.home.R
 import app.zendoo.feature.dashboard.home.ui.entity.HomeViewEntityEnum
 import app.zendoo.libraries.ui.asd.observe
@@ -54,11 +53,11 @@ class HomeFragment : DaggerFragment() {
         return view
     }
 
-    private fun navigate(pair: Pair<HomeViewEntityEnum, List<Session>?>?) {
-        when (pair?.first) {
+    private fun navigate(state: HomeViewEntityEnum?) {
+        when (state) {
             HomeViewEntityEnum.STARTING -> navController?.navigate(R.id.action_loading_to_start)
+            HomeViewEntityEnum.PROGRESSING -> navController?.navigate(R.id.action_loading_to_progressing)
             else -> {
-                navController?.navigate(R.id.action_to_loading)
             }
         }
     }

@@ -94,6 +94,7 @@ android {
 
 dependencies {
     implementation project(':features:dashboard')
+    implementation project(':features:player')
     implementation project(':libraries:di-components')
     implementation project(':libraries:ui-components')
     implementation project(':libraries:domain')

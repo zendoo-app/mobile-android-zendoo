@@ -1,6 +1,6 @@
 package app.zendoo.feature.dashboard.di
 
-import app.zendoo.feature.dashboard.DashboardFragment
+import app.zendoo.feature.dashboard.ui.DashboardFragment
 import app.zendoo.feature.dashboard.home.di.home.HomeFeatureBuilder
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

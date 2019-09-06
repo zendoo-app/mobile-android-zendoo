@@ -5,7 +5,7 @@
     android:id="@+id/constraint_dashboard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="app.zendoo.feature.dashboard.DashboardFragment">
+    tools:context="app.zendoo.feature.dashboard.ui.DashboardFragment">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav_dashboard"

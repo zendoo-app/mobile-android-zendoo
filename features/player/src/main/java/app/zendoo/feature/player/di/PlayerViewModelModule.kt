@@ -1,9 +1,9 @@
-package app.zendoo.feature.dashboard.di
+package app.zendoo.feature.player.di
 
 import androidx.lifecycle.ViewModel
 import app.zendoo.di.viewmodel.ViewModelKey
 import app.zendoo.feature.dashboard.home.di.home.HomeViewModelModule
-import app.zendoo.feature.dashboard.ui.DashboardViewModel
+import app.zendoo.feature.player.ui.PlayerViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -13,10 +13,10 @@ import dagger.multibindings.IntoMap
         (HomeViewModelModule::class)
     ]
 )
-abstract class DashboardViewModelModule {
+abstract class PlayerViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(DashboardViewModel::class)
-    internal abstract fun dashboardViewModel(viewModel: DashboardViewModel): ViewModel
+    @ViewModelKey(PlayerViewModel::class)
+    internal abstract fun playerViewModel(viewModel: PlayerViewModel): ViewModel
 }

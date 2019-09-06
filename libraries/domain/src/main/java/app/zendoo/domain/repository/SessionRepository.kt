@@ -15,7 +15,7 @@ class SessionRepository
     private fun asd(): MutableLiveData<Session?> {
         val liveData = MutableLiveData<Session?>()
         liveData.value = null
-        toProgressing()
+        toStarting()
         return liveData
     }
 

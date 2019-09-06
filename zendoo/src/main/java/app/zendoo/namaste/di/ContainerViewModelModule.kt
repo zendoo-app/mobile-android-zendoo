@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import app.zendoo.di.viewmodel.ViewModelKey
 import app.zendoo.di.viewmodel.ViewModelModule
 import app.zendoo.feature.dashboard.di.DashboardViewModelModule
-import app.zendoo.namaste.ui.ContainerViewModel
+import app.zendoo.namaste.ui.ZendooViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -19,6 +19,6 @@ abstract class ContainerViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(ContainerViewModel::class)
-    internal abstract fun containerViewModel(viewModel: ContainerViewModel): ViewModel
+    @ViewModelKey(ZendooViewModel::class)
+    internal abstract fun containerViewModel(viewModel: ZendooViewModel): ViewModel
 }

@@ -8,10 +8,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import app.zendoo.feature.dashboard.home.R
+import app.zendoo.feature.dashboard.home.databinding.FragmentStartingBinding
 import app.zendoo.feature.dashboard.home.ui.HomeViewModel
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
-import app.zendoo.feature.dashboard.home.databinding.FragmentStartingBinding
 
 class StartingFragment : DaggerFragment() {
 

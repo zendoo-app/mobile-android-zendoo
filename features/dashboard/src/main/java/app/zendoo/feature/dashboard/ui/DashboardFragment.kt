@@ -4,23 +4,39 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import app.zendoo.feature.dashboard.R
+import app.zendoo.feature.dashboard.databinding.FragmentDashboardBinding
 import app.zendoo.feature.dashboard.home.ui.HomeViewModel
+import app.zendoo.feature.dashboard.home.util.HomeExitNavigation
+import app.zendoo.feature.dashboard.home.util.HomeFragmentHost
+import app.zendoo.feature.dashboard.util.DashboardFragmentHost
+import app.zendoo.feature.dashboard.util.DashboardNavigator
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class DashboardFragment : DaggerFragment() {
+class DashboardFragment :
+    DaggerFragment(),
+    HomeFragmentHost {
 
     //region @Inject
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject
+    lateinit var navigator: DashboardNavigator
+
+    //endregion
+
+    //region lateinit
+
+    private lateinit var binding: FragmentDashboardBinding
 
     //endregion
 
@@ -47,11 +63,20 @@ class DashboardFragment : DaggerFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_dashboard,
+            container,
+            false
+        )
 
-        setupBottomNavigationView(view)
+        initNavigator()
+        setupBottomNavigationView(binding.root)
 
-        return view
+        binding.lifecycleOwner = this
+        //  binding.viewModel = viewModel.viewEntity
+
+        return binding.root
     }
 
     //endregion
@@ -61,6 +86,21 @@ class DashboardFragment : DaggerFragment() {
     private fun setupBottomNavigationView(view: View) {
         val navView: BottomNavigationView = view.findViewById(R.id.bottom_nav_dashboard)
         setupWithNavController(navView, navController!!)
+    }
+
+    //endregion
+
+    //region HomeFragmentHost
+
+    override fun getNavigator(): HomeExitNavigation = navigator
+
+    //endregion
+
+    //region DashboardNavigator
+
+    private fun initNavigator() {
+        navigator.navigation =
+            (parentFragment?.activity as DashboardFragmentHost).getDashboardNavigator()
     }
 
     //endregion

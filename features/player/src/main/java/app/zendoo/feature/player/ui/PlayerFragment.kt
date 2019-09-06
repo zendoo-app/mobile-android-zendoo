@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import app.zendoo.feature.dashboard.home.databinding.FragmentLoadingBinding
 import app.zendoo.feature.player.R
+import app.zendoo.feature.player.databinding.FragmentPlayerBinding
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -23,7 +23,7 @@ class PlayerFragment : DaggerFragment() {
 
     //region lateinit
 
-    private lateinit var binding: FragmentLoadingBinding
+    private lateinit var binding: FragmentPlayerBinding
 
     //endregion
 

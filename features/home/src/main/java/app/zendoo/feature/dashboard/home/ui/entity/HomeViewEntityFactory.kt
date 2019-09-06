@@ -46,15 +46,16 @@ constructor() {
             buttonListener = null
         )
 
-    private fun createStartingViewEntity() = HomeViewEntity(
-        foreground = null,
-        titleRes = R.string.start_title,
-        subtitleRes = R.string.start_subtitle,
-        progressBarProgress = 0,
-        drawableRes = R.drawable.ic_cutie_pie,
-        buttonRes = R.string.all_start,
-        buttonListener = null
-    )
+    private fun createStartingViewEntity() =
+        HomeViewEntity(
+            foreground = null,
+            titleRes = R.string.start_title,
+            subtitleRes = R.string.start_subtitle,
+            progressBarProgress = 0,
+            drawableRes = R.drawable.ic_cutie_pie,
+            buttonRes = R.string.all_start,
+            buttonListener = null
+        )
 
     //endregion
 }

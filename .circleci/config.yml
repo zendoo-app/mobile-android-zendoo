@@ -77,6 +77,14 @@ jobs:
           path:        features/home/build/reports/
           destination: features/home
 
+      # :features:player
+      - run:
+          name:        Running :features:player
+          command:     ./gradlew :features:player:lint --profile
+      - store_artifacts:
+          path:        features/player/build/reports/
+          destination: features/player
+
       # :features:user
       - run:
           name:        Running :features:user
@@ -86,7 +94,13 @@ jobs:
           destination: features/user
 
       # :libraries:di-components
-      # kotlin library
+      - run:
+          name:        Running :libraries:di-components
+          command:     ./gradlew :libraries:di-components:lint --profile
+      - store_artifacts:
+          path:        libraries/di-components/build/reports/
+          destination: libraries/di-components
+
 
       # :libraries:ui-components
       - run:
@@ -153,6 +167,14 @@ jobs:
       - store_artifacts:
           path:        features/home/build/reports/ktlint
           destination: features/home
+
+      # :features:player
+      - run:
+          name:        Running :features:player
+          command:     ./gradlew --continue :features:player:ktlintCheck --profile
+      - store_artifacts:
+          path:        features/player/build/reports/ktlint
+          destination: features/player
 
       # :features:user
       - run:
@@ -236,6 +258,14 @@ jobs:
       - store_artifacts:
           path:        features/home/build/reports/detekt
           destination: features/home
+
+      # :features:player
+      - run:
+          name:        Running :features:player
+          command:     ./gradlew :features:player:detekt --profile
+      - store_artifacts:
+          path:        features/player/build/reports/detekt
+          destination: features/player
 
       # :features:user
       - run:
@@ -323,6 +353,10 @@ jobs:
       - store_artifacts:
           path:        features/home/build/reports/tests
           destination: features/home
+      # :features:player
+      - store_artifacts:
+          path:        features/player/build/reports/tests
+          destination: features/player
       # :features:user
       - store_artifacts:
           path:        features/user/build/reports/tests

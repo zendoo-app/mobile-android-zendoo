@@ -1,6 +1,7 @@
 package app.zendoo.feature.dashboard.home.di.home
 
 import app.zendoo.feature.dashboard.home.di.loading.LoadingFeatureBuilder
+import app.zendoo.feature.dashboard.home.di.progressing.ProgressingFeatureBuilder
 import app.zendoo.feature.dashboard.home.di.starting.StartingFeatureBuilder
 import app.zendoo.feature.dashboard.home.ui.HomeFragment
 import dagger.Module
@@ -16,7 +17,8 @@ abstract class HomeFeatureBuilder {
         modules = [
             (HomeFragmentModule::class),
             (LoadingFeatureBuilder::class),
-            (StartingFeatureBuilder::class)
+            (StartingFeatureBuilder::class),
+            (ProgressingFeatureBuilder::class)
         ]
     )
     abstract fun homeFragment(): HomeFragment

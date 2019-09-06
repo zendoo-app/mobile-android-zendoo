@@ -7,6 +7,9 @@
 
         <import type="android.view.View" />
 
+        <import type="android.content.Context" />
+
+
         <import type="androidx.lifecycle.LiveData" />
 
         <import type="app.zendoo.feature.dashboard.home.ui.entity.HomeViewEntity" />
@@ -48,7 +51,7 @@
             android:ellipsize="end"
             android:foreground="@{viewModel.foreground}"
             android:maxLines="2"
-            android:text="@{viewModel.subtitleRes}"
+            android:text="@{String.format(context.getString(viewModel.subtitleRes), viewModel.progressNow, viewModel.progressMax)}"
             app:layout_constraintBottom_toTopOf="@id/progressbar_home"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -64,10 +67,10 @@
             android:layout_marginBottom="16dp"
             android:foreground="@{viewModel.foreground}"
             android:progress="@{viewModel.progressBarProgress}"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toTopOf="@id/imageview_home_cutiepie"
             app:layout_constraintEnd_toEndOf="@+id/imageview_home_cutiepie"
             app:layout_constraintStart_toStartOf="@+id/imageview_home_cutiepie"
-            android:scaleType="fitXY"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 
@@ -86,7 +89,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/progressbar_home"
-            tools:src="@drawable/ic_cutiepie" />
+            tools:src="@drawable/ic_cutie_pie" />
 
         <androidx.appcompat.widget.AppCompatButton
             style="@style/Widget.AppCompat.Button.Colored"

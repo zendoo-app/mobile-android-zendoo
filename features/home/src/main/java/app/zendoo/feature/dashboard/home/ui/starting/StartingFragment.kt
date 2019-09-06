@@ -51,7 +51,7 @@ class StartingFragment : DaggerFragment() {
         )
 
         binding.lifecycleOwner = this
-        binding.viewModel = viewModel.entity
+        binding.viewModel = viewModel.viewEntity
 
         return binding.root
     }

@@ -8,11 +8,11 @@ object ContentLoadingProgressBarBindingAdapter {
 
     @BindingAdapter("android:progress")
     @JvmStatic
-    fun setContentLoadingProgressBar(view: ContentLoadingProgressBar, value: Int) {
-        if (value >= 0) {
+    fun setContentLoadingProgressBar(view: ContentLoadingProgressBar, value: Int?) {
+        value?.let {
             view.progress = value
             view.visibility = View.VISIBLE
-        } else {
+        } ?: run {
             view.visibility = View.INVISIBLE
         }
     }

@@ -47,7 +47,6 @@ constructor() {
         )
 
     private fun createStartingViewEntity() = HomeViewEntity(
->>>>>>> 60902d0... asd
         foreground = null,
         titleRes = R.string.start_title,
         subtitleRes = R.string.start_subtitle,

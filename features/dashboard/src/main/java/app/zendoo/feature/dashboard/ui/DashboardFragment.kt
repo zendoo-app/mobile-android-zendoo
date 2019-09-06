@@ -1,13 +1,16 @@
-package app.zendoo.feature.dashboard
+package app.zendoo.feature.dashboard.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
+import app.zendoo.feature.dashboard.R
+import app.zendoo.feature.dashboard.home.ui.HomeViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -21,9 +24,11 @@ class DashboardFragment : DaggerFragment() {
 
     //endregion
 
-    //region lateinit
+    //region val
 
-    private lateinit var viewModel: DashboardViewModel
+    private val viewModel: HomeViewModel by viewModels {
+        viewModelFactory
+    }
 
     //endregion
 
@@ -47,11 +52,6 @@ class DashboardFragment : DaggerFragment() {
         setupBottomNavigationView(view)
 
         return view
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this, viewModelFactory)[DashboardViewModel::class.java]
     }
 
     //endregion

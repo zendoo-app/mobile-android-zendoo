@@ -1,7 +1,7 @@
-package app.zendoo.feature.dashboard
+package app.zendoo.feature.player.ui
 
 import androidx.lifecycle.ViewModel
 import javax.inject.Inject
 
-class DashboardViewModel
+class PlayerViewModel
 @Inject constructor() : ViewModel()

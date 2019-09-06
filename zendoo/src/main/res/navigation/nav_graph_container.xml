@@ -3,13 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_container"
-    app:startDestination="@id/dashboard">
+    app:startDestination="@id/player">
 
     <fragment
         android:id="@+id/dashboard"
-        android:name="app.zendoo.feature.dashboard.DashboardFragment"
+        android:name="app.zendoo.feature.dashboard.ui.DashboardFragment"
         android:label="Dashboard"
         tools:layout="@layout/fragment_dashboard" />
+    <fragment
+        android:id="@+id/player"
+        android:name="app.zendoo.feature.player.ui.PlayerFragment"
+        android:label="Player"
+        tools:layout="@layout/fragment_player" />
 
 </navigation>
 

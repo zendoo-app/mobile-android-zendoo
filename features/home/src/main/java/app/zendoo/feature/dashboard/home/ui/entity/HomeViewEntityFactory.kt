@@ -24,19 +24,6 @@ constructor() {
 
     //region HomeViewEntity
 
-<<<<<<< HEAD
-    private fun createLoadingViewEntity() = HomeViewEntity(
-        foreground = R.drawable.skeleton,
-        titleRes = R.string.start_title,
-        subtitleRes = R.string.start_subtitle,
-        progressBarProgress = 0,
-        drawableRes = R.drawable.ic_cutie_pie,
-        buttonRes = R.string.all_start,
-        buttonListener = null
-    )
-
-    private fun createStartViewEntity() = HomeViewEntity(
-=======
     private fun createLoadingViewEntity() =
         HomeViewEntity(
             foreground = R.drawable.skeleton,

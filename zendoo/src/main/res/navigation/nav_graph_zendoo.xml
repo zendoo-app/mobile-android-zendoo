@@ -2,19 +2,33 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph_container"
-    app:startDestination="@id/player">
+    android:id="@+id/nav_graph_zendoo"
+    app:startDestination="@id/dashboard">
 
     <fragment
         android:id="@+id/dashboard"
         android:name="app.zendoo.feature.dashboard.ui.DashboardFragment"
         android:label="Dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard">
+
+        <action
+            android:id="@+id/action_dashboard_to_player"
+            app:destination="@id/player"
+            app:popUpTo="@id/dashboard" />
+
+    </fragment>
+
     <fragment
         android:id="@+id/player"
         android:name="app.zendoo.feature.player.ui.PlayerFragment"
         android:label="Player"
-        tools:layout="@layout/fragment_player" />
+        tools:layout="@layout/fragment_player">
+
+        <argument
+            android:name="sessionId"
+            app:argType="integer" />
+
+    </fragment>
 
 </navigation>
 

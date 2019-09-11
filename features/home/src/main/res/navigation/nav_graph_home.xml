@@ -12,11 +12,11 @@
         tools:layout="@layout/fragment_loading">
 
         <action
-            android:id="@+id/action_loading_to_start"
+            android:id="@+id/action_to_start"
             app:destination="@id/fragment_starting" />
 
         <action
-            android:id="@+id/action_loading_to_progressing"
+            android:id="@+id/action_to_progressing"
             app:destination="@id/fragment_progressing" />
 
     </fragment>
@@ -25,7 +25,11 @@
         android:id="@+id/fragment_starting"
         android:name="app.zendoo.feature.dashboard.home.ui.starting.StartingFragment"
         android:label="Starting"
-        tools:layout="@layout/fragment_starting" />
+        tools:layout="@layout/fragment_starting">
+        <action
+            android:id="@+id/action_to_start"
+            app:destination="@id/fragment_starting" />
+    </fragment>
 
     <fragment
         android:id="@+id/fragment_progressing"

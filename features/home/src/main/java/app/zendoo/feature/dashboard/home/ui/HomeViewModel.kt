@@ -8,6 +8,7 @@ import app.zendoo.domain.repository.SessionRepository
 import app.zendoo.feature.dashboard.home.ui.entity.HomeViewEntity
 import app.zendoo.feature.dashboard.home.ui.entity.HomeViewEntityEnum
 import app.zendoo.feature.dashboard.home.ui.entity.HomeViewEntityFactory
+import app.zendoo.feature.dashboard.home.ui.entity.toEnum
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -15,7 +16,7 @@ import javax.inject.Singleton
 class HomeViewModel
 @Inject constructor(
     private val homeViewEntityFactory: HomeViewEntityFactory,
-    private val sessionRepository: SessionRepository
+    sessionRepository: SessionRepository
 ) : ViewModel() {
 
     private val currentSession: LiveData<Session?> = sessionRepository.currentSession
@@ -29,13 +30,3 @@ class HomeViewModel
 
     private fun mapHomeViewEntityEnum(currentSession: Session?) = currentSession.toEnum()
 }
-
-fun Session?.toEnum(): HomeViewEntityEnum =
-    this?.let {
-        when (this.current) {
-            0 -> HomeViewEntityEnum.STARTING
-            else -> HomeViewEntityEnum.PROGRESSING
-        }
-    } ?: run {
-        return HomeViewEntityEnum.LOADING
-    }

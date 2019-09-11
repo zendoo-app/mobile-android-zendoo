@@ -96,8 +96,6 @@ android {
 }
 
 dependencies {
-    api project(':features:home')
-    implementation project(':features:user')
     implementation project(':libraries:di-components')
     implementation project(':libraries:ui-components')
 

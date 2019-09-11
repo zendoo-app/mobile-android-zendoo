@@ -2,7 +2,7 @@ package app.zendoo.namaste.di
 
 import app.zendoo.feature.dashboard.di.DashboardFeatureBuilder
 import app.zendoo.feature.player.di.PlayerFeatureBuilder
-import app.zendoo.namaste.ui.ContainerActivity
+import app.zendoo.namaste.ui.ZendooActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -19,7 +19,7 @@ abstract class ActivityBuilder {
             (PlayerFeatureBuilder::class)
         ]
     )
-    abstract fun containerActivity(): ContainerActivity
+    abstract fun containerActivity(): ZendooActivity
 
     //endregion
 }

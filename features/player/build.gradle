@@ -101,7 +101,7 @@ dependencies {
     implementation project(':libraries:di-components')
     implementation project(':libraries:ui-components')
 
-    androidTestImplementation 'androidx.arch.core:core-testing:2.1.0'
+    androidTestImplementation 'androidx.arch.core:core-testing:2.0.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0-alpha02'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2-alpha02'
     androidTestImplementation 'androidx.test.ext:truth:1.2.0'

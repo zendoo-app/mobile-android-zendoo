@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.starting.StartingFragment">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".ui.starting.StartingFragment">
 
     <data>
 
@@ -11,19 +11,19 @@
         <import type="app.zendoo.feature.dashboard.home.ui.entity.HomeViewEntity" />
 
         <variable
-            name="viewModel"
-            type="LiveData&lt;HomeViewEntity>" />
+                name="viewModel"
+                type="LiveData&lt;HomeViewEntity>" />
 
     </data>
 
     <FrameLayout
-        android:id="@+id/frame_starting"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+            android:id="@+id/frame_starting"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <include
-            layout="@layout/include_home"
-            app:viewModel="@{viewModel}" />
+                layout="@layout/include_home"
+                app:viewModel="@{viewModel}" />
 
     </FrameLayout>
 

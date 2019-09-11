@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigate_home"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/all_home" />
+            android:id="@+id/navigate_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="@string/all_home" />
 
     <item
-        android:id="@+id/navigate_user"
-        android:icon="@drawable/ic_person_black_24dp"
-        android:title="@string/all_user" />
+            android:id="@+id/navigate_user"
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="@string/all_user" />
 
 </menu>

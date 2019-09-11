@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import app.zendoo.feature.player.R
 import app.zendoo.feature.player.databinding.FragmentPlayerBinding
+import app.zendoo.feature.player.util.PlayerEnterNavigation.Companion.getSessionId
 import app.zendoo.feature.player.util.PlayerFragmentHost
 import app.zendoo.feature.player.util.PlayerNavigator
 import dagger.android.support.DaggerFragment
@@ -54,13 +55,18 @@ class PlayerFragment : DaggerFragment() {
             false
         )
 
+        initSessionId()
         initNavigator()
         initOnNavigationUp()
 
         binding.lifecycleOwner = this
-        //  binding.viewModel = viewModel.viewEntity
+        binding.viewModel = viewModel.viewEntity
 
         return binding.root
+    }
+
+    private fun initSessionId() {
+        viewModel.id = arguments?.getSessionId() ?: -1
     }
 
     private fun initOnNavigationUp() {

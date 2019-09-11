@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.loading.LoadingFragment">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".ui.loading.LoadingFragment">
 
     <data>
 
@@ -11,20 +11,20 @@
         <import type="app.zendoo.feature.dashboard.home.ui.entity.HomeViewEntity" />
 
         <variable
-            name="viewModel"
-            type="LiveData&lt;HomeViewEntity>" />
+                name="viewModel"
+                type="LiveData&lt;HomeViewEntity>" />
 
     </data>
 
     <xyz.peridy.shimmerlayout.ShimmerLayout
-        android:id="@+id/shimmer_loading"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:shimmer_color="#EBEBEB">
+            android:id="@+id/shimmer_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:shimmer_color="#EBEBEB">
 
         <include
-            layout="@layout/include_home"
-            app:viewModel="@{viewModel}" />
+                layout="@layout/include_home"
+                app:viewModel="@{viewModel}" />
 
     </xyz.peridy.shimmerlayout.ShimmerLayout>
 

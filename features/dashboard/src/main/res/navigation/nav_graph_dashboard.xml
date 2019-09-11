@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph_dashboard"
-    app:startDestination="@id/home">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/nav_graph_dashboard"
+        app:startDestination="@id/home">
 
     <fragment
-        android:id="@+id/home"
-        android:name="app.zendoo.feature.dashboard.home.ui.HomeFragment"
-        android:label="Home"
-        tools:layout="@layout/fragment_home">
+            android:id="@+id/home"
+            android:name="app.zendoo.feature.dashboard.home.ui.HomeFragment"
+            android:label="Home"
+            tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/navigate_user"
-            app:destination="@id/user" />
+                android:id="@+id/navigate_user"
+                app:destination="@id/user" />
     </fragment>
 
     <fragment
-        android:id="@+id/user"
-        android:name="app.zendoo.feature.dashboard.user.UserFragment"
-        android:label="User"
-        tools:layout="@layout/fragment_user">
+            android:id="@+id/user"
+            android:name="app.zendoo.feature.dashboard.user.UserFragment"
+            android:label="User"
+            tools:layout="@layout/fragment_user">
         <action
-            android:id="@+id/navigate_home"
-            app:destination="@id/home" />
+                android:id="@+id/navigate_home"
+                app:destination="@id/home" />
     </fragment>
 
 </navigation>

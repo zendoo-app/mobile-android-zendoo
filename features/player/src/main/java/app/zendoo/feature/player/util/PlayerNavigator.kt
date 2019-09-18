@@ -8,9 +8,9 @@ class PlayerNavigator
 @Inject
 constructor() {
 
-    lateinit var navigation: PlayerExitNavigation
+    lateinit var navigator: PlayerExitNavigator
 
     fun onNavigationUp() {
-        navigation.onNavigationUp()
+        navigator.onNavigationUp()
     }
 }

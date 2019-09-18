@@ -8,7 +8,6 @@ import app.zendoo.domain.model.Session
 import app.zendoo.domain.repository.SessionRepository
 import app.zendoo.feature.player.ui.entity.PlayerViewEntity
 import app.zendoo.feature.player.ui.entity.PlayerViewEntityFactory
-import timber.log.Timber
 import javax.inject.Inject
 
 class PlayerViewModel
@@ -30,7 +29,6 @@ constructor(
         Transformations.map(id, ::getSession)
     }
     internal val viewEntity: LiveData<PlayerViewEntity> by lazy {
-        Timber.e("viewEntity")
         Transformations.map(
             session,
             ::mapPlayerViewEntity
@@ -56,7 +54,6 @@ constructor(
     //region SessionRepository
 
     private fun getSession(id: Int?): Session? {
-        Timber.e("$id")
         return sessionRepository.getSessionInfo(id)
     }
 

@@ -37,7 +37,7 @@ class ZendooActivity :
         setTheme(R.style.ZendooTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_zendoo)
-        
+
         initNavigator()
 
         val asd = Asd(this)

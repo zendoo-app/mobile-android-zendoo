@@ -1,10 +1,8 @@
 package app.zendoo.domain.repository
 
 import android.os.Handler
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import app.zendoo.domain.model.Session
-import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -12,9 +10,9 @@ import javax.inject.Singleton
 class SessionRepository
 @Inject constructor() {
 
-    val currentSession: MutableLiveData<Session?> = asd()
+    val currentSession: MutableLiveData<Session?> = getSession()
 
-    private fun asd(): MutableLiveData<Session?> {
+    private fun getSession(): MutableLiveData<Session?> {
         val liveData = MutableLiveData<Session?>()
         liveData.value = null
         toStarting()
@@ -33,15 +31,7 @@ class SessionRepository
         currentSession.value = Session(1, 1, 10)
     }
 
-    fun getSession(id: Int?): LiveData<Session?> {
-        val liveData = MutableLiveData<Session?>()
-        liveData.value = null
-        toStarting()
-        return liveData
-    }
-
     fun getSessionInfo(id: Int?): Session? {
-        Timber.e("$id")
         toProgressing()
         return Session(1, 1, 10)
     }

@@ -1,8 +1,8 @@
 package app.zendoo.namaste.util.navigation
 
+import app.zendoo.feature.dashboard.util.DashboardExitNavigator
 import app.zendoo.feature.dashboard.util.DashboardFragmentHost
-import app.zendoo.feature.dashboard.util.DashboardNavigation
-import app.zendoo.feature.player.util.PlayerExitNavigation
+import app.zendoo.feature.player.util.PlayerExitNavigator
 import app.zendoo.feature.player.util.PlayerFragmentHost
 
 interface ZendooFeatureHost :
@@ -19,7 +19,7 @@ interface ZendooFeatureHost :
 
     //region DashboardFragmentHost
 
-    override fun getDashboardNavigator(): DashboardNavigation {
+    override fun getDashboardNavigator(): DashboardExitNavigator {
         return getZendooNavigator()
     }
 
@@ -27,7 +27,7 @@ interface ZendooFeatureHost :
 
     //region PlayerFragmentHost
 
-    override fun getPlayerNavigator(): PlayerExitNavigation {
+    override fun getPlayerNavigator(): PlayerExitNavigator {
         return getZendooNavigator()
     }
 

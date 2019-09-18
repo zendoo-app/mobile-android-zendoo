@@ -1,13 +1,12 @@
 package app.zendoo.namaste.util.navigation
 
 import androidx.navigation.NavController
-import app.zendoo.feature.dashboard.util.DashboardNavigation
+import app.zendoo.feature.dashboard.util.DashboardExitNavigator
 import app.zendoo.feature.player.util.PlayerBundle
-import app.zendoo.feature.player.util.PlayerEnterNavigation
-import app.zendoo.feature.player.util.PlayerEnterNavigation.Companion.toBundle
-import app.zendoo.feature.player.util.PlayerExitNavigation
+import app.zendoo.feature.player.util.PlayerEnterNavigator
+import app.zendoo.feature.player.util.PlayerEnterNavigator.Companion.toBundle
+import app.zendoo.feature.player.util.PlayerExitNavigator
 import app.zendoo.namaste.R
-import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -15,9 +14,9 @@ import javax.inject.Singleton
 class ZendooNavigator
 @Inject
 constructor() :
-    DashboardNavigation,
-    PlayerExitNavigation,
-    PlayerEnterNavigation {
+    DashboardExitNavigator,
+    PlayerExitNavigator,
+    PlayerEnterNavigator {
 
     //region lateinit
 
@@ -36,7 +35,6 @@ constructor() :
     //region PlayerEnterNavigation
 
     override fun enterPlayer(bundle: PlayerBundle) {
-        Timber.e("${bundle.id}")
         navController.navigate(R.id.action_dashboard_to_player, bundle.toBundle())
     }
 

@@ -12,15 +12,17 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import app.zendoo.feature.dashboard.R
 import app.zendoo.feature.dashboard.databinding.FragmentDashboardBinding
-import app.zendoo.feature.dashboard.home.ui.HomeViewModel
-import app.zendoo.feature.dashboard.home.util.HomeExitNavigator
-import app.zendoo.feature.dashboard.home.util.HomeFragmentHost
 import app.zendoo.feature.dashboard.util.DashboardFragmentHost
 import app.zendoo.feature.dashboard.util.DashboardNavigator
+import app.zendoo.feature.home.ui.HomeViewModel
+import app.zendoo.feature.home.util.HomeExitNavigator
+import app.zendoo.feature.home.util.HomeFragmentHost
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class DashboardFragment :
     DaggerFragment(),
     HomeFragmentHost {

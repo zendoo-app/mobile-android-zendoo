@@ -6,6 +6,7 @@ import app.zendoo.feature.dashboard.home.R
 import app.zendoo.feature.dashboard.home.util.HomeNavigator
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlin.random.Random
 
 @Singleton
 class HomeViewEntityFactory
@@ -58,7 +59,8 @@ constructor(private val homeNavigator: HomeNavigator) {
             drawableRes = R.drawable.ic_cutie_pie,
             buttonRes = R.string.all_start,
             buttonListener = View.OnClickListener {
-                homeNavigator.exitStarting(session.id)
+                // homeNavigator.exitStarting(session.id)
+                homeNavigator.exitStarting(Random(100).nextInt())
             }
         )
 

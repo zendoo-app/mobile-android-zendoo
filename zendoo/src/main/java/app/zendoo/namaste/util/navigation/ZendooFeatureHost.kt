@@ -2,8 +2,8 @@ package app.zendoo.namaste.util.navigation
 
 import app.zendoo.feature.dashboard.util.DashboardFragmentHost
 import app.zendoo.feature.dashboard.util.DashboardNavigation
-import app.zendoo.feature.player.util.PlayerFragmentHost
 import app.zendoo.feature.player.util.PlayerExitNavigation
+import app.zendoo.feature.player.util.PlayerFragmentHost
 
 interface ZendooFeatureHost :
     DashboardFragmentHost,

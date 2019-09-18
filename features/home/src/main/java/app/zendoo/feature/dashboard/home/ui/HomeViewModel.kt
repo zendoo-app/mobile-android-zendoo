@@ -14,19 +14,42 @@ import javax.inject.Singleton
 
 @Singleton
 class HomeViewModel
-@Inject constructor(
+@Inject
+constructor(
     private val homeViewEntityFactory: HomeViewEntityFactory,
     sessionRepository: SessionRepository
 ) : ViewModel() {
 
-    private val currentSession: LiveData<Session?> = sessionRepository.currentSession
-    internal val viewEntity: LiveData<HomeViewEntity> =
+    //region private
+
+    private val currentSession: LiveData<Session?> by lazy {
+        sessionRepository.currentSession
+    }
+
+    //endregion
+
+    //region HomeViewEntity
+
+    internal val viewEntity: LiveData<HomeViewEntity> by lazy {
         Transformations.map(currentSession, ::mapHomeViewEntity)
-    internal val state: LiveData<HomeViewEntityEnum> =
+    }
+
+    //endregion
+
+    //region HomeViewEntityEnum
+
+    internal val state: LiveData<HomeViewEntityEnum> by lazy {
         Transformations.map(currentSession, ::mapHomeViewEntityEnum)
+    }
+
+    private fun mapHomeViewEntityEnum(currentSession: Session?) = currentSession.toEnum()
+
+    //endregion
+
+    //region HomeViewEntityFactory
 
     private fun mapHomeViewEntity(currentSession: Session?) =
         homeViewEntityFactory.create(currentSession)
 
-    private fun mapHomeViewEntityEnum(currentSession: Session?) = currentSession.toEnum()
+    //endregion
 }

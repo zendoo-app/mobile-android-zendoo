@@ -11,10 +11,10 @@ abstract class ActivityBuilder {
 
     //region ContainerActivity
 
-    @ContainerScope
+    @ZendooScope
     @ContributesAndroidInjector(
         modules = [
-            (ContainerViewModelModule::class),
+            (ZendooViewModelModule::class),
             (DashboardFeatureBuilder::class),
             (PlayerFeatureBuilder::class)
         ]

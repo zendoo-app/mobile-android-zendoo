@@ -12,7 +12,7 @@ import javax.inject.Singleton
 @Component(
     modules = [
         (AndroidInjectionModule::class),
-        (ContainerViewModelModule::class),
+        (ZendooViewModelModule::class),
         (ActivityBuilder::class)
     ]
 )

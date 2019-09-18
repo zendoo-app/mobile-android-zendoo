@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import app.zendoo.di.viewmodel.ViewModelKey
 import app.zendoo.di.viewmodel.ViewModelModule
 import app.zendoo.feature.dashboard.di.DashboardViewModelModule
+import app.zendoo.feature.player.di.PlayerViewModelModule
 import app.zendoo.namaste.ui.ZendooViewModel
 import dagger.Binds
 import dagger.Module
@@ -12,10 +13,11 @@ import dagger.multibindings.IntoMap
 @Module(
     includes = [
         (ViewModelModule::class),
-        (DashboardViewModelModule::class)
+        (DashboardViewModelModule::class),
+        (PlayerViewModelModule::class)
     ]
 )
-abstract class ContainerViewModelModule {
+abstract class ZendooViewModelModule {
 
     @Binds
     @IntoMap

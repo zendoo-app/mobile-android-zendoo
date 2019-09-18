@@ -14,6 +14,7 @@ import app.zendoo.feature.player.util.PlayerEnterNavigation.Companion.getSession
 import app.zendoo.feature.player.util.PlayerFragmentHost
 import app.zendoo.feature.player.util.PlayerNavigator
 import dagger.android.support.DaggerFragment
+import timber.log.Timber
 import javax.inject.Inject
 
 class PlayerFragment : DaggerFragment() {
@@ -66,7 +67,9 @@ class PlayerFragment : DaggerFragment() {
     }
 
     private fun initSessionId() {
-        viewModel.id = arguments?.getSessionId() ?: -1
+        val id = arguments?.getSessionId() ?: -1
+        Timber.e("$id")
+        viewModel.setId(id)
     }
 
     private fun initOnNavigationUp() {

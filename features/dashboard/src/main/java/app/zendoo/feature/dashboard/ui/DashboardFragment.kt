@@ -13,7 +13,7 @@ import androidx.navigation.ui.NavigationUI.setupWithNavController
 import app.zendoo.feature.dashboard.R
 import app.zendoo.feature.dashboard.databinding.FragmentDashboardBinding
 import app.zendoo.feature.dashboard.home.ui.HomeViewModel
-import app.zendoo.feature.dashboard.home.util.HomeExitNavigation
+import app.zendoo.feature.dashboard.home.util.HomeExitNavigator
 import app.zendoo.feature.dashboard.home.util.HomeFragmentHost
 import app.zendoo.feature.dashboard.util.DashboardFragmentHost
 import app.zendoo.feature.dashboard.util.DashboardNavigator
@@ -92,14 +92,14 @@ class DashboardFragment :
 
     //region HomeFragmentHost
 
-    override fun getNavigator(): HomeExitNavigation = navigator
+    override fun getNavigator(): HomeExitNavigator = navigator
 
     //endregion
 
     //region DashboardNavigator
 
     private fun initNavigator() {
-        navigator.navigation =
+        navigator.navControll =
             (parentFragment?.activity as DashboardFragmentHost).getDashboardNavigator()
     }
 

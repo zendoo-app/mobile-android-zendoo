@@ -8,31 +8,36 @@
     <fragment
             android:id="@+id/fragment_loading"
             android:name="app.zendoo.feature.dashboard.home.ui.loading.LoadingFragment"
-            android:label="Loading"
-            tools:layout="@layout/fragment_loading" />
+            android:label="loading"
+            tools:layout="@layout/fragment_loading">
+
+        <action
+                android:id="@+id/action_loading_to_progress"
+                app:destination="@id/fragment_progress" />
+
+
+        <action
+                android:id="@+id/action_loading_to_start"
+                app:destination="@id/fragment_start" />
+
+    </fragment>
 
     <fragment
-            android:id="@+id/fragment_starting"
-            android:name="app.zendoo.feature.dashboard.home.ui.starting.StartingFragment"
-            android:label="Starting"
-            tools:layout="@layout/fragment_starting" />
+            android:id="@+id/fragment_start"
+            android:name="app.zendoo.feature.dashboard.home.ui.start.StartFragment"
+            android:label="start"
+            tools:layout="@layout/fragment_start">
+
+        <action
+                android:id="@+id/action_start_to_progress"
+                app:destination="@id/fragment_progress" />
+
+    </fragment>
 
     <fragment
-            android:id="@+id/fragment_progressing"
-            android:name="app.zendoo.feature.dashboard.home.ui.progressing.ProgressingFragment"
-            android:label="Progressing"
-            tools:layout="@layout/fragment_progressing" />
-
-    <action
-            android:id="@+id/action_to_loading"
-            app:destination="@id/fragment_loading" />
-
-    <action
-            android:id="@+id/action_to_start"
-            app:destination="@id/fragment_starting" />
-
-    <action
-            android:id="@+id/action_to_progressing"
-            app:destination="@id/fragment_progressing" />
+            android:id="@+id/fragment_progress"
+            android:name="app.zendoo.feature.dashboard.home.ui.progress.ProgressFragment"
+            android:label="progress"
+            tools:layout="@layout/fragment_progress" />
 
 </navigation>

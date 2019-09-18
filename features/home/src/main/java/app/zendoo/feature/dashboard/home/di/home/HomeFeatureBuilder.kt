@@ -1,8 +1,8 @@
 package app.zendoo.feature.dashboard.home.di.home
 
 import app.zendoo.feature.dashboard.home.di.loading.LoadingFeatureBuilder
-import app.zendoo.feature.dashboard.home.di.progressing.ProgressingFeatureBuilder
-import app.zendoo.feature.dashboard.home.di.starting.StartingFeatureBuilder
+import app.zendoo.feature.dashboard.home.di.progress.ProgressFeatureBuilder
+import app.zendoo.feature.dashboard.home.di.start.StartFeatureBuilder
 import app.zendoo.feature.dashboard.home.ui.HomeFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -17,8 +17,8 @@ abstract class HomeFeatureBuilder {
         modules = [
             (HomeFragmentModule::class),
             (LoadingFeatureBuilder::class),
-            (StartingFeatureBuilder::class),
-            (ProgressingFeatureBuilder::class)
+            (StartFeatureBuilder::class),
+            (ProgressFeatureBuilder::class)
         ]
     )
     abstract fun homeFragment(): HomeFragment

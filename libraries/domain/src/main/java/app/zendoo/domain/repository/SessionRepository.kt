@@ -4,6 +4,7 @@ import android.os.Handler
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import app.zendoo.domain.model.Session
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -20,31 +21,16 @@ class SessionRepository
         return liveData
     }
 
-    private fun toLoading() {
+    private fun toStarting() {
         Handler().postDelayed(
             {
-                currentSession.value = null
-                toStarting()
+                currentSession.value = Session(1, 0, 10)
             }, 3000
         )
     }
 
-    private fun toStarting() {
-        Handler().postDelayed(
-            {
-                toProgressing()
-                currentSession.value = Session(1, 0, 10)
-            }, 10000
-        )
-    }
-
     private fun toProgressing() {
-        Handler().postDelayed(
-            {
-                toLoading()
-                currentSession.value = Session(1, 3, 10)
-            }, 10000
-        )
+        currentSession.value = Session(1, 1, 10)
     }
 
     fun getSession(id: Int?): LiveData<Session?> {
@@ -52,5 +38,11 @@ class SessionRepository
         liveData.value = null
         toStarting()
         return liveData
+    }
+
+    fun getSessionInfo(id: Int?): Session? {
+        Timber.e("$id")
+        toProgressing()
+        return Session(1, 1, 10)
     }
 }

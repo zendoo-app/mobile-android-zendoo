@@ -4,7 +4,7 @@ import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 
-data class HomeViewEntity constructor(
+ class HomeViewEntity constructor(
     @DrawableRes val foreground: Int? = null,
     @StringRes val titleRes: Int? = null,
     @StringRes val subtitleRes: Int? = null,
@@ -14,4 +14,4 @@ data class HomeViewEntity constructor(
     @DrawableRes val drawableRes: Int? = null,
     @StringRes val buttonRes: Int? = null,
     val buttonListener: View.OnClickListener? = null
-)
+) {}

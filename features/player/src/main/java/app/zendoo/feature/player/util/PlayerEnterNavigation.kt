@@ -8,9 +8,9 @@ interface PlayerEnterNavigation {
     companion object {
         private const val SESSION_ID = "session_id"
 
-        fun Int.toPlayerBundle() = PlayerBundle(bundleOf(SESSION_ID to this))
+        fun Int.toPlayerBundle() = PlayerBundle(this)
 
-        fun PlayerBundle.toBundle() = this.bundle
+        fun PlayerBundle.toBundle() = bundleOf(SESSION_ID to this.id)
 
         fun Bundle.getSessionId() = this.getInt(SESSION_ID)
     }

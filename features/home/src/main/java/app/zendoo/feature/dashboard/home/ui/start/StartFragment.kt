@@ -1,4 +1,4 @@
-package app.zendoo.feature.dashboard.home.ui.progressing
+package app.zendoo.feature.dashboard.home.ui.start
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,12 +8,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import app.zendoo.feature.dashboard.home.R
-import app.zendoo.feature.dashboard.home.databinding.FragmentStartingBinding
+import app.zendoo.feature.dashboard.home.databinding.FragmentStartBinding
 import app.zendoo.feature.dashboard.home.ui.HomeViewModel
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class ProgressingFragment : DaggerFragment() {
+class StartFragment : DaggerFragment() {
 
     //region @Inject
 
@@ -24,7 +24,7 @@ class ProgressingFragment : DaggerFragment() {
 
     //region lateinit
 
-    private lateinit var binding: FragmentStartingBinding
+    private lateinit var binding: FragmentStartBinding
 
     //endregion
 
@@ -45,7 +45,7 @@ class ProgressingFragment : DaggerFragment() {
     ): View? {
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_starting,
+            R.layout.fragment_start,
             container,
             false
         )

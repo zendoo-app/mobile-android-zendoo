@@ -60,13 +60,7 @@ class HomeFragment : DaggerFragment() {
     }
 
     private fun navigate(state: HomeViewEntityEnum?) {
-
-        when (state) {
-            HomeViewEntityEnum.STARTING -> navController?.navigate(R.id.action_to_start)
-            HomeViewEntityEnum.PROGRESSING -> navController?.navigate(R.id.action_to_progressing)
-            else -> {
-            }
-        }
+        navigator.navigate(state)
     }
 
     //endregion
@@ -74,7 +68,10 @@ class HomeFragment : DaggerFragment() {
     //region HomeNavigator
 
     private fun initNavigator() {
-        navigator.navigation = (parentFragment?.parentFragment as HomeFragmentHost).getNavigator()
+        navigator.navFragment = (childFragmentManager.findFragmentById(R.id.nav_host_fragment_home) as NavHostFragment?)
+        navigator.navController = navController
+        navigator.homeExitNavigator =
+            (parentFragment?.parentFragment as HomeFragmentHost).getNavigator()
     }
 
     //endregion

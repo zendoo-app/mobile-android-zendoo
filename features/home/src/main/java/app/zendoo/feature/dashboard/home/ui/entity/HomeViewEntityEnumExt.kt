@@ -5,8 +5,8 @@ import app.zendoo.domain.model.Session
 fun Session?.toEnum(): HomeViewEntityEnum =
     this?.let {
         when (this.current) {
-            0 -> HomeViewEntityEnum.STARTING
-            else -> HomeViewEntityEnum.PROGRESSING
+            0 -> HomeViewEntityEnum.START
+            else -> HomeViewEntityEnum.PROGRESS
         }
     } ?: run {
         return HomeViewEntityEnum.LOADING

@@ -7,6 +7,7 @@ import app.zendoo.feature.player.util.PlayerEnterNavigation
 import app.zendoo.feature.player.util.PlayerEnterNavigation.Companion.toBundle
 import app.zendoo.feature.player.util.PlayerExitNavigation
 import app.zendoo.namaste.R
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -35,6 +36,7 @@ constructor() :
     //region PlayerEnterNavigation
 
     override fun enterPlayer(bundle: PlayerBundle) {
+        Timber.e("${bundle.id}")
         navController.navigate(R.id.action_dashboard_to_player, bundle.toBundle())
     }
 

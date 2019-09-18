@@ -4,9 +4,9 @@ import android.view.View
 import app.zendoo.domain.model.Session
 import app.zendoo.feature.dashboard.home.R
 import app.zendoo.feature.dashboard.home.util.HomeNavigator
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
-import kotlin.random.Random
 
 @Singleton
 class HomeViewEntityFactory
@@ -15,13 +15,14 @@ constructor(private val homeNavigator: HomeNavigator) {
 
     //region HomeViewEntityFactory
 
-    fun create(session: Session?): HomeViewEntity = when (session.toEnum()) {
-        HomeViewEntityEnum.LOADING -> createLoadingViewEntity()
-        // TODO(JN): remove force
-        HomeViewEntityEnum.PROGRESSING -> createProgressingViewEntity(session!!)
-        HomeViewEntityEnum.STARTING -> createStartingViewEntity(session!!)
+    fun create(session: Session?): HomeViewEntity {
+        return when (session.toEnum()) {
+            HomeViewEntityEnum.LOADING -> createLoadingViewEntity()
+            // TODO(JN): remove force
+            HomeViewEntityEnum.PROGRESS -> createProgressingViewEntity(session!!)
+            HomeViewEntityEnum.START -> createStartingViewEntity(session!!)
+        }
     }
-
     //endregion
 
     //region HomeViewEntity
@@ -46,7 +47,8 @@ constructor(private val homeNavigator: HomeNavigator) {
             drawableRes = R.drawable.ic_cutie_pie,
             buttonRes = R.string.progress_next_session,
             buttonListener = View.OnClickListener {
-                homeNavigator.exitProgressing(session.id)
+                Timber.e("${session.id}")
+                homeNavigator.exitProgress(session.id)
             }
         )
 
@@ -59,8 +61,7 @@ constructor(private val homeNavigator: HomeNavigator) {
             drawableRes = R.drawable.ic_cutie_pie,
             buttonRes = R.string.all_start,
             buttonListener = View.OnClickListener {
-                // homeNavigator.exitStarting(session.id)
-                homeNavigator.exitStarting(Random(100).nextInt())
+                homeNavigator.exitStart(session.id)
             }
         )
 

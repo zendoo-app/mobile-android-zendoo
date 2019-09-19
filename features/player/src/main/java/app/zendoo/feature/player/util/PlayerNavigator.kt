@@ -8,9 +8,29 @@ class PlayerNavigator
 @Inject
 constructor() {
 
-    lateinit var navigation: PlayerExitNavigation
+    //region var
+
+    private var playerExitNavigator: PlayerExitNavigator? = null
+
+    //endregion
+
+    //region PlayerNavigator
+
+    fun init(playerExitNavigator: PlayerExitNavigator) {
+        set(playerExitNavigator = playerExitNavigator)
+    }
+
+    fun destroy() {
+        set()
+    }
+
+    fun set(playerExitNavigator: PlayerExitNavigator? = null) {
+        this.playerExitNavigator = playerExitNavigator
+    }
 
     fun onNavigationUp() {
-        navigation.onNavigationUp()
+        playerExitNavigator?.onNavigationUp()
     }
+
+    //endregion
 }

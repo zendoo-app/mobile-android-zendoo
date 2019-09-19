@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import javax.inject.Singleton
 
+@Singleton
 class UserFragment : Fragment() {
 
     private lateinit var viewModel: UserViewModel

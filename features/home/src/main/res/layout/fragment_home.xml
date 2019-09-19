@@ -5,7 +5,7 @@
         android:id="@+id/constraint_dashboard"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="app.zendoo.feature.dashboard.home.ui.HomeFragment">
+        tools:context="app.zendoo.feature.home.app.zendoo.feature.home.ui.HomeFragment">
 
     <fragment
             android:id="@+id/nav_host_fragment_home"

@@ -17,20 +17,17 @@ constructor(
     private val sessionRepository: SessionRepository
 ) : ViewModel() {
 
-    //region var
-
-    internal var id: Int = -1
-
-    //endregion
-
     //region private
 
-    private val session: MutableLiveData<Session?> = getSession()
+    private var id: MutableLiveData<Int?> = MutableLiveData()
 
     //endregion
 
-    //region PlayerViewEntity
+    //region lazy
 
+    private val session: LiveData<Session?> by lazy {
+        Transformations.map(id, ::getSession)
+    }
     internal val viewEntity: LiveData<PlayerViewEntity> by lazy {
         Transformations.map(
             session,
@@ -40,15 +37,25 @@ constructor(
 
     //endregion
 
-    //region PlayerViewEntityFactory
+    //region id
 
-    private fun getSession() = sessionRepository.getSession(id) as MutableLiveData
+    fun setId(id: Int?) {
+        this.id.apply { postValue(id) }
+    }
 
     //endregion
 
     //region PlayerViewEntityFactory
 
     private fun mapPlayerViewEntity(session: Session?) = playerViewEntityFactory.create(session)
+
+    //endregion
+
+    //region SessionRepository
+
+    private fun getSession(id: Int?): Session? {
+        return sessionRepository.getSessionInfo(id)
+    }
 
     //endregion
 }

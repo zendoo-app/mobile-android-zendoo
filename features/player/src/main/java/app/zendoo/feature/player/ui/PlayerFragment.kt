@@ -10,12 +10,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import app.zendoo.feature.player.R
 import app.zendoo.feature.player.databinding.FragmentPlayerBinding
-import app.zendoo.feature.player.util.PlayerEnterNavigation.Companion.getSessionId
+import app.zendoo.feature.player.util.PlayerEnterNavigator.Companion.getSessionId
 import app.zendoo.feature.player.util.PlayerFragmentHost
 import app.zendoo.feature.player.util.PlayerNavigator
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class PlayerFragment : DaggerFragment() {
 
     //region @Inject
@@ -27,9 +29,9 @@ class PlayerFragment : DaggerFragment() {
 
     //endregion
 
-    //region lateinit
+    //region var
 
-    private lateinit var binding: FragmentPlayerBinding
+    private var binding: FragmentPlayerBinding? = null
 
     //endregion
 
@@ -55,18 +57,18 @@ class PlayerFragment : DaggerFragment() {
             false
         )
 
-        initSessionId()
+        initBinding()
         initNavigator()
         initOnNavigationUp()
+        initViewModel()
 
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel.viewEntity
-
-        return binding.root
+        return binding?.root
     }
 
-    private fun initSessionId() {
-        viewModel.id = arguments?.getSessionId() ?: -1
+    override fun onDestroyView() {
+        super.onDestroyView()
+        destroyBinding()
+        destroyNavigator()
     }
 
     private fun initOnNavigationUp() {
@@ -77,11 +79,40 @@ class PlayerFragment : DaggerFragment() {
 
     //endregion
 
+    //region binding
+
+    private fun initBinding() {
+        binding?.lifecycleOwner = viewLifecycleOwner
+        binding?.viewModel = viewModel.viewEntity
+    }
+
+    private fun destroyBinding() {
+        binding = null
+    }
+
+    //endregion
+
+    //region viewModel
+
+    private fun initViewModel() {
+        initSessionId()
+    }
+
+    private fun initSessionId() {
+        val id = arguments?.getSessionId() ?: -1
+        viewModel.setId(id)
+    }
+
+    //endregion
+
     //region DashboardNavigator
 
     private fun initNavigator() {
-        navigator.navigation =
-            (parentFragment?.activity as PlayerFragmentHost).getPlayerNavigator()
+        navigator.init(playerExitNavigator = (parentFragment?.activity as PlayerFragmentHost).getPlayerNavigator())
+    }
+
+    private fun destroyNavigator() {
+        navigator.destroy()
     }
 
     //endregion

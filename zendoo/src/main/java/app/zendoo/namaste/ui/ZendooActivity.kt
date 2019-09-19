@@ -23,11 +23,9 @@ class ZendooActivity :
 
     //endregion
 
-    //region lazy
+    //region var
 
-    private val navController: NavController? by lazy {
-        Navigation.findNavController(this, R.id.nav_host_fragment_zendoo)
-    }
+    private var navController: NavController? = null
 
     //endregion
 
@@ -45,19 +43,32 @@ class ZendooActivity :
         asd.bsd()
     }
 
-    //endregion
-
-    //region DashboardNavigation
-
-    override fun getZendooNavigator() = navigator
+    override fun onDestroy() {
+        super.onDestroy()
+        destroyNavigator()
+    }
 
     //endregion
 
     //region DashboardNavigator
 
     private fun initNavigator() {
-        navigator.navController = navController!!
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment_zendoo)
+        navController?.let { navController ->
+            navigator.init(navController = navController)
+        }
     }
+
+    private fun destroyNavigator() {
+        navController = null
+        navigator.destroy()
+    }
+
+    //endregion
+
+    //region ZendooFeatureHost
+
+    override fun getZendooNavigator() = navigator
 
     //endregion
 }

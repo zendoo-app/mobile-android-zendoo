@@ -4,7 +4,6 @@ import android.view.View
 import app.zendoo.domain.model.Session
 import app.zendoo.feature.home.R
 import app.zendoo.feature.home.util.HomeNavigator
-import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -18,7 +17,6 @@ constructor(private val homeNavigator: HomeNavigator) {
     fun create(session: Session?): HomeViewEntity {
         return when (session.toEnum()) {
             HomeViewEntityEnum.LOADING -> createLoadingViewEntity()
-            // TODO(JN): remove force
             HomeViewEntityEnum.PROGRESS -> createProgressingViewEntity(session!!)
             HomeViewEntityEnum.START -> createStartingViewEntity(session!!)
         }
@@ -47,7 +45,6 @@ constructor(private val homeNavigator: HomeNavigator) {
             drawableRes = R.drawable.ic_cutie_pie,
             buttonRes = R.string.progress_next_session,
             buttonListener = View.OnClickListener {
-                Timber.e("${session.id}")
                 homeNavigator.exitProgress(session.id)
             }
         )

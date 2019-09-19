@@ -17,18 +17,18 @@ constructor() : PlayerEnterNavigator {
 
     //region var
 
-    var navController: NavController? = null
-    var navFragment: NavHostFragment? = null
-    var homeExitNavigator: HomeExitNavigator? = null
+    private var navController: NavController? = null
+    private var navFragment: NavHostFragment? = null
+    private var homeExitNavigator: HomeExitNavigator? = null
 
     //endregion
 
     //region HomeNavigator
 
     fun init(
-        navFragment: NavHostFragment? = null,
-        navController: NavController? = null,
-        homeExitNavigator: HomeExitNavigator? = null
+        navFragment: NavHostFragment?,
+        navController: NavController?,
+        homeExitNavigator: HomeExitNavigator?
     ) {
         set(
             navFragment = navFragment,

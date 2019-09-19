@@ -36,9 +36,9 @@ class DashboardFragment :
 
     //endregion
 
-    //region lateinit
+    //region var
 
-    private lateinit var binding: FragmentDashboardBinding
+    private var binding: FragmentDashboardBinding? = null
 
     //endregion
 
@@ -72,22 +72,42 @@ class DashboardFragment :
             false
         )
 
+        initBinding()
         initNavigator()
-        setupBottomNavigationView(binding.root)
+        setupBottomNavigationView()
 
-        binding.lifecycleOwner = viewLifecycleOwner
-        //  binding.viewModel = viewModel.viewEntity
+        return binding?.root
+    }
 
-        return binding.root
+    override fun onDestroyView() {
+        super.onDestroyView()
+        destroyBinding()
+        destroyNavigator()
+    }
+
+    //endregion
+
+    //region binding
+
+    private fun initBinding() {
+        binding?.lifecycleOwner = viewLifecycleOwner
+    }
+
+    private fun destroyBinding() {
+        binding = null
     }
 
     //endregion
 
     //region BottomNavigationView
 
-    private fun setupBottomNavigationView(view: View) {
-        val navView: BottomNavigationView = view.findViewById(R.id.bottom_nav_dashboard)
-        setupWithNavController(navView, navController!!)
+    private fun setupBottomNavigationView() {
+        binding?.root?.let { view ->
+            val navView: BottomNavigationView = view.findViewById(R.id.bottom_nav_dashboard)
+            navController?.let { navController ->
+                setupWithNavController(navView, navController)
+            }
+        }
     }
 
     //endregion
@@ -101,8 +121,11 @@ class DashboardFragment :
     //region DashboardNavigator
 
     private fun initNavigator() {
-        navigator.navControll =
-            (parentFragment?.activity as DashboardFragmentHost).getDashboardNavigator()
+        navigator.init(dashboardExitNavigator = (parentFragment?.activity as DashboardFragmentHost).getDashboardNavigator())
+    }
+
+    private fun destroyNavigator() {
+        navigator.destroy()
     }
 
     //endregion

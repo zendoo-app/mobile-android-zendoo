@@ -15,16 +15,32 @@ class ZendooNavigator
 @Inject
 constructor() :
     DashboardExitNavigator,
-    PlayerExitNavigator,
-    PlayerEnterNavigator {
+    PlayerEnterNavigator,
+    PlayerExitNavigator {
 
-    //region lateinit
+    //region var
 
-    lateinit var navController: NavController
+    private var navController: NavController? = null
 
     //endregion
 
-    //region DashboardNavigation
+    //region ZendooNavigator
+
+    fun init(navController: NavController) {
+        set(navController = navController)
+    }
+
+    fun destroy() {
+        set()
+    }
+
+    fun set(navController: NavController? = null) {
+        this.navController = navController
+    }
+
+    //endregion
+
+    //region DashboardExitNavigator
 
     override fun exitHome(bundle: PlayerBundle) {
         enterPlayer(bundle)
@@ -35,7 +51,7 @@ constructor() :
     //region PlayerEnterNavigation
 
     override fun enterPlayer(bundle: PlayerBundle) {
-        navController.navigate(R.id.action_dashboard_to_player, bundle.toBundle())
+        navController?.navigate(R.id.action_dashboard_to_player, bundle.toBundle())
     }
 
     //endregion
@@ -43,7 +59,7 @@ constructor() :
     //region PlayerExitNavigation
 
     override fun onNavigationUp() {
-        navController.navigateUp()
+        navController?.navigateUp()
     }
 
     //endregion

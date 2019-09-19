@@ -10,9 +10,33 @@ class DashboardNavigator
 @Inject
 constructor() : HomeExitNavigator {
 
-    lateinit var navControll: DashboardExitNavigator
+    //region var
+
+    private var dashboardExitNavigator: DashboardExitNavigator? = null
+
+    //endregion
+
+    //region DashboardNavigator
+
+    fun init(dashboardExitNavigator: DashboardExitNavigator) {
+        set(dashboardExitNavigator = dashboardExitNavigator)
+    }
+
+    fun destroy() {
+        set()
+    }
+
+    fun set(dashboardExitNavigator: DashboardExitNavigator? = null) {
+        this.dashboardExitNavigator = dashboardExitNavigator
+    }
+
+    //endregion
+
+    //region HomeExitNavigator
 
     override fun exitHome(bundle: PlayerBundle) {
-        navControll.exitHome(bundle)
+        dashboardExitNavigator?.exitHome(bundle)
     }
+
+    //endregion
 }

@@ -55,16 +55,24 @@ class HomeFragment : DaggerFragment() {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
         initNavigator()
-
-        viewModel.state.observe(
-            viewLifecycleOwner,
-            Observer { navigate(it) })
+        initViewModelObserver()
 
         return view
     }
 
-    private fun navigate(state: HomeViewEntityEnum?) {
-        navigator.navigate(state)
+    override fun onDestroyView() {
+        super.onDestroyView()
+        destroyNavigator()
+    }
+
+    //endregion
+
+    //region viewModel
+
+    private fun initViewModelObserver() {
+        viewModel.state.observe(
+            viewLifecycleOwner,
+            Observer { navigate(it) })
     }
 
     //endregion
@@ -72,11 +80,19 @@ class HomeFragment : DaggerFragment() {
     //region HomeNavigator
 
     private fun initNavigator() {
-        navigator.navFragment =
-            (childFragmentManager.findFragmentById(R.id.nav_host_fragment_home) as NavHostFragment?)
-        navigator.navController = navController
-        navigator.homeExitNavigator =
-            (parentFragment?.parentFragment as HomeFragmentHost).getNavigator()
+        navigator.init(
+            navFragment = (childFragmentManager.findFragmentById(R.id.nav_host_fragment_home) as NavHostFragment?),
+            navController = navController,
+            homeExitNavigator = (parentFragment?.parentFragment as HomeFragmentHost).getNavigator()
+        )
+    }
+
+    private fun destroyNavigator() {
+        navigator.destroy()
+    }
+
+    private fun navigate(state: HomeViewEntityEnum?) {
+        navigator.navigate(state)
     }
 
     //endregion

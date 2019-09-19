@@ -24,9 +24,9 @@ class StartFragment : DaggerFragment() {
 
     //endregion
 
-    //region lateinit
+    //region var
 
-    private lateinit var binding: FragmentStartBinding
+    private var binding: FragmentStartBinding? = null
 
     //endregion
 
@@ -52,10 +52,27 @@ class StartFragment : DaggerFragment() {
             false
         )
 
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = viewModel.viewEntity
+        initBinding()
 
-        return binding.root
+        return binding?.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        destroyBinding()
+    }
+
+    //endregion
+
+    //region binding
+
+    private fun initBinding() {
+        binding?.lifecycleOwner = viewLifecycleOwner
+        binding?.viewModel = viewModel.viewEntity
+    }
+
+    private fun destroyBinding() {
+        binding = null
     }
 
     //endregion

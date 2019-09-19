@@ -24,9 +24,9 @@ class LoadingFragment : DaggerFragment() {
 
     //endregion
 
-    //region lateinit
+    //region var
 
-    private lateinit var binding: FragmentLoadingBinding
+    private var binding: FragmentLoadingBinding? = null
 
     //endregion
 
@@ -52,10 +52,27 @@ class LoadingFragment : DaggerFragment() {
             false
         )
 
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = viewModel.viewEntity
+        initBinding()
 
-        return binding.root
+        return binding?.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        destroyBinding()
+    }
+
+    //endregion
+
+    //region binding
+
+    private fun initBinding() {
+        binding?.lifecycleOwner = viewLifecycleOwner
+        binding?.viewModel = viewModel.viewEntity
+    }
+
+    private fun destroyBinding() {
+        binding = null
     }
 
     //endregion

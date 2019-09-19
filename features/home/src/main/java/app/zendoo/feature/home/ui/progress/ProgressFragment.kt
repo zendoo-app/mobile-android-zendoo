@@ -24,9 +24,9 @@ class ProgressFragment : DaggerFragment() {
 
     //endregion
 
-    //region lateinit
+    //region var
 
-    private lateinit var binding: FragmentProgressBinding
+    private var binding: FragmentProgressBinding? = null
 
     //endregion
 
@@ -52,10 +52,27 @@ class ProgressFragment : DaggerFragment() {
             false
         )
 
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = viewModel.viewEntity
+        initBinding()
 
-        return binding.root
+        return binding?.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        destroyBinding()
+    }
+
+    //endregion
+
+    //region binding
+
+    private fun initBinding() {
+        binding?.lifecycleOwner = viewLifecycleOwner
+        binding?.viewModel = viewModel.viewEntity
+    }
+
+    private fun destroyBinding() {
+        binding = null
     }
 
     //endregion

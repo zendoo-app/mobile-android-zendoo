@@ -15,20 +15,41 @@ class HomeNavigator
 @Inject
 constructor() : PlayerEnterNavigator {
 
-    //region lateinit
-
-    lateinit var homeExitNavigator: HomeExitNavigator
-
-    //endregion
-
     //region var
 
     var navController: NavController? = null
     var navFragment: NavHostFragment? = null
+    var homeExitNavigator: HomeExitNavigator? = null
 
     //endregion
 
     //region HomeNavigator
+
+    fun init(
+        navFragment: NavHostFragment? = null,
+        navController: NavController? = null,
+        homeExitNavigator: HomeExitNavigator? = null
+    ) {
+        set(
+            navFragment = navFragment,
+            navController = navController,
+            homeExitNavigator = homeExitNavigator
+        )
+    }
+
+    fun destroy() {
+        set()
+    }
+
+    fun set(
+        navFragment: NavHostFragment? = null,
+        navController: NavController? = null,
+        homeExitNavigator: HomeExitNavigator? = null
+    ) {
+        this.navFragment = navFragment
+        this.navController = navController
+        this.homeExitNavigator = homeExitNavigator
+    }
 
     fun navigate(state: HomeViewEntityEnum?) {
         navFragment.getCurrentFragment().withDestination(state)?.let {
@@ -53,7 +74,7 @@ constructor() : PlayerEnterNavigator {
     //region PlayerEnterNavigation
 
     override fun enterPlayer(bundle: PlayerBundle) {
-        homeExitNavigator.exitHome(bundle)
+        homeExitNavigator?.exitHome(bundle)
     }
 
     //endregion

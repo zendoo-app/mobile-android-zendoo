@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import app.zendoo.feature.player.R
 import app.zendoo.feature.player.databinding.FragmentPlayerBinding
 import app.zendoo.feature.player.util.PlayerEnterNavigator.Companion.getSessionId
+import app.zendoo.feature.player.util.PlayerExitNavigator
 import app.zendoo.feature.player.util.PlayerFragmentHost
 import app.zendoo.feature.player.util.PlayerNavigator
 import dagger.android.support.DaggerFragment
@@ -43,6 +44,15 @@ class PlayerFragment : DaggerFragment() {
 
     //endregion
 
+    //region lazy
+
+    private val playerExitNavigator: PlayerExitNavigator by lazy {
+        (parentFragment?.activity as PlayerFragmentHost).getPlayerNavigator()
+    }
+    private val sessionId by lazy { arguments?.getSessionId() ?: -1 }
+
+    //endregion
+
     //region DaggerFragment
 
     override fun onCreateView(
@@ -57,62 +67,26 @@ class PlayerFragment : DaggerFragment() {
             false
         )
 
-        initBinding()
-        initNavigator()
+        viewModel.setId(sessionId)
+
+        binding.init(viewLifecycleOwner, viewModel)
+        navigator.init(playerExitNavigator)
+
         initOnNavigationUp()
-        initViewModel()
 
         return binding?.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        destroyBinding()
-        destroyNavigator()
+        binding = null
+        navigator.destroy()
     }
 
     private fun initOnNavigationUp() {
-        requireActivity().onBackPressedDispatcher.addCallback(this) {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             navigator.onNavigationUp()
         }
-    }
-
-    //endregion
-
-    //region binding
-
-    private fun initBinding() {
-        binding?.lifecycleOwner = viewLifecycleOwner
-        binding?.viewModel = viewModel.viewEntity
-    }
-
-    private fun destroyBinding() {
-        binding = null
-    }
-
-    //endregion
-
-    //region viewModel
-
-    private fun initViewModel() {
-        initSessionId()
-    }
-
-    private fun initSessionId() {
-        val id = arguments?.getSessionId() ?: -1
-        viewModel.setId(id)
-    }
-
-    //endregion
-
-    //region DashboardNavigator
-
-    private fun initNavigator() {
-        navigator.init(playerExitNavigator = (parentFragment?.activity as PlayerFragmentHost).getPlayerNavigator())
-    }
-
-    private fun destroyNavigator() {
-        navigator.destroy()
     }
 
     //endregion

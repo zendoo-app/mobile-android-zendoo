@@ -9,15 +9,15 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI.setupWithNavController
 import app.zendoo.feature.dashboard.R
 import app.zendoo.feature.dashboard.databinding.FragmentDashboardBinding
+import app.zendoo.feature.dashboard.util.DashboardExitNavigator
 import app.zendoo.feature.dashboard.util.DashboardFragmentHost
 import app.zendoo.feature.dashboard.util.DashboardNavigator
+import app.zendoo.feature.dashboard.util.init
 import app.zendoo.feature.home.ui.HomeViewModel
 import app.zendoo.feature.home.util.HomeExitNavigator
 import app.zendoo.feature.home.util.HomeFragmentHost
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -44,9 +44,7 @@ class DashboardFragment :
 
     //region val
 
-    private val viewModel: HomeViewModel by viewModels {
-        viewModelFactory
-    }
+    private val viewModel: HomeViewModel by viewModels { viewModelFactory }
 
     //endregion
 
@@ -54,6 +52,9 @@ class DashboardFragment :
 
     private val navController: NavController? by lazy {
         (childFragmentManager.findFragmentById(R.id.nav_host_fragment_dashboard) as NavHostFragment?)?.navController
+    }
+    private val dashboardExitNavigator: DashboardExitNavigator by lazy {
+        (parentFragment?.activity as DashboardFragmentHost).getDashboardExitNavigator()
     }
 
     //endregion
@@ -72,42 +73,17 @@ class DashboardFragment :
             false
         )
 
-        initBinding()
-        initNavigator()
-        setupBottomNavigationView()
+        binding.init(context, viewLifecycleOwner)
+        navController.init(binding)
+        navigator.init(dashboardExitNavigator)
 
         return binding?.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        destroyBinding()
-        destroyNavigator()
-    }
-
-    //endregion
-
-    //region binding
-
-    private fun initBinding() {
-        binding?.lifecycleOwner = viewLifecycleOwner
-    }
-
-    private fun destroyBinding() {
         binding = null
-    }
-
-    //endregion
-
-    //region BottomNavigationView
-
-    private fun setupBottomNavigationView() {
-        binding?.root?.let { view ->
-            val navView: BottomNavigationView = view.findViewById(R.id.bottom_nav_dashboard)
-            navController?.let { navController ->
-                setupWithNavController(navView, navController)
-            }
-        }
+        navigator.destroy()
     }
 
     //endregion
@@ -115,18 +91,6 @@ class DashboardFragment :
     //region HomeFragmentHost
 
     override fun getNavigator(): HomeExitNavigator = navigator
-
-    //endregion
-
-    //region DashboardNavigator
-
-    private fun initNavigator() {
-        navigator.init(dashboardExitNavigator = (parentFragment?.activity as DashboardFragmentHost).getDashboardNavigator())
-    }
-
-    private fun destroyNavigator() {
-        navigator.destroy()
-    }
 
     //endregion
 }

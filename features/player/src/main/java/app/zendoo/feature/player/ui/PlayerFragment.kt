@@ -15,7 +15,9 @@ import app.zendoo.feature.player.util.PlayerFragmentHost
 import app.zendoo.feature.player.util.PlayerNavigator
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class PlayerFragment : DaggerFragment() {
 
     //region @Inject
@@ -59,7 +61,7 @@ class PlayerFragment : DaggerFragment() {
         initNavigator()
         initOnNavigationUp()
 
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel.viewEntity
 
         return binding.root

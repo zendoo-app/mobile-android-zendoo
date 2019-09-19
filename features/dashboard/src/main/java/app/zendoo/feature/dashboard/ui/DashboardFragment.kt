@@ -75,7 +75,7 @@ class DashboardFragment :
         initNavigator()
         setupBottomNavigationView(binding.root)
 
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         //  binding.viewModel = viewModel.viewEntity
 
         return binding.root

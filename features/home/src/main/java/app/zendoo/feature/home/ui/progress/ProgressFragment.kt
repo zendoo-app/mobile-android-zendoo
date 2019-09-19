@@ -52,7 +52,7 @@ class ProgressFragment : DaggerFragment() {
             false
         )
 
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel.viewEntity
 
         return binding.root

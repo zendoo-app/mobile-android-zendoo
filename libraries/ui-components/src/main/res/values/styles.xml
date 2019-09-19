@@ -6,12 +6,12 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <style name="ZendooTheme" parent="ZendooBaseTheme">
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
         <item name="android:windowLightStatusBar">true</item>
-        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <style name="SplashTheme" parent="ZendooBaseTheme">

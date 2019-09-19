@@ -19,7 +19,7 @@ interface ZendooFeatureHost :
 
     //region DashboardFragmentHost
 
-    override fun getDashboardNavigator(): DashboardExitNavigator {
+    override fun getDashboardExitNavigator(): DashboardExitNavigator {
         return getZendooNavigator()
     }
 

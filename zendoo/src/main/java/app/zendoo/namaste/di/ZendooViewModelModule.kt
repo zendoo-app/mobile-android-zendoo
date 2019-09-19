@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import app.zendoo.di.viewmodel.ViewModelKey
 import app.zendoo.di.viewmodel.ViewModelModule
 import app.zendoo.feature.dashboard.di.DashboardViewModelModule
-import app.zendoo.feature.player.di.PlayerViewModelModule
+import app.zendoo.feature.player.di.player.PlayerViewModelModule
 import app.zendoo.namaste.ui.ZendooViewModel
 import dagger.Binds
 import dagger.Module

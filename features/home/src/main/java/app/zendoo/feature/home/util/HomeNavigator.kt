@@ -74,7 +74,9 @@ constructor() : PlayerEnterNavigator {
     //region PlayerEnterNavigation
 
     override fun enterPlayer(bundle: PlayerBundle) {
-        homeExitNavigator?.exitHome(bundle)
+        homeExitNavigator?.run {
+            exitHome(bundle)
+        }
     }
 
     //endregion

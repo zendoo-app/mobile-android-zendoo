@@ -1,4 +1,4 @@
-package app.zendoo.feature.player.di
+package app.zendoo.feature.player.di.player
 
 import androidx.lifecycle.ViewModel
 import app.zendoo.di.viewmodel.ViewModelKey

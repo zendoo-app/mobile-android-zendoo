@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        tools:context="app.zendoo.feature.home.ui.loading.LoadingFragment">
+        tools:context=".ui.start.StartFragment">
 
     <data>
 
@@ -16,16 +16,15 @@
 
     </data>
 
-    <xyz.peridy.shimmerlayout.ShimmerLayout
-            android:id="@+id/shimmer_loading"
+    <FrameLayout
+            android:id="@+id/frame_starting"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:shimmer_color="#EBEBEB">
+            android:layout_height="match_parent">
 
         <include
                 layout="@layout/include_home"
                 app:viewModel="@{viewModel}" />
 
-    </xyz.peridy.shimmerlayout.ShimmerLayout>
+    </FrameLayout>
 
 </layout>

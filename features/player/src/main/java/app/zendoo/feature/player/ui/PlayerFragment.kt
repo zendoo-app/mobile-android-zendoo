@@ -5,16 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import app.zendoo.feature.player.R
-import app.zendoo.feature.player.databinding.FragmentPlayerBinding
 import app.zendoo.feature.player.util.PlayerEnterNavigator.Companion.getSessionId
 import app.zendoo.feature.player.util.PlayerExitNavigator
 import app.zendoo.feature.player.util.PlayerFragmentHost
 import app.zendoo.feature.player.util.PlayerNavigator
 import dagger.android.support.DaggerFragment
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -30,24 +31,20 @@ class PlayerFragment : DaggerFragment() {
 
     //endregion
 
-    //region var
-
-    private var binding: FragmentPlayerBinding? = null
-
-    //endregion
-
-    //region val
+    //region lateinit
 
     private val viewModel: PlayerViewModel by viewModels {
         viewModelFactory
     }
-
+    private val playerExitNavigator: PlayerExitNavigator by lazy {
+        (parentFragment?.activity as PlayerFragmentHost).getPlayerNavigator()
+    }
     //endregion
 
     //region lazy
 
-    private val playerExitNavigator: PlayerExitNavigator by lazy {
-        (parentFragment?.activity as PlayerFragmentHost).getPlayerNavigator()
+    private val navController: NavController? by lazy {
+        (childFragmentManager.findFragmentById(R.id.nav_host_fragment_player) as NavHostFragment?)?.navController
     }
     private val sessionId by lazy { arguments?.getSessionId() ?: -1 }
 
@@ -60,27 +57,20 @@ class PlayerFragment : DaggerFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.fragment_player,
-            container,
-            false
-        )
+        val view = inflater.inflate(R.layout.fragment_player, container, false)
 
         viewModel.setId(sessionId)
 
-        binding.init(viewLifecycleOwner, viewModel)
-        navigator.init(playerExitNavigator)
-
+        navigator.init(playerExitNavigator = (activity as PlayerFragmentHost).getPlayerNavigator())
         initOnNavigationUp()
 
-        return binding?.root
+        return view
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null
-        navigator.destroy()
+        Timber.d("delayed causing race condition thus disabled")
+        // navigator.destroy()
     }
 
     private fun initOnNavigationUp() {

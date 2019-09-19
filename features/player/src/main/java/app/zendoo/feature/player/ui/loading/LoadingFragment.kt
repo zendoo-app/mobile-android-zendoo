@@ -1,4 +1,4 @@
-package app.zendoo.feature.home.ui.loading
+package app.zendoo.feature.player.ui.loading
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import app.zendoo.feature.home.R
-import app.zendoo.feature.home.databinding.FragmentHomeLoadingBinding
-import app.zendoo.feature.home.ui.HomeViewModel
+import app.zendoo.feature.player.R
+import app.zendoo.feature.player.databinding.FragmentPlayerLoadingBinding
+import app.zendoo.feature.player.ui.PlayerViewModel
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -26,13 +26,13 @@ class LoadingFragment : DaggerFragment() {
 
     //region var
 
-    private var binding: FragmentHomeLoadingBinding? = null
+    private var binding: FragmentPlayerLoadingBinding? = null
 
     //endregion
 
     //region val
 
-    private val viewModel: HomeViewModel by viewModels {
+    private val viewModel: PlayerViewModel by viewModels {
         viewModelFactory
     }
 
@@ -47,31 +47,18 @@ class LoadingFragment : DaggerFragment() {
     ): View? {
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_home_loading,
+            R.layout.fragment_player_loading,
             container,
             false
         )
 
-        initBinding()
+        binding.init(viewLifecycleOwner, viewModel)
 
         return binding?.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        destroyBinding()
-    }
-
-    //endregion
-
-    //region binding
-
-    private fun initBinding() {
-        binding?.lifecycleOwner = viewLifecycleOwner
-        binding?.viewModel = viewModel.viewEntity
-    }
-
-    private fun destroyBinding() {
         binding = null
     }
 

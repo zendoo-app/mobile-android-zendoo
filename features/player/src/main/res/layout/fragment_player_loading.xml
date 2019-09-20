@@ -16,16 +16,26 @@
 
     </data>
 
-    <xyz.peridy.shimmerlayout.ShimmerLayout
-            android:id="@+id/shimmer_loading"
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:shimmer_color="#EBEBEB">
+            android:layout_height="match_parent">
+
+        <xyz.peridy.shimmerlayout.ShimmerLayout
+                android:id="@+id/shimmer_loading"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:shimmer_color="#EBEBEB">
+
+            <include
+                    layout="@layout/include_player"
+                    app:viewModel="@{viewModel}" />
+
+        </xyz.peridy.shimmerlayout.ShimmerLayout>
 
         <include
-                layout="@layout/include_player"
+                layout="@layout/include_player_bottom"
                 app:viewModel="@{viewModel}" />
 
-    </xyz.peridy.shimmerlayout.ShimmerLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

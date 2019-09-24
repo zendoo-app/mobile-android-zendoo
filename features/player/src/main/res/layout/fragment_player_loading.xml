@@ -32,10 +32,6 @@
 
         </xyz.peridy.shimmerlayout.ShimmerLayout>
 
-        <include
-                layout="@layout/include_player_bottom"
-                app:viewModel="@{viewModel}" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

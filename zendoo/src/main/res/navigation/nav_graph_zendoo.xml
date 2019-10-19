@@ -22,7 +22,7 @@
             android:id="@+id/player"
             android:name="app.zendoo.feature.player.ui.PlayerFragment"
             android:label="Player"
-            tools:layout="@layout/fragment_player">
+            tools:layout="@layout/include_player_bottom">
 
         <argument
                 android:name="sessionId"

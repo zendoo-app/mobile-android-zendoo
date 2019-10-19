@@ -8,7 +8,6 @@ import app.zendoo.domain.model.Session
 import app.zendoo.domain.repository.SessionRepository
 import app.zendoo.feature.player.ui.entity.PlayerViewEntity
 import app.zendoo.feature.player.ui.entity.PlayerViewEntityFactory
-import timber.log.Timber
 import javax.inject.Inject
 
 class PlayerViewModel
@@ -20,7 +19,7 @@ constructor(
 
     //region private
 
-    private var id: MutableLiveData<Int?> = MutableLiveData()
+    private var id: MutableLiveData<Int?> = MutableLiveData(-1)
 
     //endregion
 
@@ -41,7 +40,6 @@ constructor(
     //region id
 
     fun setId(id: Int?) {
-        Timber.e("$id")
         this.id.apply { postValue(id) }
     }
 

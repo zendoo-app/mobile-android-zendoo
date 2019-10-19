@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        tools:context="app.zendoo.feature.home.ui.loading.LoadingFragment">
+        tools:context=".ui.start.StartFragment">
 
     <data>
 
@@ -17,7 +17,7 @@
     </data>
 
     <FrameLayout
-            android:id="@+id/frame_loading"
+            android:id="@+id/frame_starting"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

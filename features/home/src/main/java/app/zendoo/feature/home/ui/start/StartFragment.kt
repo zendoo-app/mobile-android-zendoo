@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import app.zendoo.feature.home.R
-import app.zendoo.feature.home.databinding.FragmentStartBinding
+import app.zendoo.feature.home.databinding.FragmentHomeStartBinding
 import app.zendoo.feature.home.ui.HomeViewModel
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -26,7 +26,7 @@ class StartFragment : DaggerFragment() {
 
     //region var
 
-    private var binding: FragmentStartBinding? = null
+    private var binding: FragmentHomeStartBinding? = null
 
     //endregion
 
@@ -47,7 +47,7 @@ class StartFragment : DaggerFragment() {
     ): View? {
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_start,
+            R.layout.fragment_home_start,
             container,
             false
         )

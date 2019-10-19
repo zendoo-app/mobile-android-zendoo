@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".ui.loading.LoadingFragment">
+
+    <data>
+
+        <import type="androidx.lifecycle.LiveData" />
+
+        <import type="app.zendoo.feature.player.ui.entity.PlayerViewEntity" />
+
+        <variable
+                name="viewModel"
+                type="LiveData&lt;PlayerViewEntity>" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <xyz.peridy.shimmerlayout.ShimmerLayout
+                android:id="@+id/shimmer_loading"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:shimmer_color="#EBEBEB">
+
+            <include
+                    layout="@layout/include_player"
+                    app:viewModel="@{viewModel}" />
+
+        </xyz.peridy.shimmerlayout.ShimmerLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

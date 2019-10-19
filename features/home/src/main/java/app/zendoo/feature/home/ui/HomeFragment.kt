@@ -10,10 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import app.zendoo.feature.home.R
-import app.zendoo.feature.home.ui.entity.HomeViewEntityEnum
 import app.zendoo.feature.home.util.HomeFragmentHost
 import app.zendoo.feature.home.util.HomeNavigator
 import dagger.android.support.DaggerFragment
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -54,45 +54,22 @@ class HomeFragment : DaggerFragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        initNavigator()
-        initViewModelObserver()
+        navigator.init(
+            navFragment = (childFragmentManager.findFragmentById(R.id.nav_host_fragment_home) as NavHostFragment?),
+            navController = navController,
+            homeExitNavigator = (parentFragment?.parentFragment as HomeFragmentHost).getNavigator()
+        )
+        viewModel.state.observe(
+            viewLifecycleOwner,
+            Observer { navigator.navigate(it) })
 
         return view
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        destroyNavigator()
-    }
-
-    //endregion
-
-    //region viewModel
-
-    private fun initViewModelObserver() {
-        viewModel.state.observe(
-            viewLifecycleOwner,
-            Observer { navigate(it) })
-    }
-
-    //endregion
-
-    //region HomeNavigator
-
-    private fun initNavigator() {
-        navigator.init(
-            navFragment = (childFragmentManager.findFragmentById(R.id.nav_host_fragment_home) as NavHostFragment?),
-            navController = navController,
-            homeExitNavigator = (parentFragment?.parentFragment as HomeFragmentHost).getNavigator()
-        )
-    }
-
-    private fun destroyNavigator() {
-        navigator.destroy()
-    }
-
-    private fun navigate(state: HomeViewEntityEnum?) {
-        navigator.navigate(state)
+        Timber.d("delayed causing race condition thus disabled")
+        // navigator.destroy()
     }
 
     //endregion

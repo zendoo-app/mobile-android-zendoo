@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import app.zendoo.feature.home.R
-import app.zendoo.feature.home.databinding.FragmentProgressBinding
+import app.zendoo.feature.home.databinding.FragmentHomeProgressBinding
 import app.zendoo.feature.home.ui.HomeViewModel
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -26,7 +26,7 @@ class ProgressFragment : DaggerFragment() {
 
     //region var
 
-    private var binding: FragmentProgressBinding? = null
+    private var binding: FragmentHomeProgressBinding? = null
 
     //endregion
 
@@ -47,7 +47,7 @@ class ProgressFragment : DaggerFragment() {
     ): View? {
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_progress,
+            R.layout.fragment_home_progress,
             container,
             false
         )

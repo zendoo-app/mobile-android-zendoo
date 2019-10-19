@@ -9,7 +9,7 @@
             android:id="@+id/fragment_loading"
             android:name="app.zendoo.feature.home.ui.loading.LoadingFragment"
             android:label="loading"
-            tools:layout="@layout/fragment_loading">
+            tools:layout="@layout/fragment_home_loading">
 
         <action
                 android:id="@+id/action_loading_to_progress"
@@ -26,7 +26,7 @@
             android:id="@+id/fragment_start"
             android:name="app.zendoo.feature.home.ui.start.StartFragment"
             android:label="start"
-            tools:layout="@layout/fragment_start">
+            tools:layout="@layout/fragment_home_start">
 
         <action
                 android:id="@+id/action_start_to_progress"
@@ -38,6 +38,6 @@
             android:id="@+id/fragment_progress"
             android:name="app.zendoo.feature.home.ui.progress.ProgressFragment"
             android:label="progress"
-            tools:layout="@layout/fragment_progress" />
+            tools:layout="@layout/fragment_home_progress" />
 
 </navigation>
